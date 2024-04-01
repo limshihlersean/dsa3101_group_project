@@ -3,6 +3,7 @@ import streamlit as st
 import pandas as pd
 import altair as alt
 import os
+import numpy as np
 
 # Load CSV data
 def load_data(filename):
@@ -93,92 +94,210 @@ else:
 
 #------------------------------------------------------------------------------#
 
-# Visualization for Competitor Pricing Comparison
-def create_price_comparison_chart(data, title):
-    chart = alt.Chart(data).mark_bar().encode(
-        x=alt.X('Attraction:N', axis=alt.Axis(title='Attraction')),
-        y=alt.Y('Adult_Price:Q', axis=alt.Axis(title='Average Adult Price')),
-        color='Attraction:N',
-        tooltip=['Attraction:N', 'Adult_Price:Q', 'Child_Price:Q']
-    ).properties(title=title)
-    return chart
+
+
+
+#------------------------------------------------------------------------------#
 
 # Load the data
-pricing_data = load_data('pricing.csv')
+loc_disc_data = load_data('local_discount.csv')  # Update the file name as necessary
 
-# Ensure the data types are correct
-pricing_data['Adult_Price'] = pd.to_numeric(pricing_data['Adult_Price'], errors='coerce')
-pricing_data['Child_Price'] = pd.to_numeric(pricing_data['Child_Price'], errors='coerce')
+# Preprocess the data to ensure correct data types
+loc_disc_data['Original Average Price'] = pd.to_numeric(loc_disc_data['Original Average Price'], errors='coerce')
+loc_disc_data['Local Average Price'] = pd.to_numeric(loc_disc_data['Local Average Price'], errors='coerce')
+loc_disc_data['Percentage Discount'] = pd.to_numeric(loc_disc_data['Percentage Discount'], errors='coerce')
 
-# Handle any missing or erroneous data if necessary
-# For example, dropping rows where the price is NaN after conversion
-pricing_data = pricing_data.dropna(subset=['Adult_Price', 'Child_Price'])
+# Filter out any rows with missing data
+data = loc_disc_data.dropna(subset=['Original Average Price', 'Local Average Price', 'Percentage Discount'])
 
-# Streamlit sidebar widget for category selection
-st.sidebar.header('Filters for Pricing Comparison')
-selected_categories = st.sidebar.multiselect(
-    'Select categories:',
-    options=pricing_data['Category'].unique(),  # This should be the list of all categories available in the data
-    default=pricing_data['Category'].unique()   # Default to all categories selected
+# Function to create a horizontal bar chart
+def create_local_discount_bar_chart(data, title):
+    # Horizontal bar chart
+    chart = alt.Chart(data).mark_bar().encode(
+        x=alt.X('Percentage Discount:Q', title='Percentage Discount'),
+        y=alt.Y('Attraction:N', sort='-x', title=''),  # Sort bars by discount percentage
+        color=alt.Color('Attraction:N'),  # Color by attraction
+        tooltip=[
+            alt.Tooltip('Attraction:N', title='Attraction'),
+            alt.Tooltip('Original Average Price:Q', title='Original Price'),
+            alt.Tooltip('Local Average Price:Q', title='Local Price'),
+            alt.Tooltip('Percentage Discount:Q', title='Discount', format='.2f')
+        ]
+    ).properties(title=title, height=300)  # Set the height to ensure that all bars are visible
+    return chart
+
+# Streamlit sidebar widget for attraction selection
+st.sidebar.header('Select Attractions for Visualization')
+selected_attractions = st.sidebar.multiselect(
+    'Select attractions:',
+    options=loc_disc_data['Attraction'].unique(),
+    default=loc_disc_data['Attraction'].unique(),  # Default to all attractions selected
+    key='attraction_select_local'
 )
 
-# Apply filters to pricing_data based on selected categories
-filtered_pricing_data = pricing_data[pricing_data['Category'].isin(selected_categories)]
+# Apply filters to data based on selected attractions
+filtered_data = loc_disc_data[loc_disc_data['Attraction'].isin(selected_attractions)]
 
+# Create and display the price comparison chart
+local_discount_bar_chart = create_local_discount_bar_chart(filtered_data, 'Local Discounts by Attraction')
+st.altair_chart(local_discount_bar_chart, use_container_width=True)
 
-# Create the price comparison chart using the filtered data
-price_comparison_chart = create_price_comparison_chart(
-    filtered_pricing_data, 
-    'Competitor Pricing Comparison'
+#------------------------------------------------------------------------------#
+
+# Load the data
+bun_data = load_data('bundled_discount.csv')  # Make sure the file name matches your CSV
+
+# Preprocess the data to ensure correct data types
+bun_data['Original Average Price'] = pd.to_numeric(bun_data['Original Average Price'], errors='coerce')
+bun_data['Bundled Average Price'] = pd.to_numeric(bun_data['Bundled Average Price'], errors='coerce')
+bun_data['Percentage Discount'] = pd.to_numeric(bun_data['Percentage Discount'], errors='coerce')
+
+# Filter out any rows with missing data
+data = bun_data.dropna(subset=['Original Average Price', 'Bundled Average Price', 'Percentage Discount'])
+
+# Create a horizontal bar chart function
+def create_discount_bar_chart(data, title):
+    # Horizontal bar chart
+    chart = alt.Chart(data).mark_bar().encode(
+        x=alt.X('Percentage Discount:Q', title='Percentage Discount'),
+        y=alt.Y('Attraction:N', sort='-x', title=''),  # Sort bars by discount percentage
+        color=alt.Color('Attraction:N'),  # Color by attraction
+        tooltip=[
+            alt.Tooltip('Attraction:N', title='Attraction'),
+            alt.Tooltip('Original Average Price:Q', title='Original Price'),
+            alt.Tooltip('Bundled Average Price:Q', title='Bundled Price'),
+            alt.Tooltip('Percentage Discount:Q', title='Discount', format='.2f')
+        ]
+    ).properties(title=title, height=300)  # Set the height to ensure that all bars are visible
+    return chart
+
+# Streamlit sidebar widget for attraction selection
+st.sidebar.header('Select Attractions for Visualization')
+selected_attractions = st.sidebar.multiselect(
+    'Select attractions:',
+    options=bun_data['Attraction'].unique(),
+    default=bun_data['Attraction'].unique(),  # Default to all attractions selected
+    key='attraction_select_bundled'
 )
 
-# Display the chart in the Streamlit app
-st.header('Competitor Pricing Comparison')
-st.altair_chart(price_comparison_chart, use_container_width=True)
+# Apply filters to data based on selected attractions
+filtered_data = bun_data[bun_data['Attraction'].isin(selected_attractions)]
+
+# Create and display the price comparison chart
+discount_bar_chart = create_discount_bar_chart(filtered_data, 'Discounts by Attraction')
+st.altair_chart(discount_bar_chart, use_container_width=True)
 
 
 
 #------------------------------------------------------------------------------#
 
 
-def create_price_differentiation_chart(data, chart_type):
-    # Filter data for the chosen chart type
-    filtered_data = data[data['Chart_Type'] == chart_type]
-
-    # Check if the filtered data is empty
-    if filtered_data.empty:
-        st.error('No data available for the selected chart type.')
-        return None
-
-    # Create the pie chart using the 'Count' for the size of pie slices
-    chart = alt.Chart(filtered_data).mark_arc().encode(
-        theta='Count:Q',  # Size of pie slice based on the count
-        color=alt.Color('Category:N', legend=alt.Legend(title="Category")),  # Color by category
-        tooltip=['Category:N', 'Count:Q']  # Show tooltip on hover
-    ).properties(
-        title=f'Price Differentiation: {chart_type}'
+# Function to create scatter plot
+def create_scatter_plot(data, x_axis, y_axis, color_category, title):
+    return alt.Chart(data).mark_circle(size=60).encode(
+        x=x_axis,
+        y=y_axis,
+        color=color_category,
+        tooltip=['Company', 'City', x_axis, y_axis]
+    ).interactive().properties(
+        width=300,
+        height=300,
+        title=title
     )
 
-    return chart
+# Function to preprocess the data
+def preprocess_data(df):
+    # Convert 'Tourist_volume_of_cable_car' to numeric after removing commas
+    df['Tourist_volume_of_cable_car'] = df['Tourist_volume_of_cable_car'].str.replace(',', '').astype(float)
+    # Additional preprocessing steps...
+    return df
 
+# Load and preprocess the data
+dist_dur_price_data = load_data('distance_duration_price.csv')
+dist_dur_price_data = preprocess_data(dist_dur_price_data)
 
-# Load the data
-differentiation_data = load_data('differentiation.csv')
-
-# Ensure 'Count' is a float
-differentiation_data['Count'] = pd.to_numeric(differentiation_data['Count'], errors='coerce')
-if differentiation_data['Count'].isnull().any():
-    st.error('Some count values could not be converted to numeric.')
-
-# Sidebar for Chart_Type selection
-chart_type_selection = st.sidebar.selectbox(
-    'Select Chart Type:',
-    options=differentiation_data['Chart_Type'].unique(),
+# Filters in the sidebar
+st.sidebar.header("Filters")
+selected_countries = st.sidebar.multiselect(
+    'Select Countries',
+    options=np.unique(dist_dur_price_data['Country']),
+    default=np.unique(dist_dur_price_data['Country']),
+    key='country_select_dist_dur_price'
 )
 
-# Generate and display the chart if the data is valid
-price_differentiation_chart = create_price_differentiation_chart(differentiation_data, chart_type_selection)
-if price_differentiation_chart:
-    st.altair_chart(price_differentiation_chart, use_container_width=True)
-else:
-    st.write("No valid chart data available for the selected type.")
+# Filter data based on selection
+filtered_data = dist_dur_price_data[dist_dur_price_data['Country'].isin(selected_countries)]
+
+# Generate scatter plots
+scatter_duration_price = create_scatter_plot(
+    filtered_data,
+    'Duration (Mins)',
+    'Cable car Price (SGD)',
+    'Country:N',
+    "Duration (Mins) vs. Cable car Price (SGD)"
+)
+
+scatter_distance_price = create_scatter_plot(
+    filtered_data,
+    'Distance (KM)',
+    'Cable car Price (SGD)',
+    'Country:N',
+    "Distance (KM) vs. Cable car Price (SGD)"
+)
+
+# Combine the scatter plots side by side
+combined_scatter_plots = alt.hconcat(scatter_duration_price, scatter_distance_price)
+
+# Display the scatter plots
+st.header("Interactive Scatter Plots")
+st.altair_chart(combined_scatter_plots, use_container_width=True)
+
+#------------------------------------------------------------------------------#
+
+# Visualization for Competitor Pricing Comparison
+def create_price_comparison_chart(data):
+    # Melt the dataframe to have a long-form dataframe for Altair
+    data_melted = data.melt(id_vars=['Attraction', 'Category'], 
+                            value_vars=['Adult Price', 'Senior Price', 'Child Price'],
+                            var_name='Ticket Type', value_name='Price')
+
+    chart = alt.Chart(data_melted).mark_bar().encode(
+        x=alt.X('Attraction:N', axis=alt.Axis(title='Attraction')),
+        y=alt.Y('Price:Q', axis=alt.Axis(title='Price')),
+        color='Ticket Type:N',
+        column='Ticket Type:N',
+        tooltip=['Attraction', 'Ticket Type', 'Price']
+    ).properties(
+        title='Competitor Pricing Comparison'
+    )
+    return chart
+
+# Load the data
+pricing_data = load_data('pricing.csv')
+
+# Streamlit sidebar widget for category and attraction selection
+st.sidebar.header('Filters for Pricing Comparison')
+selected_categories = st.sidebar.multiselect(
+    'Select categories:',
+    options=pricing_data['Category'].unique(),
+    default=pricing_data['Category'].unique(),
+    key='category_select_pricing'
+)
+
+selected_attractions = st.sidebar.multiselect(
+    'Select Attractions:',
+    options=pricing_data['Attraction'].unique(),
+    default=pricing_data['Attraction'].unique(),
+    key='attraction_select_pricing'
+)
+
+# Apply filters to pricing_data based on selected categories and attractions
+filtered_pricing_data = pricing_data[pricing_data['Category'].isin(selected_categories)]
+filtered_pricing_data = filtered_pricing_data[filtered_pricing_data['Attraction'].isin(selected_attractions)]
+
+# Create the price comparison chart using the filtered data
+price_comparison_chart = create_price_comparison_chart(filtered_pricing_data)
+
+# Display the chart in the Streamlit app
+st.header('Competitor Pricing Comparison')
+st.altair_chart(price_comparison_chart, use_container_width=True)
