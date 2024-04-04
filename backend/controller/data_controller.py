@@ -17,3 +17,16 @@ def post_data():
     # Here you would process the data and perhaps return a response
     return jsonify({'status': 'success', 'received_data': data})
 
+@app.route('/api/data', methods=['PATCH'])  # Changed from POST to PATCH for semantic correctness
+def patch_data():
+    data = request.json
+    item_id = data.get('item_id')  # Assume that the item_id is part of the incoming JSON data
+
+    if item_id in data_store:
+        new_value = data.get('value')
+        data_store[item_id] = new_value
+        return jsonify({'status': 'success', 'updated_data': {item_id: new_value}})
+    else:
+        return jsonify({'status': 'error', 'message': 'Item not found'}), 404
+
+
