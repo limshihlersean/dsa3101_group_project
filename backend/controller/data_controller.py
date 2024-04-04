@@ -10,3 +10,10 @@ def get_data():
     df = pd.DataFrame(data)
     df_json = df.to_json(orient="records")
     return jsonify(df_json)
+
+@app.route('/api/data', methods=['POST'])
+def post_data():
+    data = request.json
+    # Here you would process the data and perhaps return a response
+    return jsonify({'status': 'success', 'received_data': data})
+
