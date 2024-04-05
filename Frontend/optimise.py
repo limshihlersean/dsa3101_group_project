@@ -25,7 +25,7 @@ def load_data(filename):
 st.header("Price Optimisation Based on Selected Factors")
 
 #loading the data 
-cable_car_data = load_data('cable_car_data_with_PPP.csv')
+cable_car_data = load_data('cable_car_cleaned_v2.csv')
 
 # Filters in the sidebar
 
@@ -48,7 +48,7 @@ selected_value = selected_duration if custom_duration is None else custom_durati
 
 #filtered_data = cable_car_data[cable_car_data['Duration (Mins)'].isin(selected_value)]
 
-filtered_data = cable_car_data[cable_car_data['Duration (Mins)'] == selected_value]
+filtered_data = cable_car_data[cable_car_data['duration'] == selected_value]
 
 #FILTER 2: DISTANCE 
 
@@ -65,7 +65,7 @@ custom_distance = st.sidebar.number_input(
 
 selected_distance_new = selected_distance if custom_distance is None else custom_distance
 
-filtered_data_distance = cable_car_data[cable_car_data['Distance (KM)'] == selected_distance_new]
+filtered_data_distance = cable_car_data[cable_car_data['distance'] == selected_distance_new]
 
 #FILTER 3: SNOW 
 
@@ -82,7 +82,7 @@ selected_snow = st.sidebar.selectbox(
 
 # Logic to determine the selected value
 selected_snow_value = yes_no_options.index(selected_snow)
-filtered_data_snow = cable_car_data[cable_car_data['Snow'] == selected_snow]
+filtered_data_snow = cable_car_data[cable_car_data['snow'] == selected_snow]
 
 
 #FILTER 4: Total volume of cable car 
@@ -100,7 +100,7 @@ custom_volume = st.sidebar.number_input(
 
 selected_volume_new = selected_volume if custom_volume is None else custom_volume
 
-filtered_data_volume = cable_car_data[cable_car_data['Tourist_volume_of_cable_car'] == selected_volume_new]
+filtered_data_volume = cable_car_data[cable_car_data['tourist_volume_of_cable_car'] == selected_volume_new]
 #check this because it seems like its == instead of inputting a new value 
 
 #FILTER 5: AGE RANGE
@@ -115,7 +115,7 @@ selected_age = st.sidebar.selectbox(
     key='option_select_age'
 )
 selected_age_index = multiple_options.index(selected_age)
-filtered_data_age = cable_car_data[cable_car_data['Age_range'] == selected_age]
+filtered_data_age = cable_car_data[cable_car_data['age_range'] == selected_age]
 
 
 #FILTER 6: NATURE 
@@ -134,7 +134,7 @@ selected_nature = st.sidebar.selectbox(
 # Logic to determine the selected value
 selected_nature_value = yes_no_options.index(selected_nature)
 
-filtered_data_nature = cable_car_data[cable_car_data['Is_Nature'] == selected_nature]
+filtered_data_nature = cable_car_data[cable_car_data['is_nature'] == selected_nature]
 
 
 #FILTER 7: TYPE OF TRIP
@@ -151,7 +151,7 @@ selected_trip = st.sidebar.selectbox(
 
 # Logic to determine the selected value
 selected_trip_value = yes_no_options.index(selected_trip)
-filtered_data_trip = cable_car_data[cable_car_data['Type_of_trip'] == selected_trip]
+filtered_data_trip = cable_car_data[cable_car_data['type_of_trip'] == selected_trip]
 
 #FILTER 7: CITIZENSHIP
 st.sidebar.header("Citizenship")
