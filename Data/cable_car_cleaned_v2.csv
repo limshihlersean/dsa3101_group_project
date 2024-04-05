@@ -1,0 +1,459 @@
+company,country,city,duration,distance,snow,tourist_volume_of_cable_car,cable_car_price (SGD),age_range,is_nature,type_of_trip,is_citizen
+Arthurs Seat Eagle Gondola Mornington Peninsula,Australia,Melbourne ,28,8.64,0,350000,27.25,2,0,0,0
+Arthurs Seat Eagle Gondola Mornington Peninsula,Australia,Melbourne ,28,8.64,0,350000,17.14,0,0,0,0
+Arthurs Seat Eagle Gondola Mornington Peninsula,Australia,Melbourne ,28,8.64,0,350000,24.61,1,0,0,0
+Arthurs Seat Eagle Gondola Mornington Peninsula,Australia,Melbourne ,28,8.64,0,350000,24.61,3,0,0,0
+Arthurs Seat Eagle Gondola Mornington Peninsula,Australia,Melbourne ,14,4.32,0,350000,20.21,2,0,1,0
+Arthurs Seat Eagle Gondola Mornington Peninsula,Australia,Melbourne ,14,4.32,0,350000,13.18,0,0,1,0
+Arthurs Seat Eagle Gondola Mornington Peninsula,Australia,Melbourne ,14,4.32,0,350000,17.14,1,0,1,0
+Arthurs Seat Eagle Gondola Mornington Peninsula,Australia,Melbourne ,14,4.32,0,350000,17.14,3,0,1,0
+Arthurs Seat Eagle Gondola Mornington Peninsula,Australia,Melbourne ,28,8.64,0,350000,17.25,2,0,0,1
+Arthurs Seat Eagle Gondola Mornington Peninsula,Australia,Melbourne ,28,8.64,0,350000,7.14,0,0,0,1
+Arthurs Seat Eagle Gondola Mornington Peninsula,Australia,Melbourne ,28,8.64,0,350000,14.61,1,0,0,1
+Arthurs Seat Eagle Gondola Mornington Peninsula,Australia,Melbourne ,28,8.64,0,350000,14.61,3,0,0,1
+Arthurs Seat Eagle Gondola Mornington Peninsula,Australia,Melbourne ,14,4.32,0,350000,10.21,2,0,1,1
+Arthurs Seat Eagle Gondola Mornington Peninsula,Australia,Melbourne ,14,4.32,0,350000,3.18,0,0,1,1
+Arthurs Seat Eagle Gondola Mornington Peninsula,Australia,Melbourne ,14,4.32,0,350000,7.14,1,0,1,1
+Arthurs Seat Eagle Gondola Mornington Peninsula,Australia,Melbourne ,14,4.32,0,350000,7.14,3,0,1,1
+Ba Na Hills Cablecar,Vietnam,Da Nang,17,6.12,0,1000000,14.77,2,0,1,0
+Ba Na Hills Cablecar,Vietnam,Da Nang,17,6.12,0,1000000,10.3,0,0,1,0
+Ba Na Hills Cablecar,Vietnam,Da Nang,17,6.12,0,1000000,10.77,2,0,1,1
+Ba Na Hills Cablecar,Vietnam,Da Nang,17,6.12,0,1000000,7.3,0,0,1,1
+Busan Air Cruise,South Korea,Busan,30,3.24,0,1800000,22.11,2,1,0,0
+Busan Air Cruise,South Korea,Busan,15,1.62,0,1800000,17.08,2,1,1,0
+Busan Air Cruise,South Korea,Busan,30,3.24,0,1800000,16.08,0,1,0,0
+Busan Air Cruise,South Korea,Busan,15,1.62,0,1800000,13.06,0,1,1,0
+Busan Air Cruise,South Korea,Busan,30,3.24,0,1800000,17.08,2,1,0,0
+Busan Air Cruise,South Korea,Busan,15,1.62,0,1800000,13.06,2,1,1,0
+Busan Air Cruise,South Korea,Busan,30,3.24,0,1800000,12.06,0,1,0,0
+Busan Air Cruise,South Korea,Busan,15,1.62,0,1800000,10.05,0,1,1,0
+Busan Air Cruise,South Korea,Busan,30,3.24,0,1800000,20.11,4,1,0,0
+Busan Air Cruise,South Korea,Busan,15,1.62,0,1800000,15.08,4,1,1,0
+Busan Air Cruise,South Korea,Busan,30,3.24,0,1800000,15.08,4,1,0,0
+Busan Air Cruise,South Korea,Busan,15,1.62,0,1800000,11.06,4,1,1,0
+Busan Air Cruise,South Korea,Busan,30,3.24,0,1800000,20.11,4,1,0,0
+Busan Air Cruise,South Korea,Busan,15,1.62,0,1800000,15.08,4,1,1,0
+Busan Air Cruise,South Korea,Busan,30,3.24,0,1800000,15.08,4,1,0,0
+Busan Air Cruise,South Korea,Busan,15,1.62,0,1800000,11.06,4,1,1,0
+Busan Air Cruise,South Korea,Busan,30,3.24,0,1800000,18.11,2,1,0,1
+Busan Air Cruise,South Korea,Busan,15,1.62,0,1800000,13.08,2,1,1,1
+Busan Air Cruise,South Korea,Busan,30,3.24,0,1800000,12.08,0,1,0,1
+Busan Air Cruise,South Korea,Busan,15,1.62,0,1800000,9.06,0,1,1,1
+Busan Air Cruise,South Korea,Busan,30,3.24,0,1800000,14.08,2,1,0,1
+Busan Air Cruise,South Korea,Busan,15,1.62,0,1800000,10.06,2,1,1,1
+Busan Air Cruise,South Korea,Busan,30,3.24,0,1800000,9.06,0,1,0,1
+Busan Air Cruise,South Korea,Busan,15,1.62,0,1800000,7.05,0,1,1,1
+Busan Air Cruise,South Korea,Busan,30,3.24,0,1800000,17.11,4,1,0,1
+Busan Air Cruise,South Korea,Busan,15,1.62,0,1800000,12.08,4,1,1,1
+Busan Air Cruise,South Korea,Busan,30,3.24,0,1800000,12.58,4,1,0,1
+Busan Air Cruise,South Korea,Busan,15,1.62,0,1800000,8.56,4,1,1,1
+Cable Car Taormina:  Taormina to the Mazzarò Bay ,Italy,Taormina,2,0.7,0,850000,8.75,2,0,1,0
+Cable Car Taormina:  Taormina to the Mazzarò Bay ,Italy,Taormina,4,1.4,0,850000,14.59,2,0,0,0
+Cable Car Taormina:  Taormina to the Mazzarò Bay ,Italy,Taormina,2,0.7,0,850000,5.75,2,0,1,1
+Cable Car Taormina:  Taormina to the Mazzarò Bay ,Italy,Taormina,4,1.4,0,850000,11.59,2,0,0,1
+Cable Car Zuspitze,Germany ,Garmisch-Partenkirchen,10,3.6,0,600000,90.4,2,0,0,0
+Cable Car Zuspitze,Germany ,Garmisch-Partenkirchen,10,3.6,0,600000,72.2,1,0,0,0
+Cable Car Zuspitze,Germany ,Garmisch-Partenkirchen,10,3.6,0,600000,45.21,1,0,0,0
+Cable Car Zuspitze,Germany ,Garmisch-Partenkirchen,10,3.6,0,600000,45.4,2,0,0,1
+Cable Car Zuspitze,Germany ,Garmisch-Partenkirchen,10,3.6,0,600000,36.2,1,0,0,1
+Cable Car Zuspitze,Germany ,Garmisch-Partenkirchen,10,3.6,0,600000,23.21,1,0,0,1
+Chamonix Cable Car,France,Charmonix,20,2.8,1,500000,81.73,2,0,1,0
+Chamonix Cable Car,France,Charmonix,40,5.6,1,500000,109.45,2,0,0,0
+Chamonix Cable Car,France,Charmonix,40,5.6,1,500000,93.11,3,0,0,0
+Chamonix Cable Car,France,Charmonix,40,5.6,1,500000,93.11,0,0,0,0
+Chamonix Cable Car,France,Charmonix,20,2.8,1,500000,69.47,3,0,1,0
+Chamonix Cable Car,France,Charmonix,20,2.8,1,500000,69.47,0,0,1,0
+Chamonix Cable Car,France,Charmonix,20,2.8,1,500000,40.73,2,0,1,1
+Chamonix Cable Car,France,Charmonix,40,5.6,1,500000,55.45,2,0,0,1
+Chamonix Cable Car,France,Charmonix,40,5.6,1,500000,47.11,3,0,0,1
+Chamonix Cable Car,France,Charmonix,40,5.6,1,500000,47.11,0,0,0,1
+Chamonix Cable Car,France,Charmonix,20,2.8,1,500000,36.47,3,0,1,1
+Chamonix Cable Car,France,Charmonix,20,2.8,1,500000,36.47,0,0,1,1
+Gelmer Funicular,Switzerland,Guttannen ,12,2.3,0,43000,27,2,0,0,0
+Gelmer Funicular,Switzerland,Guttannen ,24,4.6,0,43000,54,2,0,1,0
+Gelmer Funicular,Switzerland,Guttannen ,12,2.3,0,43000,13.5,0,0,0,0
+Gelmer Funicular,Switzerland,Guttannen ,24,4.6,0,43000,27,0,0,1,0
+Gelmer Funicular,Switzerland,Guttannen ,12,2.3,0,43000,13.5,2,0,0,1
+Gelmer Funicular,Switzerland,Guttannen ,24,4.6,0,43000,27,2,0,1,1
+Genting Skyway,Malaysia,Pahang,15,3.38,0,600000,2.84,2,0,1,0
+Genting Skyway,Malaysia,Pahang,30,6.76,0,600000,5.11,2,0,0,0
+Genting Skyway,Malaysia,Pahang,15,3.38,0,600000,1.42,4,0,1,0
+Genting Skyway,Malaysia,Pahang,30,6.76,0,600000,2.56,4,0,0,0
+Genting Skyway,Malaysia,Pahang,15,3.38,0,600000,1.84,2,0,1,1
+Genting Skyway,Malaysia,Pahang,30,6.76,0,600000,3.11,2,0,0,1
+Genting Skyway,Malaysia,Pahang,15,3.38,0,600000,0.42,4,0,1,1
+Genting Skyway,Malaysia,Pahang,30,6.76,0,600000,1.56,4,0,0,1
+Grenoble bastille Cable Car,France,Grenoble,8,2.8,0,325000,7.3,0,1,0,0
+Grenoble bastille Cable Car,France,Grenoble,8,2.8,0,325000,9.05,1,1,0,0
+Grenoble bastille Cable Car,France,Grenoble,8,2.8,0,325000,14.01,2,1,0,0
+Grenoble bastille Cable Car,France,Grenoble,4,1.4,0,325000,5.25,0,1,1,0
+Grenoble bastille Cable Car,France,Grenoble,4,1.4,0,325000,6.42,1,1,1,0
+Grenoble bastille Cable Car,France,Grenoble,4,1.4,0,325000,9.49,2,1,1,0
+Grenoble bastille Cable Car,France,Grenoble,8,2.8,0,325000,7.3,4,1,0,0
+Grenoble bastille Cable Car,France,Grenoble,4,1.4,0,325000,5.25,4,1,1,0
+Grenoble bastille Cable Car,France,Grenoble,8,2.8,0,325000,7.3,3,1,0,0
+Grenoble bastille Cable Car,France,Grenoble,4,1.4,0,325000,5.25,3,1,1,0
+Grenoble bastille Cable Car,France,Grenoble,8,2.8,0,325000,7.3,0,1,0,1
+Grenoble bastille Cable Car,France,Grenoble,8,2.8,0,325000,9.05,1,1,0,1
+Grenoble bastille Cable Car,France,Grenoble,8,2.8,0,325000,14.01,2,1,0,1
+Grenoble bastille Cable Car,France,Grenoble,4,1.4,0,325000,5.25,0,1,1,1
+Grenoble bastille Cable Car,France,Grenoble,4,1.4,0,325000,6.42,1,1,1,1
+Grenoble bastille Cable Car,France,Grenoble,4,1.4,0,325000,9.49,2,1,1,1
+Grenoble bastille Cable Car,France,Grenoble,8,2.8,0,325000,7.3,4,1,0,1
+Grenoble bastille Cable Car,France,Grenoble,4,1.4,0,325000,5.25,4,1,1,1
+Grenoble bastille Cable Car,France,Grenoble,8,2.8,0,325000,7.3,3,1,0,1
+Grenoble bastille Cable Car,France,Grenoble,4,1.4,0,325000,5.25,3,1,1,1
+Grindelwald - Holenstein,Switzerland,Bern,10,2.5,0,478000,27,2,0,1,0
+Grindelwald - Holenstein,Switzerland,Bern,20,5,0,478000,54,2,0,0,0
+Grindelwald - Holenstein,Switzerland,Bern,10,2.5,0,478000,13.5,0,0,1,0
+Grindelwald - Holenstein,Switzerland,Bern,20,5,0,478000,27,4,0,0,0
+Grindelwald - Holenstein,Switzerland,Bern,10,2.5,0,478000,13.5,2,0,1,1
+Grindelwald - Holenstein,Switzerland,Bern,20,5,0,478000,27,2,0,0,1
+Grindelwald-Mannlichen GGM  ,Switzerland,Bern,19,6.3,0,478000,51,2,0,1,0
+Grindelwald-Mannlichen GGM  ,Switzerland,Bern,38,12.6,0,478000,102,2,0,0,0
+Grindelwald-Mannlichen GGM  ,Switzerland,Bern,19,6.3,0,478000,25.5,0,0,1,0
+Grindelwald-Mannlichen GGM  ,Switzerland,Bern,38,12.6,0,478000,51,4,0,0,0
+Grindelwald-Mannlichen GGM  ,Switzerland,Bern,19,6.3,0,478000,25.5,2,0,1,1
+Grindelwald-Mannlichen GGM  ,Switzerland,Bern,38,12.6,0,478000,51,2,0,0,1
+Gulmarg Gondola,India,Gulmag,21,6.4,0,1013458,34.93,2,0,1,0
+Gulmarg Gondola,India,Gulmag,21,6.4,0,1013458,34.93,2,0,1,1
+Jackson Hole Aerial Tram,USA,Jackson Hole,12,7.8,1,1300000,67.5,2,0,1,0
+Jackson Hole Aerial Tram,USA,Jackson Hole,12,7.8,1,1300000,43.2,0,0,1,0
+Jackson Hole Aerial Tram,USA,Jackson Hole,12,7.8,1,1300000,54,4,0,1,0
+Jackson Hole Aerial Tram,USA,Jackson Hole,12,7.8,1,1300000,67.5,2,0,1,1
+Jackson Hole Aerial Tram,USA,Jackson Hole,12,7.8,1,1300000,43.2,0,0,1,1
+Jackson Hole Aerial Tram,USA,Jackson Hole,12,7.8,1,1300000,54,4,0,1,1
+Kleine Scheidegg – Grindelwald Grund,Switzerland,Bern,14,3,0,478000,105.9,2,0,0,0
+Kleine Scheidegg – Grindelwald Grund,Switzerland,Bern,14,3,0,478000,52.4,4,0,0,0
+Kleine Scheidegg – Grindelwald Grund,Switzerland,Bern,14,3,0,478000,52.4,2,0,0,1
+Langkawi Skybridge Cable Car,Malaysia,Langkawi,30,3.4,0,1000000,44.1,2,0,0,1
+Langkawi Skybridge Cable Car,Malaysia,Langkawi,30,3.4,0,1000000,44.1,0,0,0,1
+Langkawi Skybridge Cable Car,Malaysia,Langkawi,30,3.4,0,1000000,44.1,2,0,0,0
+Langkawi Skybridge Cable Car,Malaysia,Langkawi,30,3.4,0,1000000,44.1,0,0,0,0
+Langkawi Skybridge Cable Car,Malaysia,Langkawi,30,3.4,0,1000000,29.87,2,0,0,1
+Langkawi Skybridge Cable Car,Malaysia,Langkawi,30,3.4,0,1000000,29.87,0,0,0,1
+Langkawi Skybridge Cable Car,Malaysia,Langkawi,30,3.4,0,1000000,29.87,2,0,0,0
+Langkawi Skybridge Cable Car,Malaysia,Langkawi,30,3.4,0,1000000,29.87,0,0,0,0
+Langkawi Skybridge Cable Car,Malaysia,Langkawi,30,3.4,0,1000000,12.23,2,0,0,1
+Langkawi Skybridge Cable Car,Malaysia,Langkawi,30,3.4,0,1000000,9.39,0,0,0,1
+Langkawi Skybridge Cable Car,Malaysia,Langkawi,30,3.4,0,1000000,24.18,2,0,0,0
+Langkawi Skybridge Cable Car,Malaysia,Langkawi,30,3.4,0,1000000,18.49,0,0,0,0
+Maokong Gondola,Taiwan,Taipei,25,4.03,0,700000,3,4,1,1,0
+Maokong Gondola,Taiwan,Taipei,25,4.03,0,700000,3,3,1,1,0
+Maokong Gondola,Taiwan,Taipei,25,4.03,0,700000,3,0,1,1,0
+Maokong Gondola,Taiwan,Taipei,25,4.03,0,700000,5,2,1,1,0
+Maokong Gondola,Taiwan,Taipei,25,4.03,0,700000,1.5,2,1,1,1
+Maokong Gondola,Taiwan,Taipei,25,4.03,0,700000,2.1,4,1,1,0
+Maokong Gondola,Taiwan,Taipei,25,4.03,0,700000,1.5,4,1,1,1
+Maokong Gondola,Taiwan,Taipei,25,4.03,0,700000,1.5,3,1,1,1
+Maokong Gondola,Taiwan,Taipei,25,4.03,0,700000,1.5,0,1,1,1
+Maokong Gondola,Taiwan,Taipei,25,4.03,0,700000,1.1,4,1,1,1
+Matterhorn Paradise - Zermatt - Furi,Switzerland,Zermatt,5,0.8,1,2000000,16.48,2,0,1,0
+Matterhorn Paradise - Zermatt - Furi,Switzerland,Zermatt,10,1.6,1,2000000,25.5,2,0,0,0
+Matterhorn Paradise - Zermatt - Furi,Switzerland,Zermatt,5,0.8,1,2000000,8.24,0,0,1,0
+Matterhorn Paradise - Zermatt - Furi,Switzerland,Zermatt,10,1.6,1,2000000,12.25,4,0,0,0
+Matterhorn Paradise - Zermatt - Furi,Switzerland,Zermatt,5,0.8,1,2000000,8.24,2,0,1,1
+Matterhorn Paradise - Zermatt - Furi,Switzerland,Zermatt,10,1.6,1,2000000,12.25,2,0,0,1
+Matterhorn Paradise - Zermatt - Furi,Switzerland,Zermatt,5,0.8,0,2000000,19.49,2,0,1,0
+Matterhorn Paradise - Zermatt - Furi,Switzerland,Zermatt,10,1.6,0,2000000,28.49,2,0,0,0
+Matterhorn Paradise - Zermatt - Furi,Switzerland,Zermatt,5,0.8,0,2000000,9.75,0,0,1,0
+Matterhorn Paradise - Zermatt - Furi,Switzerland,Zermatt,10,1.6,0,2000000,14.25,4,0,0,0
+Matterhorn Paradise - Zermatt - Furi,Switzerland,Zermatt,5,0.8,0,2000000,9.75,2,0,1,1
+Matterhorn Paradise - Zermatt - Furi,Switzerland,Zermatt,10,1.6,0,2000000,14.25,2,0,0,1
+Matterhorn Paradise - Zermatt - Matterhorn Glaceir Paradise ,Switzerland,Zermatt,40,8,1,2000000,92.95,2,0,1,0
+Matterhorn Paradise - Zermatt - Matterhorn Glaceir Paradise ,Switzerland,Zermatt,80,16,1,2000000,143.93,2,0,0,0
+Matterhorn Paradise - Zermatt - Matterhorn Glaceir Paradise ,Switzerland,Zermatt,40,8,1,2000000,46.48,0,0,1,0
+Matterhorn Paradise - Zermatt - Matterhorn Glaceir Paradise ,Switzerland,Zermatt,80,16,1,2000000,71.97,4,0,0,0
+Matterhorn Paradise - Zermatt - Matterhorn Glaceir Paradise ,Switzerland,Zermatt,40,8,1,2000000,46.48,2,0,1,1
+Matterhorn Paradise - Zermatt - Matterhorn Glaceir Paradise ,Switzerland,Zermatt,80,16,1,2000000,71.97,2,0,0,1
+Matterhorn Paradise - Zermatt - Matterhorn Glaceir Paradise ,Switzerland,Zermatt,40,8,0,2000000,106,2,0,1,0
+Matterhorn Paradise - Zermatt - Matterhorn Glaceir Paradise ,Switzerland,Zermatt,80,16,0,2000000,163,2,0,0,0
+Matterhorn Paradise - Zermatt - Matterhorn Glaceir Paradise ,Switzerland,Zermatt,40,8,0,2000000,54,0,0,1,0
+Matterhorn Paradise - Zermatt - Matterhorn Glaceir Paradise ,Switzerland,Zermatt,80,16,0,2000000,82.5,4,0,0,0
+Matterhorn Paradise - Zermatt - Matterhorn Glaceir Paradise ,Switzerland,Zermatt,40,8,0,2000000,54,2,0,1,1
+Matterhorn Paradise - Zermatt - Matterhorn Glaceir Paradise ,Switzerland,Zermatt,80,16,0,2000000,82.5,2,0,0,1
+Matterhorn Paradise - Zermatt - Riffelberg,Switzerland,Zermatt,23,3.1,1,2000000,46.46,2,0,1,0
+Matterhorn Paradise - Zermatt - Riffelberg,Switzerland,Zermatt,46,6.2,1,2000000,71.93,2,0,0,0
+Matterhorn Paradise - Zermatt - Riffelberg,Switzerland,Zermatt,23,3.1,1,2000000,23.23,0,0,1,0
+Matterhorn Paradise - Zermatt - Riffelberg,Switzerland,Zermatt,46,6.2,1,2000000,35.95,4,0,0,0
+Matterhorn Paradise - Zermatt - Riffelberg,Switzerland,Zermatt,23,3.1,1,2000000,23.23,2,0,1,1
+Matterhorn Paradise - Zermatt - Riffelberg,Switzerland,Zermatt,46,6.2,1,2000000,35.95,2,0,0,1
+Matterhorn Paradise - Zermatt - Riffelberg,Switzerland,Zermatt,23,3.1,0,2000000,53.98,2,0,1,0
+Matterhorn Paradise - Zermatt - Riffelberg,Switzerland,Zermatt,46,6.2,0,2000000,82.47,2,0,0,0
+Matterhorn Paradise - Zermatt - Riffelberg,Switzerland,Zermatt,23,3.1,0,2000000,26.99,0,0,1,0
+Matterhorn Paradise - Zermatt - Riffelberg,Switzerland,Zermatt,46,6.2,0,2000000,41.23,4,0,0,0
+Matterhorn Paradise - Zermatt - Riffelberg,Switzerland,Zermatt,23,3.1,0,2000000,26.99,2,0,1,1
+Matterhorn Paradise - Zermatt - Riffelberg,Switzerland,Zermatt,46,6.2,0,2000000,41.23,2,0,0,1
+Matterhorn Paradise - Zermatt - Schwarzsee,Switzerland,Zermatt,18,4.4,1,2000000,46.46,2,0,1,0
+Matterhorn Paradise - Zermatt - Schwarzsee,Switzerland,Zermatt,36,8.8,1,2000000,71.93,2,0,0,0
+Matterhorn Paradise - Zermatt - Schwarzsee,Switzerland,Zermatt,18,4.4,1,2000000,23.23,0,0,1,0
+Matterhorn Paradise - Zermatt - Schwarzsee,Switzerland,Zermatt,36,8.8,1,2000000,35.95,4,0,0,0
+Matterhorn Paradise - Zermatt - Schwarzsee,Switzerland,Zermatt,18,4.4,1,2000000,23.23,2,0,1,1
+Matterhorn Paradise - Zermatt - Schwarzsee,Switzerland,Zermatt,36,8.8,1,2000000,35.95,2,0,0,1
+Matterhorn Paradise - Zermatt - Schwarzsee,Switzerland,Zermatt,18,4.4,0,2000000,53.98,2,0,1,0
+Matterhorn Paradise - Zermatt - Schwarzsee,Switzerland,Zermatt,36,8.8,0,2000000,82.47,2,0,0,0
+Matterhorn Paradise - Zermatt - Schwarzsee,Switzerland,Zermatt,18,4.4,0,2000000,26.99,0,0,1,0
+Matterhorn Paradise - Zermatt - Schwarzsee,Switzerland,Zermatt,36,8.8,0,2000000,41.23,4,0,0,0
+Matterhorn Paradise - Zermatt - Schwarzsee,Switzerland,Zermatt,18,4.4,0,2000000,26.99,2,0,1,1
+Matterhorn Paradise - Zermatt - Schwarzsee,Switzerland,Zermatt,36,8.8,0,2000000,41.23,2,0,0,1
+Matterhorn Paradise - Zermatt - Testa Grigia ,Switzerland,Zermatt,50,9,1,2000000,133.46,2,0,1,0
+Matterhorn Paradise - Zermatt - Testa Grigia ,Switzerland,Zermatt,100,18,1,2000000,202.44,2,0,0,0
+Matterhorn Paradise - Zermatt - Testa Grigia ,Switzerland,Zermatt,50,9,1,2000000,66.72,0,0,1,0
+Matterhorn Paradise - Zermatt - Testa Grigia ,Switzerland,Zermatt,100,18,1,2000000,101.22,4,0,0,0
+Matterhorn Paradise - Zermatt - Testa Grigia ,Switzerland,Zermatt,50,9,1,2000000,66.72,2,0,1,1
+Matterhorn Paradise - Zermatt - Testa Grigia ,Switzerland,Zermatt,100,18,1,2000000,101.22,2,0,0,1
+Matterhorn Paradise - Zermatt - Testa Grigia ,Switzerland,Zermatt,50,9,0,2000000,163,2,0,1,0
+Matterhorn Paradise - Zermatt - Testa Grigia ,Switzerland,Zermatt,100,18,0,2000000,244,2,0,0,0
+Matterhorn Paradise - Zermatt - Testa Grigia ,Switzerland,Zermatt,50,9,0,2000000,81.5,0,0,1,0
+Matterhorn Paradise - Zermatt - Testa Grigia ,Switzerland,Zermatt,100,18,0,2000000,122,4,0,0,0
+Matterhorn Paradise - Zermatt - Testa Grigia ,Switzerland,Zermatt,50,9,0,2000000,81.5,2,0,1,1
+Matterhorn Paradise - Zermatt - Testa Grigia ,Switzerland,Zermatt,100,18,0,2000000,122,2,0,0,1
+Matterhorn Paradise - Zermatt - Trockener Steg,Switzerland,Zermatt,32,5.9,1,2000000,46.46,2,0,1,0
+Matterhorn Paradise - Zermatt - Trockener Steg,Switzerland,Zermatt,64,11.8,1,2000000,71.93,2,0,0,0
+Matterhorn Paradise - Zermatt - Trockener Steg,Switzerland,Zermatt,32,5.9,1,2000000,23.23,0,0,1,0
+Matterhorn Paradise - Zermatt - Trockener Steg,Switzerland,Zermatt,64,11.8,1,2000000,35.95,4,0,0,0
+Matterhorn Paradise - Zermatt - Trockener Steg,Switzerland,Zermatt,32,5.9,1,2000000,23.23,2,0,1,1
+Matterhorn Paradise - Zermatt - Trockener Steg,Switzerland,Zermatt,64,11.8,1,2000000,35.95,2,0,0,1
+Matterhorn Paradise - Zermatt - Trockener Steg,Switzerland,Zermatt,32,5.9,0,2000000,70.48,2,0,1,0
+Matterhorn Paradise - Zermatt - Trockener Steg,Switzerland,Zermatt,64,11.8,0,2000000,107.97,2,0,0,0
+Matterhorn Paradise - Zermatt - Trockener Steg,Switzerland,Zermatt,32,5.9,0,2000000,35.24,0,0,1,0
+Matterhorn Paradise - Zermatt - Trockener Steg,Switzerland,Zermatt,64,11.8,0,2000000,54,4,0,0,0
+Matterhorn Paradise - Zermatt - Trockener Steg,Switzerland,Zermatt,32,5.9,0,2000000,35.24,2,0,1,1
+Matterhorn Paradise - Zermatt - Trockener Steg,Switzerland,Zermatt,64,11.8,0,2000000,54,2,0,0,1
+Maya Ropeway & Cable Car,Japan,Kobe,12,1.8,0,2000000,8.02,2,0,1,0
+Maya Ropeway & Cable Car,Japan,Kobe,24,3.6,0,2000000,13.91,2,0,0,0
+Maya Ropeway & Cable Car,Japan,Kobe,12,1.8,0,2000000,4.01,0,0,1,0
+Maya Ropeway & Cable Car,Japan,Kobe,24,3.6,0,2000000,6.95,0,0,0,0
+Maya Ropeway & Cable Car,Japan,Kobe,12,1.8,0,2000000,6.42,4,0,1,0
+Maya Ropeway & Cable Car,Japan,Kobe,24,3.6,0,2000000,11.13,4,0,0,0
+Maya Ropeway & Cable Car,Japan,Kobe,12,1.8,0,2000000,2,4,0,1,0
+Maya Ropeway & Cable Car,Japan,Kobe,24,3.6,0,2000000,3.48,4,0,0,0
+Maya Ropeway & Cable Car,Japan,Kobe,12,1.8,0,2000000,4.02,2,0,1,1
+Maya Ropeway & Cable Car,Japan,Kobe,24,3.6,0,2000000,7.91,2,0,0,1
+Maya Ropeway & Cable Car,Japan,Kobe,12,1.8,0,2000000,2.01,0,0,1,1
+Maya Ropeway & Cable Car,Japan,Kobe,24,3.6,0,2000000,3.95,0,0,0,1
+Maya Ropeway & Cable Car,Japan,Kobe,12,1.8,0,2000000,3.42,4,0,1,1
+Maya Ropeway & Cable Car,Japan,Kobe,24,3.6,0,2000000,6.13,4,0,0,1
+Maya Ropeway & Cable Car,Japan,Kobe,12,1.8,0,2000000,1,4,0,1,1
+Maya Ropeway & Cable Car,Japan,Kobe,24,3.6,0,2000000,2.48,4,0,0,1
+Mount Titlis Cable Car : Engelberg to Titli,Switzerland,Lucerne,30,3.02,0,1200000,107.82,2,0,0,0
+Mount Titlis Cable Car : Engelberg to Titli,Switzerland,Lucerne,30,3.02,0,1200000,107.82,2,0,0,1
+Mount Titlis Cable Car: Engelberg to Engstlenalp,Switzerland,Lucerne,30,3.02,0,1200000,86.86,2,0,0,0
+Mount Titlis Cable Car: Engelberg to Engstlenalp,Switzerland,Lucerne,30,3.02,0,1200000,62.9,2,0,1,0
+Mount Titlis Cable Car: Engelberg to Engstlenalp,Switzerland,Lucerne,30,3.02,0,1200000,43.43,1,0,0,0
+Mount Titlis Cable Car: Engelberg to Engstlenalp,Switzerland,Lucerne,30,3.02,0,1200000,31.45,1,0,1,0
+Mount Titlis Cable Car: Engelberg to Engstlenalp,Switzerland,Lucerne,30,3.02,0,1200000,86.86,2,0,0,1
+Mount Titlis Cable Car: Engelberg to Engstlenalp,Switzerland,Lucerne,30,3.02,0,1200000,62.9,2,0,1,1
+Mount Titlis Cable Car: Engelberg to Engstlenalp,Switzerland,Lucerne,30,3.02,0,1200000,43.43,1,0,0,1
+Mount Titlis Cable Car: Engelberg to Engstlenalp,Switzerland,Lucerne,30,3.02,0,1200000,31.45,1,0,1,1
+Mount Titlis Cable Car: Engelberg to Jochpass,Switzerland,Lucerne,30,3.02,0,1200000,70.38,2,0,0,0
+Mount Titlis Cable Car: Engelberg to Jochpass,Switzerland,Lucerne,30,3.02,0,1200000,50.92,2,0,1,0
+Mount Titlis Cable Car: Engelberg to Jochpass,Switzerland,Lucerne,30,3.02,0,1200000,35.19,1,0,0,0
+Mount Titlis Cable Car: Engelberg to Jochpass,Switzerland,Lucerne,30,3.02,0,1200000,25.46,1,0,1,0
+Mount Titlis Cable Car: Engelberg to Jochpass,Switzerland,Lucerne,30,3.02,0,1200000,70.38,2,0,0,1
+Mount Titlis Cable Car: Engelberg to Jochpass,Switzerland,Lucerne,30,3.02,0,1200000,50.92,2,0,1,1
+Mount Titlis Cable Car: Engelberg to Jochpass,Switzerland,Lucerne,30,3.02,0,1200000,35.19,1,0,0,1
+Mount Titlis Cable Car: Engelberg to Jochpass,Switzerland,Lucerne,30,3.02,0,1200000,25.46,1,0,1,1
+Mount Titlis Cable Car: Engelberg to Stand,Switzerland,Lucerne,30,3.02,0,1200000,83.86,2,0,0,0
+Mount Titlis Cable Car: Engelberg to Stand,Switzerland,Lucerne,30,3.02,0,1200000,59.9,2,0,1,0
+Mount Titlis Cable Car: Engelberg to Stand,Switzerland,Lucerne,30,3.02,0,1200000,41.93,1,0,0,0
+Mount Titlis Cable Car: Engelberg to Stand,Switzerland,Lucerne,30,3.02,0,1200000,29.95,1,0,1,0
+Mount Titlis Cable Car: Engelberg to Stand,Switzerland,Lucerne,30,3.02,0,1200000,83.86,2,0,0,1
+Mount Titlis Cable Car: Engelberg to Stand,Switzerland,Lucerne,30,3.02,0,1200000,59.9,2,0,1,1
+Mount Titlis Cable Car: Engelberg to Stand,Switzerland,Lucerne,30,3.02,0,1200000,41.93,1,0,0,1
+Mount Titlis Cable Car: Engelberg to Stand,Switzerland,Lucerne,30,3.02,0,1200000,29.95,1,0,1,1
+Mount Titlis Cable Car: Engelberg to Titlis,Switzerland,Lucerne,30,3.02,0,1200000,103.33,2,0,1,0
+Mount Titlis Cable Car: Engelberg to Titlis,Switzerland,Lucerne,30,3.02,0,1200000,53.91,1,0,0,0
+Mount Titlis Cable Car: Engelberg to Titlis,Switzerland,Lucerne,30,3.02,0,1200000,51.67,1,0,1,0
+Mount Titlis Cable Car: Engelberg to Titlis,Switzerland,Lucerne,30,3.02,0,1200000,103.33,2,0,1,1
+Mount Titlis Cable Car: Engelberg to Titlis,Switzerland,Lucerne,30,3.02,0,1200000,53.91,1,0,0,1
+Mount Titlis Cable Car: Engelberg to Titlis,Switzerland,Lucerne,30,3.02,0,1200000,51.67,1,0,1,1
+Mount Titlis Cable Car: Engelberg to Trubsee,Switzerland,Lucerne,30,3.02,0,1200000,53.91,2,0,0,0
+Mount Titlis Cable Car: Engelberg to Trubsee,Switzerland,Lucerne,30,3.02,0,1200000,38.94,2,0,1,0
+Mount Titlis Cable Car: Engelberg to Trubsee,Switzerland,Lucerne,30,3.02,0,1200000,26.96,1,0,0,0
+Mount Titlis Cable Car: Engelberg to Trubsee,Switzerland,Lucerne,30,3.02,0,1200000,19.47,1,0,1,0
+Mount Titlis Cable Car: Engelberg to Trubsee,Switzerland,Lucerne,30,3.02,0,1200000,53.91,2,0,0,1
+Mount Titlis Cable Car: Engelberg to Trubsee,Switzerland,Lucerne,30,3.02,0,1200000,38.94,2,0,1,1
+Mount Titlis Cable Car: Engelberg to Trubsee,Switzerland,Lucerne,30,3.02,0,1200000,26.96,1,0,0,1
+Mount Titlis Cable Car: Engelberg to Trubsee,Switzerland,Lucerne,30,3.02,0,1200000,19.47,1,0,1,1
+Mt. Moiwa Ropeway,Japan,Sapporo,10,2.4,0,400000,6.23,2,0,0,0
+Mt. Moiwa Ropeway,Japan,Sapporo,10,2.4,0,400000,3.11,0,0,0,0
+Mt. Moiwa Ropeway,Japan,Sapporo,5,1.2,0,400000,3.11,2,0,1,0
+Mt. Moiwa Ropeway,Japan,Sapporo,5,1.2,0,400000,1.6,0,0,1,0
+Mt. Moiwa Ropeway,Japan,Sapporo,10,2.4,0,400000,3.23,2,0,0,1
+Mt. Moiwa Ropeway,Japan,Sapporo,10,2.4,0,400000,2.11,0,0,0,1
+Mt. Moiwa Ropeway,Japan,Sapporo,5,1.2,0,400000,2.11,2,0,1,1
+Mt. Moiwa Ropeway,Japan,Sapporo,5,1.2,0,400000,0.6,0,0,1,1
+Mutianyu Great Wall Cable Car,China,Beijing,5,0.723,0,1642500,18.9,2,0,1,0
+Mutianyu Great Wall Cable Car,China,Beijing,5,0.723,0,1642500,9.44,0,0,1,0
+Mutianyu Great Wall Cable Car,China,Beijing,10,1.446,0,1642500,22.7,2,0,0,0
+Mutianyu Great Wall Cable Car,China,Beijing,10,1.446,0,1642500,11.33,0,0,0,0
+Mutianyu Great Wall Cable Car,China,Beijing,5,0.723,0,1642500,13.9,2,0,1,1
+Mutianyu Great Wall Cable Car,China,Beijing,5,0.723,0,1642500,4.44,0,0,1,1
+Mutianyu Great Wall Cable Car,China,Beijing,10,1.446,0,1642500,17.7,2,0,0,1
+Mutianyu Great Wall Cable Car,China,Beijing,10,1.446,0,1642500,6.33,0,0,0,1
+Namsan Cable Car,South Korea,Seoul,3,0.605,0,600000,12.04,2,0,1,0
+Namsan Cable Car,South Korea,Seoul,6,1.21,0,600000,11.5,0,0,0,0
+Namsan Cable Car,South Korea,Seoul,6,1.21,0,600000,15.05,2,0,0,0
+Namsan Cable Car,South Korea,Seoul,6,1.21,0,600000,11.5,4,0,0,0
+Namsan Cable Car,South Korea,Seoul,3,0.605,0,600000,9,4,0,1,0
+Namsan Cable Car,South Korea,Seoul,6,1.21,0,600000,11.5,4,0,0,0
+Namsan Cable Car,South Korea,Seoul,3,0.605,0,600000,9,4,0,1,0
+Namsan Cable Car,South Korea,Seoul,3,0.605,0,600000,9,0,0,1,0
+Namsan Cable Car,South Korea,Seoul,3,0.605,0,600000,6.04,2,0,1,1
+Namsan Cable Car,South Korea,Seoul,6,1.21,0,600000,5.5,0,0,0,1
+Namsan Cable Car,South Korea,Seoul,6,1.21,0,600000,8.05,2,0,0,1
+Namsan Cable Car,South Korea,Seoul,6,1.21,0,600000,5.5,4,0,0,1
+Namsan Cable Car,South Korea,Seoul,3,0.605,0,600000,4,4,0,1,1
+Namsan Cable Car,South Korea,Seoul,6,1.21,0,600000,5.5,4,0,0,1
+Namsan Cable Car,South Korea,Seoul,3,0.605,0,600000,4,4,0,1,1
+Namsan Cable Car,South Korea,Seoul,3,0.605,0,600000,4,0,0,1,1
+Ngong Ping,Hong Kong,Hong Kong,25,5.7,0,1380000,40.23,2,0,1,0
+Ngong Ping,Hong Kong,Hong Kong,25,5.7,0,1380000,23.11,0,0,1,0
+Ngong Ping,Hong Kong,Hong Kong,25,5.7,0,1380000,24.83,4,0,1,0
+Ngong Ping,Hong Kong,Hong Kong,50,10.4,0,1380000,59.92,2,0,0,0
+Ngong Ping,Hong Kong,Hong Kong,50,10.4,0,1380000,36.81,0,0,0,0
+Ngong Ping,Hong Kong,Hong Kong,50,10.4,0,1380000,40.23,4,0,0,0
+Ngong Ping,Hong Kong,Hong Kong,25,5.7,0,1380000,20.23,2,0,1,1
+Ngong Ping,Hong Kong,Hong Kong,25,5.7,0,1380000,13.11,0,0,1,1
+Ngong Ping,Hong Kong,Hong Kong,25,5.7,0,1380000,12.83,4,0,1,1
+Ngong Ping,Hong Kong,Hong Kong,50,10.4,0,1380000,30.92,2,0,0,1
+Ngong Ping,Hong Kong,Hong Kong,50,10.4,0,1380000,18.81,0,0,0,1
+Ngong Ping,Hong Kong,Hong Kong,50,10.4,0,1380000,20.23,4,0,0,1
+Palisades Tahoe Aerial Tram,USA,Olympic Valley,10,2.4,1,400000,83.7,2,0,1,0
+Palisades Tahoe Aerial Tram,USA,Olympic Valley,10,2.4,1,400000,58.05,0,0,1,0
+Palisades Tahoe Aerial Tram,USA,Olympic Valley,10,2.4,1,400000,75.6,4,0,1,0
+Palisades Tahoe Aerial Tram,USA,Olympic Valley,10,2.4,1,400000,97.2,2,0,1,0
+Palisades Tahoe Aerial Tram,USA,Olympic Valley,10,2.4,1,400000,67.5,0,0,1,0
+Palisades Tahoe Aerial Tram,USA,Olympic Valley,10,2.4,1,400000,87.75,4,0,1,0
+Palisades Tahoe Aerial Tram,USA,Olympic Valley,10,2.4,1,400000,83.7,2,0,1,1
+Palisades Tahoe Aerial Tram,USA,Olympic Valley,10,2.4,1,400000,58.05,0,0,1,1
+Palisades Tahoe Aerial Tram,USA,Olympic Valley,10,2.4,1,400000,75.6,4,0,1,1
+Palisades Tahoe Aerial Tram,USA,Olympic Valley,10,2.4,1,400000,97.2,2,0,1,1
+Palisades Tahoe Aerial Tram,USA,Olympic Valley,10,2.4,1,400000,67.5,0,0,1,1
+Palisades Tahoe Aerial Tram,USA,Olympic Valley,10,2.4,1,400000,87.75,4,0,1,1
+Palm Springs Aerial Tramway,USA,Palm Springs,10,4.02,0,800000,41.78,2,0,1,0
+Palm Springs Aerial Tramway,USA,Palm Springs,10,4.02,0,800000,25.58,0,0,1,0
+Palm Springs Aerial Tramway,USA,Palm Springs,10,4.02,0,800000,39.08,4,0,1,0
+Palm Springs Aerial Tramway,USA,Palm Springs,10,4.02,0,800000,41.78,2,0,1,1
+Palm Springs Aerial Tramway,USA,Palm Springs,10,4.02,0,800000,25.58,0,0,1,1
+Palm Springs Aerial Tramway,USA,Palm Springs,10,4.02,0,800000,39.08,4,0,1,1
+Peak 2 Peak Gondola,Canada,Whistler,11,4.4,1,3000000,131,2,0,0,0
+Peak 2 Peak Gondola,Canada,Whistler,11,4.4,1,3000000,110,4,0,0,0
+Peak 2 Peak Gondola,Canada,Whistler,11,4.4,1,3000000,104,1,0,0,0
+Peak 2 Peak Gondola,Canada,Whistler,11,4.4,1,3000000,61,0,0,0,0
+Peak 2 Peak Gondola,Canada,Whistler,11,4.4,0,3000000,97,2,0,0,0
+Peak 2 Peak Gondola,Canada,Whistler,11,4.4,0,3000000,88,4,0,0,0
+Peak 2 Peak Gondola,Canada,Whistler,11,4.4,0,3000000,83,1,0,0,0
+Peak 2 Peak Gondola,Canada,Whistler,11,4.4,0,3000000,50,0,0,0,0
+Peak 2 Peak Gondola,Canada,Whistler,11,4.4,1,3000000,131,2,0,0,1
+Peak 2 Peak Gondola,Canada,Whistler,11,4.4,1,3000000,110,4,0,0,1
+Peak 2 Peak Gondola,Canada,Whistler,11,4.4,1,3000000,104,1,0,0,1
+Peak 2 Peak Gondola,Canada,Whistler,11,4.4,1,3000000,61,0,0,0,1
+Peak 2 Peak Gondola,Canada,Whistler,11,4.4,0,3000000,97,2,0,0,1
+Peak 2 Peak Gondola,Canada,Whistler,11,4.4,0,3000000,88,4,0,0,1
+Peak 2 Peak Gondola,Canada,Whistler,11,4.4,0,3000000,83,1,0,0,1
+Peak 2 Peak Gondola,Canada,Whistler,11,4.4,0,3000000,50,0,0,0,1
+Port Cable Car,Spain,Barcelona,10,1.3,0,2500000,16.05,2,1,1,0
+Port Cable Car,Spain,Barcelona,20,2.6,0,2500000,24.07,2,1,0,0
+Port Cable Car,Spain,Barcelona,10,1.3,0,2500000,16.05,2,1,1,1
+Port Cable Car,Spain,Barcelona,20,2.6,0,2500000,24.07,2,1,0,1
+Sandia Peak Tramway,USA,Albuquerque,30,8.6,0,1200000,45.9,2,0,1,0
+Sandia Peak Tramway,USA,Albuquerque,30,8.6,0,1200000,32.4,0,0,1,0
+Sandia Peak Tramway,USA,Albuquerque,30,8.6,0,1200000,39.15,1,0,1,0
+Sandia Peak Tramway,USA,Albuquerque,30,8.6,0,1200000,39.15,4,0,1,0
+Sandia Peak Tramway,USA,Albuquerque,15,4.3,0,1200000,31.05,2,0,0,0
+Sandia Peak Tramway,USA,Albuquerque,15,4.3,0,1200000,31.05,0,0,0,0
+Sandia Peak Tramway,USA,Albuquerque,15,4.3,0,1200000,31.05,1,0,0,0
+Sandia Peak Tramway,USA,Albuquerque,15,4.3,0,1200000,31.05,4,0,0,0
+Sandia Peak Tramway,USA,Albuquerque,30,8.6,0,1200000,45.9,2,0,1,1
+Sandia Peak Tramway,USA,Albuquerque,30,8.6,0,1200000,32.4,0,0,1,1
+Sandia Peak Tramway,USA,Albuquerque,30,8.6,0,1200000,39.15,1,0,1,1
+Sandia Peak Tramway,USA,Albuquerque,30,8.6,0,1200000,39.15,4,0,1,1
+Sandia Peak Tramway,USA,Albuquerque,15,4.3,0,1200000,31.05,2,0,0,1
+Sandia Peak Tramway,USA,Albuquerque,15,4.3,0,1200000,31.05,0,0,0,1
+Sandia Peak Tramway,USA,Albuquerque,15,4.3,0,1200000,31.05,1,0,0,1
+Sandia Peak Tramway,USA,Albuquerque,15,4.3,0,1200000,31.05,4,0,0,1
+Schynige Platte,Switzerland,Interlaken,30,5,0,1000000,96,2,0,0,0
+Schynige Platte,Switzerland,Interlaken,30,5,0,1000000,48,0,0,0,0
+Schynige Platte,Switzerland,Interlaken,30,5,0,1000000,48,2,0,0,1
+Skyrail Rainforest Cableway,Australia,Queensland,30,7.5,0,1000000,54.55,2,0,1,0
+Skyrail Rainforest Cableway,Australia,Queensland,30,7.5,0,1000000,27.27,0,0,1,0
+Skyrail Rainforest Cableway,Australia,Queensland,60,15,0,1000000,81.82,2,0,0,0
+Skyrail Rainforest Cableway,Australia,Queensland,60,15,0,1000000,40.91,0,0,0,0
+Skyrail Rainforest Cableway,Australia,Queensland,30,7.5,0,1000000,27.55,2,0,1,1
+Skyrail Rainforest Cableway,Australia,Queensland,30,7.5,0,1000000,14.27,0,0,1,1
+Skyrail Rainforest Cableway,Australia,Queensland,60,15,0,1000000,40.82,2,0,0,1
+Skyrail Rainforest Cableway,Australia,Queensland,60,15,0,1000000,20.91,0,0,0,1
+Sugarloaf Cable Car,Brazil,Rio de Janeiro,3,0.85,0,1200000,49.89,2,1,0,0
+Sugarloaf Cable Car,Brazil,Rio de Janeiro,3,0.85,0,1200000,24.81,4,1,0,0
+Sugarloaf Cable Car,Brazil,Rio de Janeiro,3,0.85,0,1200000,24.81,0,1,0,0
+Sugarloaf Cable Car,Brazil,Rio de Janeiro,3,0.85,0,1200000,49.89,2,1,0,1
+Sugarloaf Cable Car,Brazil,Rio de Janeiro,3,0.85,0,1200000,24.81,4,1,0,1
+Sugarloaf Cable Car,Brazil,Rio de Janeiro,3,0.85,0,1200000,24.81,0,1,0,1
+Sun Moon Lake Ropeway,Taiwan,Nantou,10,1.877,0,1000000,14.76,2,0,0,0
+Sun Moon Lake Ropeway,Taiwan,Nantou,10,1.877,0,1000000,11.81,4,0,0,0
+Sun Moon Lake Ropeway,Taiwan,Nantou,10,1.877,0,1000000,11.81,4,0,0,0
+Sun Moon Lake Ropeway,Taiwan,Nantou,10,1.877,0,1000000,11.81,0,0,0,0
+Sun Moon Lake Ropeway,Taiwan,Nantou,10,1.877,0,1000000,7.76,2,0,0,1
+Sun Moon Lake Ropeway,Taiwan,Nantou,10,1.877,0,1000000,6.81,4,0,0,1
+Sun Moon Lake Ropeway,Taiwan,Nantou,10,1.877,0,1000000,6.81,4,0,0,1
+Sun Moon Lake Ropeway,Taiwan,Nantou,10,1.877,0,1000000,6.81,0,0,0,1
+Table Mountain Aerial Cableway,South Africa,Cape Town,4.5,1.2,0,1200000,12.78,0,1,0,0
+Table Mountain Aerial Cableway,South Africa,Cape Town,4.5,1.2,0,1200000,25.56,2,1,0,0
+Table Mountain Aerial Cableway,South Africa,Cape Town,4.5,1.2,0,1200000,8.52,4,1,0,0
+Table Mountain Aerial Cableway,South Africa,Cape Town,4.5,1.2,0,1200000,17.75,1,1,0,0
+Table Mountain Aerial Cableway,South Africa,Cape Town,8,2.4,0,1200000,9.23,0,1,1,0
+Table Mountain Aerial Cableway,South Africa,Cape Town,8,2.4,0,1200000,17.04,2,1,1,0
+Table Mountain Aerial Cableway,South Africa,Cape Town,8,2.4,0,1200000,4.97,4,1,1,0
+Table Mountain Aerial Cableway,South Africa,Cape Town,8,2.4,0,1200000,10.65,1,1,1,0
+Table Mountain Aerial Cableway,South Africa,Cape Town,4.5,1.2,0,1200000,12.78,0,1,0,1
+Table Mountain Aerial Cableway,South Africa,Cape Town,4.5,1.2,0,1200000,25.56,2,1,0,1
+Table Mountain Aerial Cableway,South Africa,Cape Town,4.5,1.2,0,1200000,8.52,4,1,0,1
+Table Mountain Aerial Cableway,South Africa,Cape Town,4.5,1.2,0,1200000,17.75,1,1,0,1
+Table Mountain Aerial Cableway,South Africa,Cape Town,8,2.4,0,1200000,9.23,0,1,1,1
+Table Mountain Aerial Cableway,South Africa,Cape Town,8,2.4,0,1200000,17.04,2,1,1,1
+Table Mountain Aerial Cableway,South Africa,Cape Town,8,2.4,0,1200000,4.97,4,1,1,1
+Table Mountain Aerial Cableway,South Africa,Cape Town,8,2.4,0,1200000,10.65,1,1,1,1
+Teleferic de Montjuic,Spain,Barcelona,5,0.75,0,2500000,15.35,2,1,1,0
+Teleferic de Montjuic,Spain,Barcelona,5,0.75,0,2500000,12.42,0,1,1,0
+Teleferic de Montjuic,Spain,Barcelona,10,1.5,0,2500000,23.38,2,1,0,0
+Teleferic de Montjuic,Spain,Barcelona,10,1.5,0,2500000,16.95,0,1,0,0
+Teleferic de Montjuic,Spain,Barcelona,5,0.75,0,2500000,15.35,2,1,1,1
+Teleferic de Montjuic,Spain,Barcelona,5,0.75,0,2500000,12.42,0,1,1,1
+Teleferic de Montjuic,Spain,Barcelona,10,1.5,0,2500000,23.38,2,1,0,1
+Teleferic de Montjuic,Spain,Barcelona,10,1.5,0,2500000,16.95,0,1,0,1
+Teleferico de Gaia,Portugal,Porto,5,0.562,0,400000,10.23,2,1,1,0
+Teleferico de Gaia,Portugal,Porto,5,0.562,0,400000,5.11,0,1,1,0
+Teleferico de Gaia,Portugal,Porto,10,1.124,0,400000,14.61,2,1,0,0
+Teleferico de Gaia,Portugal,Porto,10,1.124,0,400000,7.31,0,1,0,0
+Teleferico de Gaia,Portugal,Porto,5,0.562,0,400000,10.23,2,1,1,1
+Teleferico de Gaia,Portugal,Porto,5,0.562,0,400000,5.11,0,1,1,1
+Teleferico de Gaia,Portugal,Porto,10,1.124,0,400000,14.61,2,1,0,1
+Teleferico de Gaia,Portugal,Porto,10,1.124,0,400000,7.31,0,1,0,1
+Tianmen Mountain Cable Car,China,Hunan,28,7.455,0,2628000,43.71,2,0,1,0
+Tianmen Mountain Cable Car,China,Hunan,28,7.455,0,2628000,23.71,2,0,1,1
+Tianzi Mountain Cable Car,China,Hunan,10,2.084,0,2628000,13.39,2,0,1,0
+Tianzi Mountain Cable Car,China,Hunan,10,2.084,0,2628000,7.39,2,0,1,1
+Wellington Cable Car,New Zealand,Wellington,5,0.612,0,1470000,8.91,2,0,1,0
+Wellington Cable Car,New Zealand,Wellington,10,1.224,0,1470000,4.86,2,0,0,0
+Wellington Cable Car,New Zealand,Wellington,5,0.612,0,1470000,5.45,1,1,1,0
+Wellington Cable Car,New Zealand,Wellington,10,1.224,0,1470000,2.43,1,1,0,0
+Wellington Cable Car,New Zealand,Wellington,5,0.612,0,1470000,8.91,2,0,1,1
+Wellington Cable Car,New Zealand,Wellington,10,1.224,0,1470000,4.86,2,0,0,1
+Wellington Cable Car,New Zealand,Wellington,5,0.612,0,1470000,5.45,1,1,1,1
+Wellington Cable Car,New Zealand,Wellington,10,1.224,0,1470000,2.43,1,1,0,1
+Yangjiajie Cable Car,China,Hunan,5.2,1.876,0,2628000,14.4,2,0,1,0
+Yangjiajie Cable Car,China,Hunan,5.2,1.876,0,2628000,7.4,2,0,1,1
+Yen Tu Mountain Cable Car,Vietnam,Quảng Ninh,32,4.208,0,800000,15.24,2,1,0,0
+Yen Tu Mountain Cable Car,Vietnam,Quảng Ninh,32,4.208,0,800000,15.24,0,1,0,0
+Yen Tu Mountain Cable Car,Vietnam,Quảng Ninh,32,4.208,0,800000,15.24,1,1,0,0
+Yen Tu Mountain Cable Car,Vietnam,Quảng Ninh,32,4.208,0,800000,15.24,3,1,0,0
+Yen Tu Mountain Cable Car,Vietnam,Quảng Ninh,32,4.208,0,800000,15.24,2,1,0,1
+Yen Tu Mountain Cable Car,Vietnam,Quảng Ninh,32,4.208,0,800000,15.24,0,1,0,1
+Yen Tu Mountain Cable Car,Vietnam,Quảng Ninh,32,4.208,0,800000,15.24,1,1,0,1
+Yen Tu Mountain Cable Car,Vietnam,Quảng Ninh,32,4.208,0,800000,15.24,3,1,0,1
+Zhangjiajie National Forest Park Cable Car,China,Hunan,6,1,0,2628000,9.3,2,0,1,0
+Zhangjiajie National Forest Park Cable Car,China,Hunan,12,2,0,2628000,17.86,2,0,0,0
+Zhangjiajie National Forest Park Cable Car,China,Hunan,6,1,0,2628000,4.3,2,0,1,1
+Zhangjiajie National Forest Park Cable Car,China,Hunan,12,2,0,2628000,8.86,2,0,0,1
