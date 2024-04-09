@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:latest
+    container_name: mysql-container
+    restart: always
+    ports: 
+      - 1272:3306
+    networks:
+      - docker-net
+    environment:
+      MYSQL_ROOT_PASSWORD: teamVamos123!
+      MYSQL_DATABASE: priceopt
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - docker-net
+    volumes:
+      - ./:/app
+    depends_on:
+      - db
+
+volumes:
+  mysql_data:
+
+networks:
+  docker-net: 
+    name: docker_network
+    driver: bridge
