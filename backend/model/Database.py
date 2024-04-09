@@ -18,12 +18,12 @@ class Database:
 
     def execute_query(self, query):
         self.cursor.execute(query)
-        return self.cursor.fetchall()
+        column_headers = [col[0] for col in self.cursor.description]
+        return column_headers, self.cursor.fetchall()
 
     def retrieve_data_from_table(self, table_name):
         query = f"SELECT * FROM {table_name}"
-        table_data = self.execute_query(query)
-        column_headers = [col[0] for col in self.cursor.description]
+        column_headers, table_data = self.execute_query(query)
         return column_headers, table_data
     
     def add_all_data_to_table(self, table_name, data):
