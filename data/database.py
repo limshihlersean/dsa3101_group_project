@@ -2,7 +2,6 @@
 import mysql.connector
 import pandas as pd
 import time
-#import os
 
 # Get the directory of the current script file
 #script_directory = os.path.dirname(__file__)
