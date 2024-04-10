@@ -34,50 +34,49 @@ def create_scatter_plot(data, x_axis, y_axis, color_category, title):
         x=x_axis,
         y=y_axis,
         color=color_category,
-        tooltip=['Company', 'City', x_axis, y_axis]
+        tooltip=['company', 'city', x_axis, y_axis]
     ).interactive().properties(
         width=300,
         height=300,
         title=title
     )
 
-# Function to preprocess the data
+'''# Function to preprocess the data
 def preprocess_data(df):
     # Convert 'Tourist_volume_of_cable_car' to numeric after removing commas
     df['Tourist_volume_of_cable_car'] = df['Tourist_volume_of_cable_car'].str.replace(',', '').astype(float)
     # Additional preprocessing steps...
-    return df
+    return df'''
 
 # Load and preprocess the data
-dist_dur_price_data = load_data('distance_duration_price.csv')
-dist_dur_price_data = preprocess_data(dist_dur_price_data)
+dist_dur_price_data = app.get_distance_duration_price()
 
 # Filters in the sidebar
 st.sidebar.header("Filter for Cable Car Price Analysis")
 selected_countries = st.sidebar.multiselect(
     'Select Countries',
-    options=np.unique(dist_dur_price_data['Country']),
-    default=np.unique(dist_dur_price_data['Country']),
+    options=np.unique(dist_dur_price_data['country']),
+    default=np.unique(dist_dur_price_data['country']),
     key='country_select_dist_dur_price'
 )
 
 # Filter data based on selection
-filtered_data = dist_dur_price_data[dist_dur_price_data['Country'].isin(selected_countries)]
+filtered_data = dist_dur_price_data[dist_dur_price_data['country'].isin(selected_countries)]
 
 # Generate scatter plots
 scatter_duration_price = create_scatter_plot(
     filtered_data,
-    'Duration (Mins)',
-    'Cable car Price (SGD)',
-    'Country:N',
+    'duration',
+    'cable_car_price',
+    'country:N',
     "Duration (Mins) vs. Cable car Price (SGD)"
 )
 
 scatter_distance_price = create_scatter_plot(
     filtered_data,
-    'Distance (KM)',
-    'Cable car Price (SGD)',
-    'Country:N',
+    'distance',
+    'cable_car_price',
+    'country:N',
     "Distance (KM) vs. Cable car Price (SGD)"
 )
 
@@ -88,7 +87,7 @@ combined_scatter_plots = alt.hconcat(scatter_duration_price, scatter_distance_pr
 st.altair_chart(combined_scatter_plots, use_container_width=True)
 
 #------------------------------------------------------------------------------#
-
+'''
 st.header('Standard Pricing Overview')
 
 def create_price_comparison_chart(data):
@@ -335,4 +334,4 @@ filtered_data = bun_data[bun_data['Attraction'].isin(selected_attractions)]
 discount_bar_chart = create_discount_bar_chart(filtered_data, 'Discounts by Attraction')
 st.altair_chart(discount_bar_chart, use_container_width=True)
 
-#------------------------------------------------------------------------------#
+#------------------------------------------------------------------------------#'''

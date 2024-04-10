@@ -39,11 +39,24 @@ def get_bundle_discount():
 
 def get_distance_duration_price():
     response = requests.get('http://localhost:8080/tables/distance_duration_price')
+    print(response.status_code, response.text)  # Debugging line
+    if response.status_code == 200:
+        data = response.json()
+        if 'message' in data and isinstance(data['message'], list):
+            df = pd.DataFrame(data['message'])
+            st.write(df)
+        else:
+            st.error('No data found')
+    else:
+        st.error(f'Failed to get data from backend: {response.status_code}')
+
+'''def get_distance_duration_price():
+    response = requests.get('http://localhost:8080/tables/distance_duration_price')
     if response.status_code == 200:
         data = response.json()
         st.write(data['message'])
     else:
-        st.error('Failed to get data from backend')
+        st.error('Failed to get data from backend')'''
 
 
 def send_data():
