@@ -13,6 +13,7 @@ COPY local_attractions_citandnon_isbundle_2024.csv .
 COPY local_attractions_citizen_alacarte_allyears.csv .
 COPY local_attractions_noncitizen_alacarte_2024.csv .
 COPY cable_car_cleaned_v2.csv .
+COPY .env .
 
 # Command to run your script
 CMD ["python", "database.py"]

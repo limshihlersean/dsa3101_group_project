@@ -21,6 +21,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+    restart: always
     networks:
       - docker-net
     volumes:
