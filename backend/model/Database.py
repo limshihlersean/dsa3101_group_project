@@ -166,12 +166,10 @@ class Database:
                 vol;
         
         """
-        column_headers, rows = self.execute_query()
+        rows = self.execute_query(query)
 
-        return column_headers, rows
-
-
-        
+        return rows
+    
     def add_all_data_to_table(self, table_name, data):
         columns = ', '.join(data[0].keys())
         placeholders = ', '.join(['%s'] * len(data[0]))
@@ -183,34 +181,3 @@ class Database:
         # Insert multiple rows of data in one go
         self.cursor.executemany(query, values)
         self.conn.commit()
-        
-    # def insert_new_rows_noncitizensingle(self,data):
-
-    #     new_data = data
-
-
-    #     # Iterate over the JSON data and insert each row into the database
-    #     for row in new_data:
-    #         company = row[0]
-    #         age = row[1]
-    #         events = row[2]
-    #         price =  row[3]
-
-
-    #         # Prepare the INSERT statement
-    #         query = """
-    #             INSERT INTO overseas (company, age, events, price)
-    #             VALUES (%s, %s, %s, %s);
-    #         """
-
-    #     cursor.execute(query, (company, age, events, price ))
-
-    #     message = "Insertion success"
-
-    #     # Commit the transaction
-    #     mydb.commit()
-
-    #     cursor.close()
-    #     mydb.close()
-
-    #     #return jsonify({'message': message})

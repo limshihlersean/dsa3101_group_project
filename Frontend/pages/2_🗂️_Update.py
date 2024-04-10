@@ -1,9 +1,9 @@
 import pandas as pd
 import streamlit as st
 import requests
+import app
 
-
-def load_data():
+def load_data1():
     response = requests.get('http://localhost:5000/')
     if response.status_code == 200:
         data = response.json()
@@ -20,10 +20,10 @@ def update_data():
     else:
         st.error("Failed to update data in the database.")
 
-#df = load_data()
+df = app.load_data_overseas()
 
 st.title("Your data")  # add a title
-df = pd.read_csv("../data/cable_car_data_with_PPP.csv")
+#df = pd.read_csv("../data/cable_car_data_with_PPP.csv")
 
 #allow users to add and delete rows
 edited_df = st.data_editor(df, num_rows="dynamic")
