@@ -79,6 +79,7 @@ def update_backend_data(item_id, new_value):
 # Example usage
 data_to_update = {'name': 'Updated Resource', 'value': 150}
 update_resource('1', data_to_update)
+'''
 
 def delete_resource(resource_id):
     base_url = 'http://localhost:5000/api/resource/'
@@ -94,6 +95,7 @@ def delete_resource(resource_id):
 # Example usage
 delete_resource('1')
 
+'''
 # Your Streamlit UI components
 st.title('Streamlit Frontend')
 

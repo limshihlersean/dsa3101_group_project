@@ -4,6 +4,7 @@ import pandas as pd
 import altair as alt
 import os
 import numpy as np
+import app 
 
 
 #To show the title of Dashboard
