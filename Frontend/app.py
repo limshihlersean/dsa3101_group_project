@@ -3,52 +3,92 @@ import requests
 import pandas as pd
 
 # Define the base URL for the backend API
-BASE_URL = 'http://localhost:8080/tables/dynamic_pricing'
+BASE_URL = 'http://localhost:8080/tables'
+
+def load_data_overseas():
+    response = requests.get('http://localhost:8080/tables/distance_duration_price')
+    if response.status_code == 200:
+        data = response.json()
+        columns = data[0]
+        rows = data[1]
+        df = pd.DataFrame(rows, columns=columns)
+
+        return df
+    else:
+        st.error(f'Failed to get data from backend: {response.status_code}')
+
 
 def get_dynamic_pricing():
     response = requests.get('http://localhost:8080/tables/dynamic_pricing')
     if response.status_code == 200:
         data = response.json()
-        st.write(data['message'])
+        columns = data[0]
+        rows = data[1]
+        df = pd.DataFrame(rows, columns=columns)
+
+        return df
     else:
-        st.error('Failed to get data from backend')
+        st.error(f'Failed to get data from backend: {response.status_code}')
 
 def get_pricing_table():
     response = requests.get('http://localhost:8080/tables/pricing')
     if response.status_code == 200:
         data = response.json()
-        st.write(data['message'])
+        columns = data[0]
+        rows = data[1]
+        df = pd.DataFrame(rows, columns=columns)
+
+        return df
     else:
-        st.error('Failed to get data from backend')
+        st.error(f'Failed to get data from backend: {response.status_code}')
 
 def get_local_discount():
     response = requests.get('http://localhost:8080/tables/local_discount')
     if response.status_code == 200:
         data = response.json()
-        st.write(data['message'])
+        columns = data[0]
+        rows = data[1]
+        df = pd.DataFrame(rows, columns=columns)
+
+        return df
     else:
-        st.error('Failed to get data from backend')
+        st.error(f'Failed to get data from backend: {response.status_code}')
 
 def get_bundle_discount():
     response = requests.get('http://localhost:8080/tables/bundle_discount')
     if response.status_code == 200:
         data = response.json()
-        st.write(data['message'])
+        columns = data[0]
+        rows = data[1]
+        df = pd.DataFrame(rows, columns=columns)
+
+        return df
     else:
-        st.error('Failed to get data from backend')
+        st.error(f'Failed to get data from backend: {response.status_code}')
 
 def get_distance_duration_price():
     response = requests.get('http://localhost:8080/tables/distance_duration_price')
-    print(response.status_code, response.text)  # Debugging line
     if response.status_code == 200:
         data = response.json()
-        if 'message' in data and isinstance(data['message'], list):
-            df = pd.DataFrame(data['message'])
-            st.write(df)
-        else:
-            st.error('No data found')
+        columns = data[0]
+        rows = data[1]
+        df = pd.DataFrame(rows, columns=columns)
+
+        return df
     else:
         st.error(f'Failed to get data from backend: {response.status_code}')
+
+def load_data():
+    response = requests.get('http://127.0.0.1:8080/tables/all_isbundle')
+    if response.status_code == 200:
+        data = response.json()
+        df = pd.DataFrame(data)
+        print(data)
+        return df
+    else:
+        st.error("Failed to fetch data from database.")
+        return None
+
 
 '''def get_distance_duration_price():
     response = requests.get('http://localhost:8080/tables/distance_duration_price')
@@ -56,7 +96,7 @@ def get_distance_duration_price():
         data = response.json()
         st.write(data['message'])
     else:
-        st.error('Failed to get data from backend')'''
+        st.error('Failed to get data from backend')
 
 
 def send_data():
@@ -78,7 +118,7 @@ def update_backend_data(item_id, new_value):
         st.error('Failed to update data in backend')
 
 
-'''def update_resource(resource_id, data):
+def update_resource(resource_id, data):
     base_url = 'http://localhost:5000/api/resource/'
     url = f'{base_url}{resource_id}'
 
@@ -92,7 +132,7 @@ def update_backend_data(item_id, new_value):
 # Example usage
 data_to_update = {'name': 'Updated Resource', 'value': 150}
 update_resource('1', data_to_update)
-'''
+
 
 def delete_resource(resource_id):
     base_url = 'http://localhost:5000/api/resource/'
@@ -108,7 +148,7 @@ def delete_resource(resource_id):
 # Example usage
 delete_resource('1')
 
-'''
+
 # Your Streamlit UI components
 st.title('Streamlit Frontend')
 
