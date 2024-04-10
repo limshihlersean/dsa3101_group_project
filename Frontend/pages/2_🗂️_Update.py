@@ -1,6 +1,7 @@
 import pandas as pd
 import streamlit as st
 import requests
+import app
 
 # load overseas table
 def load_data_overseas():
