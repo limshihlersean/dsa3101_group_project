@@ -28,6 +28,7 @@ services:
       - ./backend:/app
     depends_on:
       - db
+    command: ["./wait-for-it.sh", "db:3306", "--", "python", "app.py"]
     ports:
       - "8080:8080"
     env_file:
@@ -41,6 +42,7 @@ services:
       - docker-net
     depends_on:
       - db
+    
     env_file:
       - .env
 
