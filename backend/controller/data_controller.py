@@ -29,21 +29,6 @@ def retrieve_table_api(table_name):
     # Return the JSON response
     return response
 
-def get_dynamic_pricing_table():
-    mydb = connect_to_database()
-    cursor = mydb.cursor()
-
-    query = f"SELECT * FROM citizen_single"
-    cursor.execute(query)
-    column_headers = [col[0] for col in cursor.description]
-    rows = cursor.fetchall()
-
-
-    cursor.close()
-    mydb.close()
-
-    return column_headers, rows
-
 @app.route('/tables/dynamic_pricing', methods=['GET'])
 def dynamic_pricing_table_api():
     # Call the get_pricing_table function to fetch data
@@ -109,8 +94,6 @@ def pricing_table_api():
     return response
 
 def get_local_discount_table():
-    mydb = connect_to_database()
-    cursor = mydb.cursor()
 
     query = """
         WITH combined_table AS (
@@ -143,13 +126,7 @@ def get_local_discount_table():
             citizen_price != non_citizen_price;
     
     """
-    cursor.execute(query)
-    column_headers = [col[0] for col in cursor.description]
-    rows = cursor.fetchall()
-
-
-    cursor.close()
-    mydb.close()
+    column_headers, rows = db.execute_query(query)
 
     return column_headers, rows
 
@@ -211,9 +188,6 @@ def bundle_discount_table_api():
 
 
 def get_distance_duration_price_table():
-    mydb = connect_to_database()
-    cursor = mydb.cursor()
-
     query = """
         SELECT
             company,
@@ -236,13 +210,7 @@ def get_distance_duration_price_table():
             vol;
     
     """
-    cursor.execute(query)
-    column_headers = [col[0] for col in cursor.description]
-    rows = cursor.fetchall()
-
-
-    cursor.close()
-    mydb.close()
+    column_headers, rows = db.execute_query()
 
     return column_headers, rows
 
