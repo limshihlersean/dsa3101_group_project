@@ -3,15 +3,48 @@ import requests
 import pandas as pd
 
 # Define the base URL for the backend API
-BASE_URL = 'http://localhost:5000/api/data'
+BASE_URL = 'http://localhost:8080/tables/dynamic_pricing'
 
-def get_message():
-    response = requests.get(BASE_URL)
+def get_dynamic_pricing():
+    response = requests.get('http://localhost:8080/tables/dynamic_pricing')
     if response.status_code == 200:
         data = response.json()
         st.write(data['message'])
     else:
         st.error('Failed to get data from backend')
+
+def get_pricing_table():
+    response = requests.get('http://localhost:8080/tables/pricing')
+    if response.status_code == 200:
+        data = response.json()
+        st.write(data['message'])
+    else:
+        st.error('Failed to get data from backend')
+
+def get_local_discount():
+    response = requests.get('http://localhost:8080/tables/local_discount')
+    if response.status_code == 200:
+        data = response.json()
+        st.write(data['message'])
+    else:
+        st.error('Failed to get data from backend')
+
+def get_bundle_discount():
+    response = requests.get('http://localhost:8080/tables/bundle_discount')
+    if response.status_code == 200:
+        data = response.json()
+        st.write(data['message'])
+    else:
+        st.error('Failed to get data from backend')
+
+def get_distance_duration_price():
+    response = requests.get('http://localhost:8080/tables/distance_duration_price')
+    if response.status_code == 200:
+        data = response.json()
+        st.write(data['message'])
+    else:
+        st.error('Failed to get data from backend')
+
 
 def send_data():
     data = {'key': 'value'}
