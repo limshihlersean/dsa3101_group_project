@@ -23,7 +23,7 @@ while True:
             database="priceopt",
             port=3306
         )
-        print("Connected to MySQL server successfully!")
+        print("Connected to MySQL server successfully!!!")
         break  
     except mysql.connector.Error as err:
         print(f"Error connecting to MySQL server: {err}")

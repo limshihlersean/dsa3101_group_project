@@ -2,13 +2,13 @@ import mysql.connector
 from dotenv import load_dotenv
 import os
 
-load_dotenv("../../.env")
+load_dotenv("../.env")
 mysql_password = os.environ.get("MYSQL_PASSWORD")
 
 class Database:
     def __init__(self):
         self.conn = mysql.connector.connect(
-            host="127.0.0.1",
+            host="db",
             user="root",
             password=mysql_password,
             database="priceopt",

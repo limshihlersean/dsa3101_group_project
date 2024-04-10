@@ -2,11 +2,11 @@ from flask import Flask, request, jsonify
 import pandas as pd
 import mysql.connector
 
-from ..model.Database import Database
+from model import Database
 
 app = Flask(__name__)
 
-db = Database()
+db = Database.Database()
 
 @app.route('/api/data', methods=['GET'])
 def get_data():

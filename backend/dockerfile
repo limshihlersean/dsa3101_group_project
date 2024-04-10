@@ -2,13 +2,15 @@
 FROM python:3.11
 
 # Set working directory
-WORKDIR /app
+WORKDIR /backend
 
 # Copy the important contents into the container
 COPY requirements.txt .
 COPY model ./model
 COPY controller ./controller
 COPY app.py .
+COPY __init__.py .
+COPY .env .
 
 RUN pip install -r requirements.txt
 
