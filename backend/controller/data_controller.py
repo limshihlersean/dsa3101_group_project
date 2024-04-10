@@ -32,108 +32,29 @@ def retrieve_table_api(table_name):
 @app.route('/tables/dynamic_pricing', methods=['GET'])
 def dynamic_pricing_table_api():
     # Call the get_pricing_table function to fetch data
-    table_data = get_dynamic_pricing_table()
+    table_data = db.get_dynamic_pricing_table()
     # Convert the data to JSON format
     response = jsonify(table_data)
     # Return the JSON response
     return response
 
-def get_pricing_table():
-    mydb = connect_to_database()
-    cursor = mydb.cursor()
 
-    query = """
-        SELECT 
-            'overseas' AS table_name,
-            company, 
-            CASE 
-                WHEN age_range = 0 THEN 'Child'
-                WHEN age_range = 1 THEN 'Student'
-                WHEN age_range = 2 THEN 'Adult'
-                WHEN age_range = 3 THEN 'Senior Citizen'
-                WHEN age_range = 4 THEN 'Disabled'
-            END AS age,
-            AVG(cable_car_price) AS price 
-        FROM 
-            overseas 
-        WHERE 
-            is_citizen = 1 AND 
-            type_of_trip = 0 
-        GROUP BY 
-            company, 
-            age_range
-
-        UNION ALL
-
-        SELECT 
-            'local' AS table_name,
-            company, 
-            age, 
-            price 
-        FROM 
-            citizen_single 
-        WHERE 
-            year = 2024;"""
-    cursor.execute(query)
-    column_headers = [col[0] for col in cursor.description]
-    rows = cursor.fetchall()
-
-
-    cursor.close()
-    mydb.close()
-
-    return column_headers, rows
 
 @app.route('/tables/pricing', methods=['GET'])
 def pricing_table_api():
     # Call the get_pricing_table function to fetch data
-    table_data = get_pricing_table()
+    table_data = db.get_pricing_table()
     # Convert the data to JSON format
     response = jsonify(table_data)
     # Return the JSON response
     return response
 
-def get_local_discount_table():
 
-    query = """
-        WITH combined_table AS (
-            SELECT
-                company,
-                age,
-                SUM(CASE WHEN is_citizen = 1 THEN price ELSE Null END) AS citizen_price,
-                SUM(CASE WHEN is_citizen = 0 THEN price ELSE Null END) AS non_citizen_price
-            FROM
-                (
-                SELECT company, age, price, 1 AS is_citizen FROM citizen_single WHERE year = 2024
-                UNION ALL
-                SELECT company, age, price, 0 AS is_citizen FROM noncitizen_single
-                ) AS combined_table
-            GROUP BY
-                company,
-                age
-            HAVING
-                citizen_price IS NOT Null OR non_citizen_price IS NOT Null
-        )
-        SELECT 
-            company, 
-            age, 
-            citizen_price, 
-            non_citizen_price,
-            (ABS((non_citizen_price - citizen_price)) / non_citizen_price) * 100 AS discount
-        FROM 
-            combined_table
-        WHERE 
-            citizen_price != non_citizen_price;
-    
-    """
-    column_headers, rows = db.execute_query(query)
-
-    return column_headers, rows
 
 @app.route('/tables/local_discount', methods=['GET'])
 def local_discount_table_api():
     # Call the get_pricing_table function to fetch data
-    table_data = get_local_discount_table()
+    table_data = db.get_local_discount_table()
     # Convert the data to JSON format
     response = jsonify(table_data)
     # Return the JSON response
@@ -142,83 +63,32 @@ def local_discount_table_api():
 
 
 
-def get_bundle_discount_table():
-    mydb = connect_to_database()
-    cursor = mydb.cursor()
-
-    query = """
-        SELECT 
-            company, 
-            age, 
-            price, 
-            1 AS is_bundle 
-        FROM all_isbundle 
-        WHERE is_citizen = 1
-
-        UNION ALL
-
-        SELECT 
-            company, 
-            age, 
-            price, 
-            0 AS is_bundle 
-        FROM citizen_single 
-        WHERE year = 2024;
-    
-    """
-    cursor.execute(query)
-    column_headers = [col[0] for col in cursor.description]
-    rows = cursor.fetchall()
-
-
-    cursor.close()
-    mydb.close()
-
-    return column_headers, rows
 
 @app.route('/tables/bundle_discount', methods=['GET'])
 def bundle_discount_table_api():
     # Call the get_pricing_table function to fetch data
-    table_data = get_bundle_discount_table()
+    table_data = db.get_bundle_discount_table()
     # Convert the data to JSON format
     response = jsonify(table_data)
     # Return the JSON response
     return response
 
 
-
-def get_distance_duration_price_table():
-    query = """
-        SELECT
-            company,
-            country,
-            city,
-            duration,
-            distance,
-            tourist_volume_of_cable_car AS vol,
-            AVG(cable_car_price) AS price
-        FROM
-            overseas
-        WHERE
-            age_range = 2 AND is_citizen = 1
-        GROUP BY
-            company,
-            country,
-            city,
-            duration,
-            distance,
-            vol;
-    
-    """
-    column_headers, rows = db.execute_query()
-
-    return column_headers, rows
 
 @app.route('/tables/distance_duration_price', methods=['GET'])
 def distance_duration_price_table_api():
     # Call the get_pricing_table function to fetch data
-    table_data = get_distance_duration_price_table()
+    table_data = db.get_distance_duration_price_table()
     # Convert the data to JSON format
     response = jsonify(table_data)
     # Return the JSON response
     return response
+
+
+# @app.route('/insert/overseas_data', methods=['POST'])
+# def insert_new_rows_noncitizensingle():
+#     data = request.get_json()
+#     # Call to insert data 
+#     response = db.insert_new_rows_noncitizensingle(data)
+
+#     return response
