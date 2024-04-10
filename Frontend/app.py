@@ -65,7 +65,7 @@ def update_backend_data(item_id, new_value):
         st.error('Failed to update data in backend')
 
 
-def update_resource(resource_id, data):
+'''def update_resource(resource_id, data):
     base_url = 'http://localhost:5000/api/resource/'
     url = f'{base_url}{resource_id}'
 
@@ -106,5 +106,5 @@ if st.button('Send Data to Backend'):
 item_id = st.text_input('Item ID')
 new_value = st.text_input('New Value')
 if st.button('Update Data in Backend') and item_id and new_value:
-    update_backend_data(item_id, new_value)
+    update_backend_data(item_id, new_value)'''
 
