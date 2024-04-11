@@ -33,6 +33,20 @@ services:
       - "8080:8080"
     env_file:
       - .env
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: always
+    networks:
+      - docker-net
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "8501:8501"
+    env_file:
+      - .env
   
   data:
     build:
