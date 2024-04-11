@@ -17,6 +17,7 @@ df1 = pd.read_csv('local_attractions_citizen_alacarte_allyears.csv')
 df2 = pd.read_csv('local_attractions_noncitizen_alacarte_2024.csv')
 df3 = pd.read_csv('local_attractions_citandnon_isbundle_2024.csv')
 df4 = pd.read_csv('cable_car_cleaned_v2.csv')
+df5 = pd.read_csv('NewCableCarPED.csv')
 
 while True:
     try:
@@ -188,6 +189,40 @@ num_rows = cursor.fetchone()[0]
 # Print the number of rows
 print("Number of rows in 'overseas' table:", num_rows)
 
+
+#######creating df5#############
+cursor.execute("USE priceopt")
+
+cursor.execute("DROP TABLE IF EXISTS ped_data")
+
+
+cursor.execute("""
+    CREATE TABLE IF NOT EXISTS ped_data (
+        is_citizen INT,
+        is_adult INT,
+        price DECIMAL(10,2),
+        quantity DECIMAL(10,2)
+    )
+""")
+
+
+
+# Iterate over DataFrame rows and insert data into MySQL table
+for index, row in df5.iterrows():
+    sql = "INSERT INTO ped_data (is_citizen, is_adult, price, quantity) VALUES (%s, %s, %s, %s)"
+    val = (row['is_citizen'], row['is_adult'], row['price'], row['quantity'])
+    cursor.execute(sql, val)
+
+# Commit changes to the database
+mydb.commit()
+
+cursor.execute("SELECT COUNT(*) FROM ped_data")
+
+# Fetch the result of the query
+num_rows = cursor.fetchone()[0]
+
+# Print the number of rows
+print("Number of rows in 'ped_data' table:", num_rows)
 
 # Close cursor and connection
 cursor.close()
