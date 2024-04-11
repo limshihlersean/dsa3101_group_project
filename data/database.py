@@ -1,6 +1,8 @@
 import mysql.connector
 import pandas as pd
 import time
+from dotenv import load_dotenv
+import os
 
 # Get the directory of the current script file
 #script_directory = os.path.dirname(__file__)
@@ -8,6 +10,8 @@ import time
 # Change the current working directory to the script directory
 #os.chdir(script_directory)
 
+load_dotenv()
+mysql_password = os.environ.get("MYSQL_PASSWORD")
 
 df1 = pd.read_csv('local_attractions_citizen_alacarte_allyears.csv')
 df2 = pd.read_csv('local_attractions_noncitizen_alacarte_2024.csv')
@@ -19,7 +23,7 @@ while True:
         mydb = mysql.connector.connect(
             host="db", #"localhost", #change to localhost if run locally if not db when docker-compose up
             user="root",
-            password="teamVamos123!",
+            password=mysql_password,
             database="priceopt",
             port=3306
         )
