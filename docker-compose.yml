@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+
   db:
     image: mysql:latest
     container_name: mysql-container
@@ -33,6 +34,22 @@ services:
       - "8080:8080"
     env_file:
       - .env
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: always
+    networks:
+      - docker-net
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "8501:8501"
+    env_file:
+      - .env
+    depends_on:
+      - backend
   
   data:
     build:
