@@ -3,58 +3,6 @@ import streamlit as st
 import requests
 import app
 
-# load overseas table
-def load_data_overseas():
-    response = requests.get('http://localhost:8080/tables/overseas')
-    if response.status_code == 200:
-        data = response.json()
-        columns = data[0]
-        rows = data[1]
-        df = pd.DataFrame(rows, columns=columns)
-        return df
-    else:
-        st.error("Failed to fetch data from database.")
-        return None
-
-#load all_isbundle table
-def load_data_all_isbundle():
-    response = requests.get('http://localhost:8080/tables/all_isbundle')
-    if response.status_code == 200:
-        data = response.json()
-        columns = data[0]
-        rows = data[1]
-        df = pd.DataFrame(rows, columns=columns)
-        return df
-    else:
-        st.error("Failed to fetch data from database.")
-        return None
-    
-#load citizen_single table
-def load_data_citizen_single():
-    response = requests.get('http://localhost:8080/tables/citizen_single')
-    if response.status_code == 200:
-        data = response.json()
-        columns = data[0]
-        rows = data[1]
-        df = pd.DataFrame(rows, columns=columns)
-        return df
-    else:
-        st.error("Failed to fetch data from database.")
-        return None
-    
-#load noncitizen_single table
-def load_data_noncitizen_single():
-    response = requests.get('http://localhost:8080/tables/noncitizen_single')
-    if response.status_code == 200:
-        data = response.json()
-        columns = data[0]
-        rows = data[1]
-        df = pd.DataFrame(rows, columns=columns)
-        return df
-    else:
-        st.error("Failed to fetch data from database.")
-        return None
-
 def update_data():
     response = requests.post('http://localhost:5000/')
     if response.status_code == 200:
@@ -62,15 +10,47 @@ def update_data():
     else:
         st.error("Failed to update data in the database.")
 
-df = load_data_citizen_single()
+def overseas_table():
+    return app.load_data_overseas()
+
+def all_isbundle_table():
+    return app.load_data_all_isbundle()
+
+def citizen_single_table():
+    return app.load_data_citizen_single()
+
+def noncitizen_single_table():
+    return app.load_data_noncitizen_single()
 
 st.title("Your data")  # add a title
 
+col1, col2, col3, col4 = st.columns(4)
 
-#allow users to add and delete rows
-edited_df = st.data_editor(df, num_rows="dynamic")
+with col1:
+    button1 = st.button('Overseas')
 
-if st.button('Update Data'):
+with col2:
+    button2 = st.button('All is bundle')
+
+with col3:
+    button3 = st.button('Citizen Single')
+
+with col4:
+    button4 = st.button('Non-citizen Single')
+
+if button1:
+    edited_df = st.data_editor(overseas_table(), num_rows="dynamic")
+
+if button2: 
+    edited_df = st.data_editor(all_isbundle_table(), num_rows="dynamic")
+
+if button3: 
+    edited_df = st.data_editor(citizen_single_table(), num_rows="dynamic")
+
+if  button4:
+    edited_df = st.data_editor(noncitizen_single_table(), num_rows="dynamic")
+
+if st.button('Not Working Update Data Button'):
     update_data(df)
 
 
