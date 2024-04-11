@@ -49,7 +49,7 @@ st.sidebar.header("Filter for Cable Car Price Analysis")
 selected_countries = st.sidebar.multiselect(
     'Select Countries',
     options=np.unique(dist_dur_price_data["country"]),
-    default=np.unique(dist_dur_price_data["country"]),
+    default=np.unique(dist_dur_price_data["country"].unique()[:10]),
     key='country_select_dist_dur_price'
 )
 
@@ -119,14 +119,16 @@ st.sidebar.header('Filters for Standard Pricing Overview')
 selected_categories = st.sidebar.multiselect(
     'Select Categories:',
     options=pricing_data['table_name'].unique(),
-    default=pricing_data['table_name'].unique(),
+    default=pricing_data['table_name'].unique()[0],
     key='category_select_pricing'
 )
 
+filtered_data = pricing_data[pricing_data['table_name'].isin(selected_categories)]
+
 selected_attractions = st.sidebar.multiselect(
     'Select Attractions:',
-    options=pricing_data['company'].unique(),
-    default=pricing_data['company'].unique(),
+    options=filtered_data['company'].unique(),
+    default=filtered_data['company'].unique()[:3]if len(filtered_data['company'].unique()) >= 3 else filtered_data['company'].unique(),
     key='attraction_select_pricing'
 )
 
@@ -222,7 +224,7 @@ st.sidebar.header('Filter for Dynamic Pricing Analysis')
 selected_companies = st.sidebar.multiselect(
     'Select Companies:',
     options=data['company'].unique(),
-    default=data['company'].unique()[0]  # Default to first company
+    default=data['company'].unique()[:3]  # Default to first company
 )
 
 # Display the chart only if at least one company is selected
@@ -244,37 +246,65 @@ loc_disc_data = app.get_local_discount()  # Update the file name as necessary
 loc_disc_data['non_citizen_price'] = pd.to_numeric(loc_disc_data['non_citizen_price'], errors='coerce')
 loc_disc_data['citizen_price'] = pd.to_numeric(loc_disc_data['citizen_price'], errors='coerce')
 loc_disc_data['discount'] = pd.to_numeric(loc_disc_data['discount'], errors='coerce')
+loc_disc_data.drop_duplicates(inplace=True)
 
 # Filter out any rows with missing data
-data = loc_disc_data.dropna(subset=['non_citizen_price', 'citizen_price', 'discount'])
+loc_disc_data = loc_disc_data.dropna(subset=['non_citizen_price', 'citizen_price', 'discount'])
 
-# Function to create a horizontal bar chart
+st.write('Max discount:', loc_disc_data['discount'].max())
+
+# Function to create a grouped bar chart with age categories
+# Function to create a horizontal bar chart with side-by-side bars for different age categories
 def create_local_discount_bar_chart(data, title):
     # Horizontal bar chart
     chart = alt.Chart(data).mark_bar().encode(
-        x=alt.X('discount:Q', title='Percentage Discount'),
-        y=alt.Y('company:N', sort='-x', title=''),  # Sort bars by discount percentage
-        color=alt.Color('company:N'),  # Color by attraction
+        x=alt.X('discount:Q', title='Percentage Discount', scale=alt.Scale(zero=False)),
+        y=alt.Y('company:N', title=''),  # Y-axis will show company names
+        color=alt.Color('age:N', legend=alt.Legend(title="Age Category")),  # Color by age category
+        row=alt.Row('age:N'),  # Create separate columns for each age category
         tooltip=[
             alt.Tooltip('company:N', title='Attraction'),
-            alt.Tooltip('non_citizen_price:Q', title='Original Price'),  # Corrected column reference
+            alt.Tooltip('non_citizen_price:Q', title='Original Price'),
             alt.Tooltip('citizen_price:Q', title='Local Price'),
-            alt.Tooltip('discount:Q', title='Percentage Discount', format='.2f')
+            alt.Tooltip('discount:Q', title='Percentage Discount', format='.2f'),
+            alt.Tooltip('age:N', title='Age Category')
         ]
-    ).properties(title=title, height=300)  # Set the height to ensure that all bars are visible
+    ).properties(
+        title=title # Set the height to ensure that all bars are visible
+    )
+
+    # Configure the facet spacing and the width of each bar group
+    chart = chart.configure_facet(
+        spacing=5
+    ).configure_view(
+        stroke=None  # Remove the border around each facet to create a seamless view
+    )
+    
     return chart
 
-# Streamlit sidebar widget for attraction selection
+
+# Streamlit sidebar widget for age category selection
 st.sidebar.header('Filter for Local Discounts')
+selected_age_categories = st.sidebar.multiselect(
+    'Select Age Categories:',
+    options=loc_disc_data['age'].unique(),
+    default=loc_disc_data['age'].unique()[0],
+    key='age_category_select'
+)
+
+# Filter the data based on selected age categories
+filtered_age_category_data = loc_disc_data[loc_disc_data['age'].isin(selected_age_categories)]
+
+# Streamlit sidebar widget for attraction selection
 selected_attractions = st.sidebar.multiselect(
     'Select Attractions:',
-    options=loc_disc_data['company'].unique(),
-    default=loc_disc_data['company'].unique(),  # Default to all attractions selected
+    options=filtered_age_category_data['company'].unique(),
+    default=filtered_age_category_data['company'].unique()[:5] if len(filtered_age_category_data['company'].unique()) >= 5 else filtered_age_category_data['company'].unique(),
     key='attraction_select_local'
 )
 
 # Apply filters to data based on selected attractions
-filtered_data = loc_disc_data[loc_disc_data['company'].isin(selected_attractions)]
+filtered_data = filtered_age_category_data[filtered_age_category_data['company'].isin(selected_attractions)]
 
 # Create and display the price comparison chart
 local_discount_bar_chart = create_local_discount_bar_chart(filtered_data, 'Local Discounts by Attraction')
@@ -315,7 +345,7 @@ st.sidebar.header('Filter for Bundled Discounts')
 selected_attractions = st.sidebar.multiselect(
     'Select Attractions:',
     options=bun_data['Attraction'].unique(),
-    default=bun_data['Attraction'].unique(),  # Default to all attractions selected
+    default=bun_data['Attraction'].unique()[:5],  # Default to all attractions selected
     key='attraction_select_bundled'
 )
 
