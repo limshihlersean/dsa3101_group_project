@@ -5,8 +5,9 @@ import pandas as pd
 # Define the base URL for the backend API
 BASE_URL = 'http://localhost:8080/tables'
 
+#load overseas table
 def load_data_overseas():
-    response = requests.get('http://localhost:8080/tables/distance_duration_price')
+    response = requests.get('http://localhost:8080/tables/overseas')
     if response.status_code == 200:
         data = response.json()
         columns = data[0]
@@ -17,6 +18,44 @@ def load_data_overseas():
     else:
         st.error(f'Failed to get data from backend: {response.status_code}')
 
+#load all_isbundle table
+def load_data_all_isbundle():
+    response = requests.get('http://localhost:8080/tables/all_isbundle')
+    if response.status_code == 200:
+        data = response.json()
+        columns = data[0]
+        rows = data[1]
+        df = pd.DataFrame(rows, columns=columns)
+        return df
+    else:
+        st.error("Failed to fetch data from database.")
+        return None
+    
+#load citizen_single table
+def load_data_citizen_single():
+    response = requests.get('http://localhost:8080/tables/citizen_single')
+    if response.status_code == 200:
+        data = response.json()
+        columns = data[0]
+        rows = data[1]
+        df = pd.DataFrame(rows, columns=columns)
+        return df
+    else:
+        st.error("Failed to fetch data from database.")
+        return None
+
+#load noncitizen_single table
+def load_data_noncitizen_single():
+    response = requests.get('http://localhost:8080/tables/noncitizen_single')
+    if response.status_code == 200:
+        data = response.json()
+        columns = data[0]
+        rows = data[1]
+        df = pd.DataFrame(rows, columns=columns)
+        return df
+    else:
+        st.error("Failed to fetch data from database.")
+        return None
 
 def get_dynamic_pricing():
     response = requests.get('http://localhost:8080/tables/dynamic_pricing')
@@ -82,9 +121,9 @@ def load_data():
     response = requests.get('http://127.0.0.1:8080/tables/all_isbundle')
     if response.status_code == 200:
         data = response.json()
-        df = pd.DataFrame(data)
-        print(data)
-        return df
+        columns = data[0]
+        rows = data[1]
+        df = pd.DataFrame(rows, columns=columns)
     else:
         st.error("Failed to fetch data from database.")
         return None
