@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+
   db:
     image: mysql:latest
     container_name: mysql-container
@@ -47,6 +48,8 @@ services:
       - "8501:8501"
     env_file:
       - .env
+    depends_on:
+      - backend
   
   data:
     build:
