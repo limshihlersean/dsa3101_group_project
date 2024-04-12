@@ -22,8 +22,9 @@ class Database:
         column_headers = [col[0] for col in self.cursor.description]
         return column_headers, self.cursor.fetchall()
 
-    def execute_query2(self, query):
-        self.cursor.execute(query)
+    def execute_query_post(self, query,val):
+        self.cursor.execute(query,val)
+        self.conn.commit()
 
 
 
@@ -121,23 +122,24 @@ class Database:
 
         query = """
             SELECT 
-                company, 
-                age, 
-                price, 
-                1 AS is_bundle 
-            FROM all_isbundle 
-            WHERE is_citizen = 1
+                company,
+                age,
+                is_citizen,
+                price,
+                original_price,
+                ((original_price - price) / original_price) * 100 AS discount
+            FROM (
+                SELECT 
+                    company,
+                    age,
+                    is_citizen,
+                    price,
+                    (singleA + singleB + singleC + singleD + singleE) AS original_price
+                FROM 
+                    all_isbundle
+            ) AS subquery_alias;
 
-            UNION ALL
 
-            SELECT 
-                company, 
-                age, 
-                price, 
-                0 AS is_bundle 
-            FROM citizen_single 
-            WHERE year = 2024;
-        
         """
         column_headers, rows = self.execute_query(query)
         return column_headers, rows
@@ -181,3 +183,17 @@ class Database:
         # Insert multiple rows of data in one go
         self.cursor.executemany(query, values)
         self.conn.commit()
+
+    def add_data_to_noncitsingle(self,data):
+        # Prepare the INSERT statement
+        
+
+        for row in data: 
+            query = "INSERT INTO noncitizen_single (`company`, `age`, `events`, `price`) VALUES (%s, %s, %s, %s);"
+            company = row.get("company")
+            age = row.get("age")
+            events = row.get("events")
+            price = row.get("price")
+            values = (company,age,events,price)
+            self.execute_query_post(query,values)
+

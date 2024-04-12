@@ -1,6 +1,8 @@
 import mysql.connector
 import pandas as pd
 import time
+from dotenv import load_dotenv
+import os
 
 # Get the directory of the current script file
 #script_directory = os.path.dirname(__file__)
@@ -8,18 +10,21 @@ import time
 # Change the current working directory to the script directory
 #os.chdir(script_directory)
 
+load_dotenv()
+mysql_password = os.environ.get("MYSQL_PASSWORD")
 
 df1 = pd.read_csv('local_attractions_citizen_alacarte_allyears.csv')
 df2 = pd.read_csv('local_attractions_noncitizen_alacarte_2024.csv')
 df3 = pd.read_csv('local_attractions_citandnon_isbundle_2024.csv')
 df4 = pd.read_csv('cable_car_cleaned_v2.csv')
+df5 = pd.read_csv('NewCableCarPED.csv')
 
 while True:
     try:
         mydb = mysql.connector.connect(
             host="db", #"localhost", #change to localhost if run locally if not db when docker-compose up
             user="root",
-            password="teamVamos123!",
+            password=mysql_password,
             database="priceopt",
             port=3306
         )
@@ -121,7 +126,12 @@ cursor.execute("""
         age VARCHAR(50), 
         is_citizen INT,
         events VARCHAR(255),
-        price INT
+        price INT,
+        singleA INT,
+        singleB INT,
+        singleC INT,
+        singleD INT,
+        singleE INT
     )
 """)
 
@@ -129,8 +139,8 @@ cursor.execute("""
 
 # Iterate over DataFrame rows and insert data into MySQL table
 for index, row in df3.iterrows():
-    sql = "INSERT INTO all_isbundle (company, age, is_citizen, events, price) VALUES (%s, %s, %s, %s, %s)"
-    val = (row['company'], row['age'], row['is_citizen'], row['events'], row['average_price'])
+    sql = "INSERT INTO all_isbundle (company, age, is_citizen, events, price, singleA, singleB, singleC, singleD, singleE) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    val = (row['company'], row['age'], row['is_citizen'], row['events'], row['average_price'], row['singleA'], row['singleB'], row['singleC'], row['singleD'], row['singleE'])
     cursor.execute(sql, val)
 
 # Commit changes to the database
@@ -184,6 +194,40 @@ num_rows = cursor.fetchone()[0]
 # Print the number of rows
 print("Number of rows in 'overseas' table:", num_rows)
 
+
+#######creating df5#############
+cursor.execute("USE priceopt")
+
+cursor.execute("DROP TABLE IF EXISTS ped_data")
+
+
+cursor.execute("""
+    CREATE TABLE IF NOT EXISTS ped_data (
+        is_citizen INT,
+        is_adult INT,
+        price DECIMAL(10,2),
+        quantity DECIMAL(10,2)
+    )
+""")
+
+
+
+# Iterate over DataFrame rows and insert data into MySQL table
+for index, row in df5.iterrows():
+    sql = "INSERT INTO ped_data (is_citizen, is_adult, price, quantity) VALUES (%s, %s, %s, %s)"
+    val = (row['is_citizen'], row['is_adult'], row['price'], row['quantity'])
+    cursor.execute(sql, val)
+
+# Commit changes to the database
+mydb.commit()
+
+cursor.execute("SELECT COUNT(*) FROM ped_data")
+
+# Fetch the result of the query
+num_rows = cursor.fetchone()[0]
+
+# Print the number of rows
+print("Number of rows in 'ped_data' table:", num_rows)
 
 # Close cursor and connection
 cursor.close()

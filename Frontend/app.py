@@ -58,7 +58,7 @@ def load_data_noncitizen_single():
         return None
 
 def get_dynamic_pricing():
-    response = requests.get('http://localhost:8080/tables/dynamic_pricing')
+    response = requests.get('http://backend:8080/tables/dynamic_pricing')
     if response.status_code == 200:
         data = response.json()
         columns = data[0]
@@ -70,7 +70,7 @@ def get_dynamic_pricing():
         st.error(f'Failed to get data from backend: {response.status_code}')
 
 def get_pricing_table():
-    response = requests.get('http://localhost:8080/tables/pricing')
+    response = requests.get('http://backend:8080/tables/pricing')
     if response.status_code == 200:
         data = response.json()
         columns = data[0]
@@ -82,7 +82,7 @@ def get_pricing_table():
         st.error(f'Failed to get data from backend: {response.status_code}')
 
 def get_local_discount():
-    response = requests.get('http://localhost:8080/tables/local_discount')
+    response = requests.get('http://backend:8080/tables/local_discount')
     if response.status_code == 200:
         data = response.json()
         columns = data[0]
@@ -94,7 +94,7 @@ def get_local_discount():
         st.error(f'Failed to get data from backend: {response.status_code}')
 
 def get_bundle_discount():
-    response = requests.get('http://localhost:8080/tables/bundle_discount')
+    response = requests.get('http://backend:8080/tables/bundle_discount')
     if response.status_code == 200:
         data = response.json()
         columns = data[0]
@@ -106,7 +106,7 @@ def get_bundle_discount():
         st.error(f'Failed to get data from backend: {response.status_code}')
 
 def get_distance_duration_price():
-    response = requests.get('http://localhost:8080/tables/distance_duration_price')
+    response = requests.get('http://backend:8080/tables/distance_duration_price')
     if response.status_code == 200:
         data = response.json()
         columns = data[0]
