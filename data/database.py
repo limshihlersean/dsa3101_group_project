@@ -126,7 +126,12 @@ cursor.execute("""
         age VARCHAR(50), 
         is_citizen INT,
         events VARCHAR(255),
-        price INT
+        price INT,
+        singleA INT,
+        singleB INT,
+        singleC INT,
+        singleD INT,
+        singleE INT
     )
 """)
 
@@ -134,8 +139,8 @@ cursor.execute("""
 
 # Iterate over DataFrame rows and insert data into MySQL table
 for index, row in df3.iterrows():
-    sql = "INSERT INTO all_isbundle (company, age, is_citizen, events, price) VALUES (%s, %s, %s, %s, %s)"
-    val = (row['company'], row['age'], row['is_citizen'], row['events'], row['average_price'])
+    sql = "INSERT INTO all_isbundle (company, age, is_citizen, events, price, singleA, singleB, singleC, singleD, singleE) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    val = (row['company'], row['age'], row['is_citizen'], row['events'], row['average_price'], row['singleA'], row['singleB'], row['singleC'], row['singleD'], row['singleE'])
     cursor.execute(sql, val)
 
 # Commit changes to the database
