@@ -3,6 +3,7 @@ import pandas as pd
 import mysql.connector
 
 from model import Database
+from service.MLModel import query_model
 
 app = Flask(__name__)
 
@@ -95,7 +96,7 @@ def get_optimal_price_from_ml_model():
         age_range = data["age_range"]
         tourist_volume = int(data["tourist_volume"])
         is_one_way = int(data["is_one_way"])
-        optimal_price_based_on_ml_model = query_ml_model(age_range, tourist_volume, is_one_way)
+        optimal_price_based_on_ml_model = query_model.query_ml_model(age_range, tourist_volume, is_one_way)
         return jsonify({"optimal_price": optimal_price_based_on_ml_model})
     except Exception as e:
         return jsonify({"error": str(e)}), 400
