@@ -1,48 +1,18 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 import streamlit as st
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-
-# Load data
-data = pd.read_csv('../data/NewCableCarPED.csv')
-
-# Function to analyze groups
-def analyze_group(group_df, is_citizen, is_adult):
-    # Existing code for analyze_group goes here
-    pass
-
-# Streamlit page setup
-st.title('Price Elasticity of Demand Analysis')
-st.sidebar.header('User Input Options')
-
-# User selection of groups
-is_citizen = st.sidebar.selectbox('Citizenship Status', options=['Citizen', 'Non-Citizen'])
-is_adult = st.sidebar.selectbox('Age Group', options=['Adult', 'Child'])
-
-# Filter data based on user selection
-filtered_group = data[(data['Is_Citizen'] == is_citizen) & (data['Is_Adult'] == is_adult)]
-
-# Display results on the page
-if st.button('Analyze'):
-    analyze_group(filtered_group, is_citizen == 'Citizen', is_adult == 'Adult')
-
-# This part of the code handles visualizations and output display
-# Code from your analyze_group function to display results and plots
-
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
 
 # Read the CSV file into a DataFrame
-data = pd.read_csv('NewCableCarPED.csv')
+data = pd.read_csv('../data/NewCableCarPED.csv')
 
 # Group the data by the first two columns (Is_Citizen and Is_Adult)
-groups = data.groupby(['Is_Citizen', 'Is_Adult'])
+groups = data.groupby(['is_citizen', 'is_adult'])
 
 # Define a function to calculate PED, find optimal price, create graph, and table for each group
 def analyze_group(group_df, is_citizen, is_adult):
-    prices = group_df['Price'].tolist()
-    quantities = group_df['Quantity'].tolist()
+    prices = group_df['price'].tolist()
+    quantities = group_df['quantity'].tolist()
     
     # Interpolate between existing data points
     new_prices = np.arange(min(prices), max(prices) + 1)  # Generate new price points as integers from min to max
@@ -79,9 +49,9 @@ def analyze_group(group_df, is_citizen, is_adult):
         "Revenue": revenue[:-1]  # Exclude the last revenue value to match the size of other arrays
     })
 
-    # Display the results table
-    print("Results Table:")
-    print(results_df)
+    # Display the results table in Streamlit
+    st.write("Results Table:")
+    st.dataframe(results_df)
 
     # Plot the price vs quantity graph
     plt.figure(figsize=(10, 6))
@@ -90,6 +60,16 @@ def analyze_group(group_df, is_citizen, is_adult):
     plt.xlabel("Price")
     plt.ylabel("Quantity")
     plt.grid(True)
+
+    # Create and display the price vs quantity graph in Streamlit
+    fig, ax = plt.subplots(figsize=(10, 6))
+    # ... (existing code to create the plot)
+    
+    st.pyplot(fig)
+
+    # Display the optimal price and PED in Streamlit
+    st.write(f"Optimal price that maximizes revenue: {optimal_price}")
+    st.write(f"Price Elasticity of Demand (PED) at the optimal price: {PED[optimal_price_index]}")
 
     # Annotate the price point closest to PED = -1
     plt.annotate(f'Price Point for closest |PED| to 1: ${closest_ped_price}\nTotal Revenue: ${closest_ped_revenue}', 
@@ -114,3 +94,18 @@ for group_name, group_df in groups:
     print(f"\nGroup: {group_name}")
     is_citizen, is_adult = group_name
     analyze_group(group_df, is_citizen, is_adult)
+
+# Streamlit page setup
+st.title('Price Elasticity of Demand Analysis')
+
+# User selection of groups using Streamlit's selectbox
+is_citizen_selection = st.selectbox('Citizenship Status', options=['Citizen', 'Non-Citizen'])
+is_adult_selection = st.selectbox('Age Group', options=['Adult', 'Child'])
+
+# Filter data based on user selection
+filtered_group = data[(data['is_citizen'] == is_citizen_selection) & (data['is_adult'] == is_adult_selection)]
+
+# Button to trigger the analysis
+if st.button('Analyze'):
+    analyze_group(filtered_group, is_citizen_selection == 'Citizen', is_adult_selection == 'Adult')
+
