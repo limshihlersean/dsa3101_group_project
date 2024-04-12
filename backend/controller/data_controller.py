@@ -38,8 +38,6 @@ def dynamic_pricing_table_api():
     # Return the JSON response
     return response
 
-
-
 @app.route('/tables/pricing', methods=['GET'])
 def pricing_table_api():
     # Call the get_pricing_table function to fetch data
@@ -48,8 +46,6 @@ def pricing_table_api():
     response = jsonify(table_data)
     # Return the JSON response
     return response
-
-
 
 @app.route('/tables/local_discount', methods=['GET'])
 def local_discount_table_api():
@@ -60,10 +56,6 @@ def local_discount_table_api():
     # Return the JSON response
     return response
 
-
-
-
-
 @app.route('/tables/bundle_discount', methods=['GET'])
 def bundle_discount_table_api():
     # Call the get_pricing_table function to fetch data
@@ -73,8 +65,6 @@ def bundle_discount_table_api():
     # Return the JSON response
     return response
 
-
-
 @app.route('/tables/distance_duration_price', methods=['GET'])
 def distance_duration_price_table_api():
     # Call the get_pricing_table function to fetch data
@@ -83,7 +73,6 @@ def distance_duration_price_table_api():
     response = jsonify(table_data)
     # Return the JSON response
     return response
-
 
 @app.route('/insert/noncitsingle', methods=['POST'])
 def insert_new_rows():
@@ -98,6 +87,19 @@ def insert_new_rows():
     except Exception as e:
         # Return an error message if there's an exception
         return jsonify({'error': str(e)}), 400
+    
+@app.route("/model/priceoptmodel", methods=["POST"])
+def get_optimal_price_from_ml_model():
+    try:
+        data = request.get_json()
+        age_range = data["age_range"]
+        tourist_volume = int(data["tourist_volume"])
+        is_one_way = int(data["is_one_way"])
+        optimal_price_based_on_ml_model = query_ml_model(age_range, tourist_volume, is_one_way)
+        return jsonify({"optimal_price": optimal_price_based_on_ml_model})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
     
 
     
