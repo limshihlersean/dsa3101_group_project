@@ -214,6 +214,7 @@ if response.status_code == 200:
     
     # Do something with the optimal price
     print("Optimal price:", optimal_price)
+    st.write("Optimal price:", optimal_price)
 else:
     print("Error:", response.text)
 
