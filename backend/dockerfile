@@ -11,8 +11,10 @@ COPY controller ./controller
 COPY app.py .
 COPY __init__.py .
 COPY .env .
+COPY wait-for-it.sh .
 
 RUN pip install -r requirements.txt
+RUN chmod +x wait-for-it.sh
 
 EXPOSE 8080
 

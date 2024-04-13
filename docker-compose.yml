@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+
   db:
     image: mysql:latest
     container_name: mysql-container
@@ -21,16 +22,34 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+    restart: always
     networks:
       - docker-net
     volumes:
       - ./backend:/app
     depends_on:
       - db
+    command: ["./wait-for-it.sh", "db:3306", "--", "python", "app.py"]
     ports:
       - "8080:8080"
     env_file:
       - .env
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: always
+    networks:
+      - docker-net
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "8501:8501"
+    env_file:
+      - .env
+    depends_on:
+      - backend
   
   data:
     build:
@@ -40,6 +59,9 @@ services:
       - docker-net
     depends_on:
       - db
+    
+    env_file:
+      - .env
 
 volumes:
   mysql_data:
