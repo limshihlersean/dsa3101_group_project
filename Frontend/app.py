@@ -27,5 +27,3 @@ def update_data(json_data, endpoint):
 
 #PRICE OPTIMISATION MODEL
 #post parameter data to the backend 
-def input_parameters():
-    

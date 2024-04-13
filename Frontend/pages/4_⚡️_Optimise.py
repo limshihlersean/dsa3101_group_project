@@ -184,7 +184,23 @@ if st.sidebar.button("Generate"):
         'selected_citizenship': selected_citizenship
     }
 
-    
+#Converting the input data into a dictionary format 
+# Initialize an empty dictionary to store the selected filters and values
+selected_filters = {}
+
+# Add selected volume to the dictionary
+selected_filters['selected_volume'] = selected_volume_new
+
+# Add selected age to the dictionary
+selected_filters['selected_age'] = selected_age
+
+# Add selected trip to the dictionary
+selected_filters['selected_trip'] = selected_trip
+
+# Add selected citizenship to the dictionary
+selected_filters['selected_citizenship'] = selected_citizenship
+
+
 
 #MODEL: find out how to integrate this with the backend's 
 
