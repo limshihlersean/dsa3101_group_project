@@ -4,6 +4,7 @@ import mysql.connector
 
 from model import Database
 from services.MLModel import query_model
+from services import data_validation
 
 app = Flask(__name__)
 
@@ -93,10 +94,10 @@ def insert_new_rows():
 def get_optimal_price_from_ml_model():
     try:
         data = request.get_json()
-        age_range = int(data["age_range"])
-        tourist_volume = int(data["tourist_volume"])
-        is_one_way = int(data["is_one_way"])
-        is_citizen = int(data["is_citizen"])
+        age_range = data_validation.validate_age_range(int(data["age_range"]))
+        tourist_volume = data_validation.validate_tourist_volume(int(data["tourist_volume"]))
+        is_one_way = data_validation.validate_binary_encodings(int(data["is_one_way"]))
+        is_citizen = data_validation.validate_binary_encodings(int(data["is_citizen"]))
         optimal_price_based_on_ml_model = query_model.query_ml_model(age_range, tourist_volume, is_one_way, is_citizen)
         return jsonify({"optimal_price": optimal_price_based_on_ml_model})
     except Exception as e:

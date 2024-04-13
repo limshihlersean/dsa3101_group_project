@@ -23,7 +23,7 @@ def query_ml_model(age_range, tourist_volume, is_one_way, is_citizen):
         price = booster.predict(one_way_dataframe)[0]
     else:
         price = booster.predict(round_dataframe)[0]
-    if (price < 5.3):
-        return 5.3
+    if (price < 1):
+        return 1
     return round(price, 2)
     
