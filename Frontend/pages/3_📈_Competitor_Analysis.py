@@ -318,43 +318,91 @@ st.header("Bundled Discounts")
 bun_data = app.load_data('bundle_discount')  # Make sure the file name matches your CSV
 
 # Preprocess the data to ensure correct data types
-bun_data['Original Average Price'] = pd.to_numeric(bun_data['Original Average Price'], errors='coerce')
-bun_data['Bundled Average Price'] = pd.to_numeric(bun_data['Bundled Average Price'], errors='coerce')
-bun_data['Percentage Discount'] = pd.to_numeric(bun_data['Percentage Discount'], errors='coerce')
+bun_data['original_price'] = pd.to_numeric(bun_data['original_price'], errors='coerce')
+bun_data['price'] = pd.to_numeric(bun_data['price'], errors='coerce')
+bun_data['discount'] = pd.to_numeric(bun_data['discount'], errors='coerce')
 
 # Filter out any rows with missing data
-data = bun_data.dropna(subset=['Original Average Price', 'Bundled Average Price', 'Percentage Discount'])
+data = bun_data.dropna(subset=['original_price', 'price', 'discount'])
 
-# Create a horizontal bar chart function
-def create_discount_bar_chart(data, title):
-    # Horizontal bar chart
+def create_grouped_discount_bar_chart(data, title):
+    # Grouped horizontal bar chart
     chart = alt.Chart(data).mark_bar().encode(
-        x=alt.X('Percentage Discount:Q', title='Percentage Discount'),
-        y=alt.Y('Attraction:N', sort='-x', title=''),  # Sort bars by discount percentage
-        color=alt.Color('Attraction:N'),  # Color by attraction
+        x=alt.X('discount:Q', title='Percentage Discount', scale=alt.Scale(zero=False)),
+        y=alt.Y('company:N', title='', axis=alt.Axis(labels=False)),  # Y-axis will show company names but hide labels to avoid repetition
+        color=alt.Color('age:N', legend=alt.Legend(title="Age Category")),  # Color by age category
+        row=alt.Row('age:N', header=alt.Header(title='Age Category')), # Create separate panes for each age category
         tooltip=[
-            alt.Tooltip('Attraction:N', title='Attraction'),
-            alt.Tooltip('Original Average Price:Q', title='Original Price'),
-            alt.Tooltip('Bundled Average Price:Q', title='Bundled Price'),
-            alt.Tooltip('Percentage Discount:Q', title='Discount', format='.2f')
+            alt.Tooltip('company:N', title='Company'),
+            alt.Tooltip('original_price:Q', title='Original Price'),
+            alt.Tooltip('price:Q', title='Bundled Price'),
+            alt.Tooltip('discount:Q', title='Percentage Discount', format='.2f'),
+            alt.Tooltip('age:N', title='Age Category')
         ]
-    ).properties(title=title, height=300)  # Set the height to ensure that all bars are visible
+    ).properties(
+        title=title,
+        width=150  # Set the width of each pane
+    ).configure_view(
+        stroke=None  # Remove the border around each pane to create a seamless view
+    ).configure_facet(
+        spacing=10  # Adjust the spacing between panes
+        
+    )
+
     return chart
 
-# Streamlit sidebar widget for attraction selection
-st.sidebar.header('Filter for Bundled Discounts')
-selected_attractions = st.sidebar.multiselect(
-    'Select Attractions:',
-    options=bun_data['Attraction'].unique(),
-    default=bun_data['Attraction'].unique()[:5],  # Default to all attractions selected
-    key='attraction_select_bundled'
+# Streamlit sidebar widget for filters
+st.sidebar.header('Filters for Bundled Discounts')
+st.sidebar.subheader('Filter for Local Categories')
+# Filter by Age
+selected_ages = st.sidebar.multiselect(
+    'Select Age Group:',
+    options=bun_data['age'].unique(),
+    default=bun_data['age'].unique(),  # Default to all age groups selected
+    key='age_select_local'
 )
 
-# Apply filters to data based on selected attractions
-filtered_data = bun_data[bun_data['Attraction'].isin(selected_attractions)]
+# Filter by Company
+selected_attractions = st.sidebar.multiselect(
+    'Select Companies:',
+    options=bun_data['company'].unique(),
+    default=bun_data['company'].unique()[:5],  # Default to top 5 companies selected
+    key='company_select_local'
+)
+
+# Apply filters to data based on selected age groups, citizenship status, and companies
+filtered_data = bun_data[bun_data['age'].isin(selected_ages)]
+filtered_data = filtered_data[filtered_data['is_citizen'] == 1]
+filtered_data = filtered_data[filtered_data['company'].isin(selected_attractions)]
 
 # Create and display the price comparison chart
-discount_bar_chart = create_discount_bar_chart(filtered_data, 'Discounts by Attraction')
+discount_bar_chart = create_grouped_discount_bar_chart(filtered_data, 'Discounts by Attraction')
+st.altair_chart(discount_bar_chart, use_container_width=True)
+
+st.sidebar.subheader('Filter for Non-Local Categories')
+# Filter by Age
+selected_ages = st.sidebar.multiselect(
+    'Select Age Group:',
+    options=bun_data['age'].unique(),
+    default=bun_data['age'].unique(),  # Default to all age groups selected
+    key='age_select_non_local'
+)
+
+# Filter by Company
+selected_attractions = st.sidebar.multiselect(
+    'Select Companies:',
+    options=bun_data['company'].unique(),
+    default=bun_data['company'].unique()[:5],  # Default to top 5 companies selected
+    key='company_select_non_local'
+)
+
+# Apply filters to data based on selected age groups, citizenship status, and companies
+filtered_data = bun_data[bun_data['age'].isin(selected_ages)]
+filtered_data = filtered_data[filtered_data['is_citizen'] == 0]
+filtered_data = filtered_data[filtered_data['company'].isin(selected_attractions)]
+
+# Create and display the price comparison chart
+discount_bar_chart = create_grouped_discount_bar_chart(filtered_data, 'Discounts by Attraction')
 st.altair_chart(discount_bar_chart, use_container_width=True)
 
 #------------------------------------------------------------------------------#'''
