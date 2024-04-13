@@ -5,6 +5,7 @@ import altair as alt
 import os
 import numpy as np
 import app
+import requests
 
 #show title of the dashboard 
 st.title('Price Optimisation Dashboard')
@@ -200,7 +201,15 @@ selected_filters['selected_trip'] = selected_trip
 # Add selected citizenship to the dictionary
 selected_filters['selected_citizenship'] = selected_citizenship
 
+#Post request to the backend 
+# POST the data to the backend
+response = requests.post('https://example.com/api/update_filters', json=selected_filters)
 
+# Check if the request was successful
+if response.status_code == 200:
+    st.success("Data sent successfully!")
+else:
+    st.error(f"Error: {response.status_code}")
 
 #MODEL: find out how to integrate this with the backend's 
 
