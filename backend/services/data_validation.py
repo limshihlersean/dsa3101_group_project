@@ -1,14 +1,26 @@
 def validate_age_range(age_range):
-    if (age_range <= 3 and age_range >= 0):
-        return age_range
-    raise ValueError("Invalid age range: age range is between 0 and 3")
+    try:
+        age_range = int(age_range)
+    except:
+        raise ValueError("age range need to be 0, 1, 2 or 3")
+    if (age_range > 3 or age_range < 0):
+        raise ValueError("Invalid age range: age range need to be 0, 1, 2 or 3")
+    return age_range
 
 def validate_tourist_volume(tourist_volume):
-    if (tourist_volume > 0):
-        return tourist_volume
-    raise ValueError("Invalid tourist volume: tourist volume per year must be more than 0")
+    try:
+        tourist_volume = float(tourist_volume)
+    except:
+        raise ValueError("tourist volume need to be a valid number")
+    if (tourist_volume < 0):
+        raise ValueError("Invalid tourist volume: tourist volume per year must be more than 0")
+    return tourist_volume
 
 def validate_binary_encodings(num):
-    if (num == 0 or num == 1):
-        return num
-    raise ValueError("Values have to be either 0 or 1")
+    try:
+        num = int(num)
+    except:
+        raise ValueError("num needs to be 0 and 1")
+    if (num != 0 and num != 1):
+        raise ValueError("Values have to be either 0 or 1")
+    return num
