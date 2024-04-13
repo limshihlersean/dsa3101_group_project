@@ -24,3 +24,8 @@ def update_data(json_data, endpoint):
         st.success("Data updated successfully.")
     else:
         st.error("Failed to update data in the database.")
+
+#PRICE OPTIMISATION MODEL
+#post parameter data to the backend 
+def input_parameters():
+    

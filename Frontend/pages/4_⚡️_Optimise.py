@@ -173,7 +173,18 @@ selected_citizen_value = yes_no_options.index(selected_citizenship)
 filtered_data_citizen = cable_car_data[cable_car_data['is_citizen'] == selected_trip]
 
 
+#Generating the optimal prices 
+# Create a "Generate" button
+if st.sidebar.button("Generate"):
+    # Prepare the data to be sent to the backend
+    selected_filters = {
+        'selected_volume': selected_volume_new,
+        'selected_age': selected_age,
+        'selected_trip': selected_trip,
+        'selected_citizenship': selected_citizenship
+    }
 
+    
 
 #MODEL: find out how to integrate this with the backend's 
 
