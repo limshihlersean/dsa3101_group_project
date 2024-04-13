@@ -10,17 +10,6 @@ app = Flask(__name__)
 
 db = Database.Database()
 
-@app.route('/api/data', methods=['GET'])
-def get_data():
-    # To add model logic to get data from database and transform data.
-    #data = {'A': [1, 2, 3], 'B': [4, 5, 6], 'C': [7, 8, 9]}
-    file_path = '../data/bundled_discount.csv'
-    data = pd.read_csv(file_path)
-
-    df = pd.DataFrame(data)
-    df_json = df.to_json(orient="records")
-    return jsonify(df_json)
-
 
 @app.route('/tables/<table_name>', methods=['GET'])
 def retrieve_table_api(table_name):
@@ -94,10 +83,10 @@ def insert_new_rows():
 def get_optimal_price_from_ml_model():
     try:
         data = request.get_json()
-        age_range = data_validation.validate_age_range(int(data["age_range"]))
-        tourist_volume = data_validation.validate_tourist_volume(int(data["tourist_volume"]))
-        is_one_way = data_validation.validate_binary_encodings(int(data["is_one_way"]))
-        is_citizen = data_validation.validate_binary_encodings(int(data["is_citizen"]))
+        age_range = data_validation.validate_age_range(data["age_range"])
+        tourist_volume = data_validation.validate_tourist_volume(data["tourist_volume"])
+        is_one_way = data_validation.validate_binary_encodings(data["is_one_way"])
+        is_citizen = data_validation.validate_binary_encodings(data["is_citizen"])
         optimal_price_based_on_ml_model = query_model.query_ml_model(age_range, tourist_volume, is_one_way, is_citizen)
         return jsonify({"optimal_price": optimal_price_based_on_ml_model})
     except Exception as e:

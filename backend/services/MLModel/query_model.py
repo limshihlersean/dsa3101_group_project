@@ -2,11 +2,16 @@ import catboost as cb
 import pandas as pd
 import joblib
 import numpy as np
+import os
+from sklearn.preprocessing import StandardScaler
 
 def query_ml_model(age_range, tourist_volume, is_one_way, is_citizen):
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    model_path = os.path.join(current_dir, "predict_cable_car_prices.json")
+    scaler_path = os.path.join(current_dir, "tourist_volume_scaler.pkl")
     booster = cb.CatBoostRegressor()
-    booster.load_model("predict_cable_car_prices.json")
-    tourist_volume_scaler = joblib.load("tourist_volume_scaler.pkl")
+    booster.load_model(model_path)
+    tourist_volume_scaler = joblib.load(scaler_path)
     one_way_duration = 12.5
     one_way_distance = 1.65
     round_duration = 25
