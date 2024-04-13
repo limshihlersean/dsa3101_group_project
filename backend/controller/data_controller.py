@@ -86,7 +86,7 @@ def distance_duration_price_table_api():
 
 
 @app.route('/insert/noncitsingle', methods=['POST'])
-def insert_new_rows():
+def insert_new_rows_noncitsingle():
     try:
         # Iterate over the JSON data and insert each row into the database
         data = request.get_json()
@@ -98,15 +98,59 @@ def insert_new_rows():
     except Exception as e:
         # Return an error message if there's an exception
         return jsonify({'error': str(e)}), 400
+
+@app.route('/insert/citsingle', methods=['POST'])
+def insert_new_rows_citsingle():
+    try:
+        # Iterate over the JSON data and insert each row into the database
+        data = request.get_json()
+
+        db.add_data_to_citsingle(data)
+        message = "Insertion success"
+        return jsonify({'message': message})
+
+    except Exception as e:
+        # Return an error message if there's an exception
+        return jsonify({'error': str(e)}), 400
     
+@app.route('/insert/allisbundle', methods=['POST'])
+def insert_new_rows_allisbundle():
+    try:
+        # Iterate over the JSON data and insert each row into the database
+        data = request.get_json()
 
-    
+        db.add_data_to_allisbundle(data)
+        message = "Insertion success"
+        return jsonify({'message': message})
 
+    except Exception as e:
+        # Return an error message if there's an exception
+        return jsonify({'error': str(e)}), 400
 
-# @app.route('/insert/overseas_data', methods=['POST'])
-# def insert_new_rows_noncitizensingle():
-#     data = request.get_json()
-#     # Call to insert data 
-#     response = db.insert_new_rows_noncitizensingle(data)
+@app.route('/insert/overseas', methods=['POST'])
+def insert_new_rows_overseas():
+    try:
+        # Iterate over the JSON data and insert each row into the database
+        data = request.get_json()
 
-#     return response
+        db.add_data_to_overseas(data)
+        message = "Insertion success"
+        return jsonify({'message': message})
+
+    except Exception as e:
+        # Return an error message if there's an exception
+        return jsonify({'error': str(e)}), 400
+
+@app.route('/insert/ped', methods=['POST'])
+def insert_new_rows_ped():
+    try:
+        # Iterate over the JSON data and insert each row into the database
+        data = request.get_json()
+
+        db.add_data_to_ped(data)
+        message = "Insertion success"
+        return jsonify({'message': message})
+
+    except Exception as e:
+        # Return an error message if there's an exception
+        return jsonify({'error': str(e)}), 400
