@@ -3,7 +3,7 @@ import pandas as pd
 import mysql.connector
 
 from model import Database
-from service.MLModel import query_model
+from services.MLModel import query_model
 
 app = Flask(__name__)
 
