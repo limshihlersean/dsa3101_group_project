@@ -49,7 +49,8 @@ def preprocess_data(df):
     return df'''
 
 # Load and preprocess the data
-dist_dur_price_data = app.get_distance_duration_price()
+dist_dur_price_data = app.load_data('distance_duration_price')
+
 
 # Filters in the sidebar
 st.sidebar.header("Filter for Cable Car Price Analysis")
@@ -151,7 +152,7 @@ def create_price_comparison_chart(data):
     return chart
 
 # Load the data
-pricing_data = app.get_pricing_table()
+pricing_data = app.load_data('pricing')
 
 # Streamlit sidebar widget for category and attraction selection
 st.sidebar.header('Filters for Standard Pricing Overview')
@@ -186,7 +187,7 @@ import altair as alt
 import pandas as pd
 
 # Assuming 'data' is the DataFrame created from your JSON data
-data = app.get_dynamic_pricing()
+data = app.load_data('dynamic_pricing')
 
 # Convert 'year' column to datetime format if necessary
 data['year'] = pd.to_datetime(data['year'].astype(str), format='%Y')
@@ -341,7 +342,7 @@ def create_dynamic_pricing_chart(data, selected_attractions):
     return final_chart
 
 # Load the data
-dynamic_pricing_data = app.get_dynamic_pricing()
+dynamic_pricing_data = app.load_data('dynamic_pricing')
 
 # Convert the 'Date' column to datetime type
 dynamic_pricing_data['Date'] = pd.to_datetime(dynamic_pricing_data['Date'].astype(str) + '-01-01')
@@ -368,7 +369,7 @@ else:
 st.header("Local Discounts")
 
 # Load the data
-loc_disc_data = app.get_local_discount()  # Update the file name as necessary
+loc_disc_data = app.load_data('local_discount')  # Update the file name as necessary
 
 # Preprocess the data to ensure correct data types
 loc_disc_data['non_citizen_price'] = pd.to_numeric(loc_disc_data['non_citizen_price'], errors='coerce')
@@ -414,7 +415,7 @@ st.altair_chart(local_discount_bar_chart, use_container_width=True)
 st.header("Bundled Discounts")
 
 # Load the data
-bun_data = app.get_bundle_discount()  # Make sure the file name matches your CSV
+bun_data = app.load_data('bundle_discount')  # Make sure the file name matches your CSV
 
 # Preprocess the data to ensure correct data types
 bun_data['Original Average Price'] = pd.to_numeric(bun_data['Original Average Price'], errors='coerce')
