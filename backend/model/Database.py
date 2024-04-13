@@ -22,9 +22,8 @@ class Database:
         column_headers = [col[0] for col in self.cursor.description]
         return column_headers, self.cursor.fetchall()
 
-    def execute_query_post(self, query,val):
-        self.cursor.execute(query,val)
-        self.conn.commit()
+    def execute_query2(self, query):
+        self.cursor.execute(query)
 
 
 
