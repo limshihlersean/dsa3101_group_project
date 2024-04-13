@@ -3,7 +3,7 @@ import pandas as pd
 from model import Database # Import the Database class
 
 # Read the CSV file into a DataFrame
-data = pd.read_csv('data/NewCableCarPED.csv')
+data = pd.read_csv('../data/NewCableCarPED.csv')
 
 # Group the data by the first two columns (Is_Citizen and Is_Adult)
 groups = data.groupby(['Is_Citizen', 'Is_Adult'])
