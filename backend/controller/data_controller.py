@@ -85,6 +85,24 @@ def distance_duration_price_table_api():
     return response
 
 
+@app.route('/insert/noncitsingle', methods=['POST'])
+def insert_new_rows():
+    try:
+        # Iterate over the JSON data and insert each row into the database
+        data = request.get_json()
+
+        db.add_data_to_noncitsingle(data)
+        message = "Insertion success"
+        return jsonify({'message': message})
+
+    except Exception as e:
+        # Return an error message if there's an exception
+        return jsonify({'error': str(e)}), 400
+    
+
+    
+
+
 # @app.route('/insert/overseas_data', methods=['POST'])
 # def insert_new_rows_noncitizensingle():
 #     data = request.get_json()

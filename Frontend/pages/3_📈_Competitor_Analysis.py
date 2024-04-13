@@ -42,7 +42,8 @@ def create_scatter_plot(data, x_axis, y_axis, color_category, title):
     )
 
 # Load and preprocess the data
-dist_dur_price_data = app.get_distance_duration_price()
+dist_dur_price_data = app.load_data('distance_duration_price')
+
 
 # Filters in the sidebar
 st.sidebar.header("Filter for Cable Car Price Analysis")
@@ -112,7 +113,7 @@ def create_price_comparison_chart(data):
     return chart
 
 # Load the data
-pricing_data = app.get_pricing_table()
+pricing_data = app.load_data('pricing')
 
 # Streamlit sidebar widget for category and attraction selection
 st.sidebar.header('Filters for Standard Pricing Overview')
@@ -149,7 +150,7 @@ import altair as alt
 import pandas as pd
 
 # Assuming 'data' is the DataFrame created from your JSON data
-data = app.get_dynamic_pricing()
+data = app.load_data('dynamic_pricing')
 
 # Convert 'year' column to datetime format if necessary
 data['year'] = pd.to_datetime(data['year'].astype(str), format='%Y')
@@ -235,12 +236,100 @@ else:
     st.write("Please select at least one company to visualize the dynamic pricing data.")
 
 
+def create_dynamic_pricing_chart(data, selected_attractions):
+    # Define color scheme for the attractions
+    color_scale = alt.Scale(domain=selected_attractions, scheme='category10')
+
+    # Define a unique shape for each age range
+    shape_scale = alt.Scale(domain=['Adult', 'Child', 'Senior'],
+                            range=['circle', 'square', 'triangle-right'])
+
+    # Define the tooltip content
+    tooltip_content = [
+        alt.Tooltip('year(Date):T', title='Year'),
+        alt.Tooltip('Price:Q', title='Price'),
+        alt.Tooltip('Event:N', title='Event'),
+        alt.Tooltip('Attraction:N', title='Attraction'),
+        alt.Tooltip('Age Range:N', title='Age Range')
+    ]
+
+    # Create a base chart to define the legend for attractions
+    legend_chart = alt.Chart(data).mark_point().encode(
+        color=alt.Color('Attraction:N', scale=color_scale, legend=alt.Legend(title="Attraction")),
+        shape=alt.Shape('Age Range:N', scale=shape_scale, legend=alt.Legend(title="Age Range"))
+    ).transform_filter(
+        alt.datum.Attraction == 'This is a fake filter to hide the points'
+    )
+
+    # Initialize an empty list to collect chart layers
+    chart_layers = [legend_chart]  # Start with the legend chart
+
+    for attraction in selected_attractions:
+        # Filter data for the current attraction
+        attraction_data = data[data['Attraction'] == attraction]
+
+        if attraction_data.empty:
+            continue  # Skip attractions with no data
+
+        # Loop through the age ranges to create separate line and point charts
+        for age_range in ['Adult', 'Child', 'Senior']:
+            # Filter data for the current age range within the attraction
+            age_range_data = attraction_data[attraction_data['Age Range'] == age_range]
+
+            # Create a line chart for the current age range within the attraction
+            lines = alt.Chart(age_range_data).mark_line().encode(
+                x='year(Date):T',
+                y='Price:Q',
+                color=alt.Color('Attraction:N', scale=color_scale, legend=None),
+                tooltip=tooltip_content
+            )
+
+            # Create points for the line chart
+            points = alt.Chart(age_range_data).mark_point(filled=True, size=100).encode(
+                x='year(Date):T',
+                y='Price:Q',
+                shape=alt.Shape('Age Range:N', scale=shape_scale, legend=None),
+                color=alt.Color('Attraction:N', scale=color_scale, legend=None),
+                tooltip=tooltip_content
+            )
+
+            # Add the line and point charts for the current age range as layers
+            chart_layers.append(lines + points)
+
+    # Combine all chart layers
+    final_chart = alt.layer(*chart_layers).resolve_scale(color='independent') if chart_layers else alt.Chart().mark_text(text='No data to display', align='left')
+
+    return final_chart
+
+# Load the data
+dynamic_pricing_data = app.load_data('dynamic_pricing')
+
+# Convert the 'Date' column to datetime type
+dynamic_pricing_data['Date'] = pd.to_datetime(dynamic_pricing_data['Date'].astype(str) + '-01-01')
+
+# Streamlit widget for attraction selection
+st.sidebar.header('Filter for Dynamic Pricing Analysis')
+selected_attractions = st.sidebar.multiselect(
+    'Select Attractions:',
+    options=dynamic_pricing_data['Attraction'].unique(),
+    default=dynamic_pricing_data['Attraction'].unique()[0]  # Default to first attraction
+)
+
+# Display the chart only if at least one attraction is selected
+if selected_attractions:
+    # Call the function to create the chart
+    dynamic_pricing_chart = create_dynamic_pricing_chart(dynamic_pricing_data, selected_attractions)
+    # Display the chart
+    st.altair_chart(dynamic_pricing_chart, use_container_width=True)
+else:
+    st.write("Please select at least one attraction to visualize the dynamic pricing data.")
+'''
 #------------------------------------------------------------------------------#
     
 st.header("Local Discounts")
 
 # Load the data
-loc_disc_data = app.get_local_discount()  # Update the file name as necessary
+loc_disc_data = app.load_data('local_discount')  # Update the file name as necessary
 
 # Preprocess the data to ensure correct data types
 loc_disc_data['non_citizen_price'] = pd.to_numeric(loc_disc_data['non_citizen_price'], errors='coerce')
@@ -314,7 +403,7 @@ st.altair_chart(local_discount_bar_chart, use_container_width=True)
 st.header("Bundled Discounts")
 
 # Load the data
-bun_data = app.get_bundle_discount()  # Make sure the file name matches your CSV
+bun_data = app.load_data('bundle_discount')  # Make sure the file name matches your CSV
 
 # Preprocess the data to ensure correct data types
 bun_data['Original Average Price'] = pd.to_numeric(bun_data['Original Average Price'], errors='coerce')
