@@ -93,10 +93,11 @@ def insert_new_rows():
 def get_optimal_price_from_ml_model():
     try:
         data = request.get_json()
-        age_range = data["age_range"]
+        age_range = int(data["age_range"])
         tourist_volume = int(data["tourist_volume"])
         is_one_way = int(data["is_one_way"])
-        optimal_price_based_on_ml_model = query_model.query_ml_model(age_range, tourist_volume, is_one_way)
+        is_citizen = int(data["is_citizen"])
+        optimal_price_based_on_ml_model = query_model.query_ml_model(age_range, tourist_volume, is_one_way, is_citizen)
         return jsonify({"optimal_price": optimal_price_based_on_ml_model})
     except Exception as e:
         return jsonify({"error": str(e)}), 400
