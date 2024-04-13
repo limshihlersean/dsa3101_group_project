@@ -20,7 +20,10 @@ def query_ml_model(age_range, tourist_volume, is_one_way, is_citizen):
                             "tourist_volume_of_cable_car": [tourist_volume]})
     
     if (is_one_way == 1):
-        return booster.predict(one_way_dataframe)[0]
+        price = booster.predict(one_way_dataframe)[0]
     else:
-        return booster.predict(round_dataframe)[0]
+        price = booster.predict(round_dataframe)[0]
+    if (price < 5.3):
+        return 5.3
+    return round(price, 2)
     
