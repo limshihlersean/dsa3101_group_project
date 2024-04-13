@@ -3,7 +3,7 @@ import requests
 import pandas as pd
 
 # Define the base URL for the backend API
-BASE_URL = 'http://backend:8080'
+BASE_URL = 'http://localhost:8080'
 
 #load overseas table
 def load_data(table_name):
