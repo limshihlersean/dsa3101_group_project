@@ -4,6 +4,7 @@ import pandas as pd
 import altair as alt
 import os
 import numpy as np
+import app
 
 #show title of the dashboard 
 st.title('Price Optimisation Dashboard')
@@ -26,9 +27,11 @@ st.header("Price Optimisation Based on Selected Factors")
 
 #loading the data 
 cable_car_data = load_data('cable_car_cleaned_v2.csv')
+dist_dur_price_data = app.load_data('distance_duration_price')
+
 
 # Filters in the sidebar
-
+'''
 #FILTER 1: Duration
 
 st.sidebar.header("Preferred Duration")
@@ -83,7 +86,7 @@ selected_snow = st.sidebar.selectbox(
 # Logic to determine the selected value
 selected_snow_value = yes_no_options.index(selected_snow)
 filtered_data_snow = cable_car_data[cable_car_data['snow'] == selected_snow]
-
+'''
 
 #FILTER 4: Total volume of cable car 
 st.sidebar.header("Total Volume of Cable Car")
@@ -117,7 +120,7 @@ selected_age = st.sidebar.selectbox(
 selected_age_index = multiple_options.index(selected_age)
 filtered_data_age = cable_car_data[cable_car_data['age_range'] == selected_age]
 
-
+'''
 #FILTER 6: NATURE 
 
 st.sidebar.header("City or Nature")
@@ -136,7 +139,7 @@ selected_nature_value = yes_no_options.index(selected_nature)
 
 filtered_data_nature = cable_car_data[cable_car_data['is_nature'] == selected_nature]
 
-
+'''
 #FILTER 7: TYPE OF TRIP
 st.sidebar.header("Type of Trip")
 
