@@ -104,7 +104,7 @@ custom_volume = st.sidebar.number_input(
 
 selected_volume_new = selected_volume if custom_volume is None else custom_volume
 
-filtered_data_volume = cable_car_data[cable_car_data['tourist_volume_of_cable_car'] == selected_volume_new]
+#filtered_data_volume = cable_car_data[cable_car_data['tourist_volume_of_cable_car'] == selected_volume_new]
 #check this because it seems like its == instead of inputting a new value 
 
 #FILTER 5: AGE RANGE
@@ -155,7 +155,7 @@ selected_trip = st.sidebar.selectbox(
 
 # Logic to determine the selected value
 selected_trip_value = yes_no_options.index(selected_trip)
-filtered_data_trip = cable_car_data[cable_car_data['type_of_trip'] == selected_trip]
+#filtered_data_trip = cable_car_data[cable_car_data['type_of_trip'] == selected_trip]
 
 #FILTER 7: CITIZENSHIP
 st.sidebar.header("Citizenship")
@@ -193,13 +193,13 @@ data = {}
 data['tourist_volume'] = selected_volume_new
 
 # Add selected age to the dictionary
-data['age_range'] = selected_age
+data['age_range'] = selected_age_index
 
 # Add selected trip to the dictionary
-data['is_one_way'] = selected_trip
+data['is_one_way'] = selected_trip_value
 
 # Add selected citizenship to the dictionary
-data['is_citizen'] = selected_citizenship
+data['is_citizen'] = selected_citizen_value
 
 # Send a POST request to the backend
 response = requests.post('http://backend:8080/model/priceoptmodel', json=data)
