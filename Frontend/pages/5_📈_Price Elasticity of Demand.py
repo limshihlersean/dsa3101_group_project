@@ -63,21 +63,33 @@ def analyze_group(group_df):
 
 st.title('Price Elasticity of Demand Analysis')
 
-is_citizen_selection = st.selectbox('Citizenship Status', options=[1, 0])
-is_adult_selection = st.selectbox('Age Group', options=[1, 0])
+st.title('Price Elasticity of Demand Analysis')
 
-# Initialize an empty DataFrame as a fallback
+# Adjusted selectbox for string values
+is_citizen_selection = st.selectbox('Citizenship Status', options=['Citizen', 'Non-Citizen'])
+is_adult_selection = st.selectbox('Age Group', options=['Adult', 'Child'])
+
+# Map the string selections back to the corresponding integers for filtering
+is_citizen_mapping = {'Citizen': 1, 'Non-Citizen': 0}
+is_adult_mapping = {'Adult': 1, 'Child': 0}
+
+# Apply the mapping to get the integer values
+is_citizen_value = is_citizen_mapping[is_citizen_selection]
+is_adult_value = is_adult_mapping[is_adult_selection]
+
+
+# Filter the data using the mapped integer values
 filtered_group = pd.DataFrame()
 
 if data is not None:
-    # Filter data based on user selection
-    filtered_group = data[(data['is_citizen'] == is_citizen_selection) & (data['is_adult'] == is_adult_selection)]
+    # Apply the integer mappings to filter the data
+    filtered_group = data[(data['is_citizen'] == is_citizen_value) & (data['is_adult'] == is_adult_value)]
 
     if not filtered_group.empty:
         st.write("Filtered Data:")
         st.dataframe(filtered_group)
     else:
-        st.error("No data available for the selected criteria.")
+        st.error("No data available for the selected criteria or 'ped_data' not loaded correctly.")
 
 if st.button('Analyze'):
     if not filtered_group.empty:
