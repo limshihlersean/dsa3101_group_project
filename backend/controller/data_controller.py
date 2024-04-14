@@ -149,3 +149,17 @@ def insert_new_rows_ped():
     except Exception as e:
         # Return an error message if there's an exception
         return jsonify({'error': str(e)}), 400
+
+@app.route('/delete/noncitsingle', methods=['DELETE'])
+def delete_rows_noncitsingle():
+    try:
+        # Iterate over the JSON data and insert each row into the database
+        data = request.get_json()
+
+        db.delete_data_from_noncitsingle(data)
+        message = "Deletion success"
+        return jsonify({'message': message})
+
+    except Exception as e:
+        # Return an error message if there's an exception
+        return jsonify({'error': str(e)}), 400
