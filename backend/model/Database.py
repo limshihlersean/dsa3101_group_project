@@ -26,6 +26,22 @@ class Database:
         self.cursor.execute(query, values)
         self.conn.commit()
 
+    def execute_query_select(self, query, values):
+        try:
+            # Execute the SELECT query with the provided values
+            self.cursor.execute(query, values)
+            # Fetch the result of the query
+            result = self.cursor.fetchone()
+            # Check if the result is not None (i.e., the row exists)
+            if result is not None:
+                return True  # Return True if the row exists
+            else:
+                return False  # Return False if the row does not exist
+        except Exception as e:
+            # Print or log the error message if an exception occurs
+            print(f"Error executing SELECT query: {e}")
+            return False  # Return False in case of an error
+
 
 
     def retrieve_data_from_table(self, table_name):
@@ -261,14 +277,22 @@ class Database:
             values = (is_citizen,is_adult,price,quantity)
             self.execute_query_post(query,values)
 
-    def delete_data_from_noncitsingle(self,data):
+    def delete_data_from_noncitsingle(self, data):
         for _, row in data.items():
-            query = "DELETE FROM noncitizen_single WHERE company=%s AND age=%s AND events=%s AND price=%s;"
+            query_select = "SELECT * FROM noncitizen_single WHERE company=%s AND age=%s AND events=%s AND price=%s;"
             company = row.get("company")
             age = row.get("age")
             events = row.get("events")
             price = row.get("price")
-            values = (company,age,events,price)
-            self.execute_query_post(query,values)
+            values = (company, age, events, price)
+            # Check if the row exists in the database
+            if self.execute_query_select(query_select, values):
+                # If the row exists, then proceed with deletion
+                query_delete = "DELETE FROM noncitizen_single WHERE company=%s AND age=%s AND events=%s AND price=%s;"
+                self.execute_query_post(query_delete, values)
+            else:
+                # If the row doesn't exist, log a message or raise an exception as per your requirement
+                print("Row not found in database:", values)
+
 
 
