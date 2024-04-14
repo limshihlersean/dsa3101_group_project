@@ -31,7 +31,7 @@ class Database:
             # Execute the SELECT query with the provided values
             self.cursor.execute(query, values)
             # Fetch the result of the query
-            result = self.cursor.fetchone()
+            result = self.cursor.fetchall()
             # Check if the result is not None (i.e., the row exists)
             if result is not None:
                 return True  # Return True if the row exists
