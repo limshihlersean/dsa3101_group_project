@@ -57,5 +57,5 @@ with st.expander("Non-citizen (Single Attractions)"):
     st.write(selection)
     if st.button('Delete', key=4):
         json = selection.to_json(orient ='index')
-        print(json)
-        app.update_data(json, 'noncitsingle')
+        app.delete_data(json, 'noncitsingle')
+

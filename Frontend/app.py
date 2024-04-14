@@ -34,10 +34,13 @@ def update_data(json_data, endpoint):
 def delete_data(json_data, endpoint):
     try:
         json_data_dict = json.loads(json_data)
-        response = requests.post(BASE_URL + '/insert/' + endpoint, json=json_data_dict)
+        response = requests.delete(BASE_URL + '/delete/' + endpoint, json=json_data_dict)
     except json.JSONDecodeError as e:
         print("Error decoding JSON:", e)
     if response.status_code == 200:
+        st.write("Your updated data:")
+        noncitizen_single_table = load_data('noncitizen_single') 
+        st.write(noncitizen_single_table)
         st.success("Data deleted successfully.")
     else:
         st.error("Failed to delete data in the database.")
