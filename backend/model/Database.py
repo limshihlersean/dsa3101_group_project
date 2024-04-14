@@ -260,3 +260,15 @@ class Database:
 
             values = (is_citizen,is_adult,price,quantity)
             self.execute_query_post(query,values)
+
+    def delete_data_from_noncitsingle(self,data):
+        for _, row in data.items():
+            query = "DELETE FROM noncitizen_single WHERE company=%s AND age=%s AND events=%s AND price=%s;"
+            company = row.get("company")
+            age = row.get("age")
+            events = row.get("events")
+            price = row.get("price")
+            values = (company,age,events,price)
+            self.execute_query_post(query,values)
+
+
