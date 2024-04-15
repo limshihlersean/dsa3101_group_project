@@ -8,7 +8,7 @@ import app
 import requests
 
 #show title of the dashboard 
-st.title('Price Optimisation Dashboard')
+st.title('Price Optimisation')
 
 #sidebar 
 st.sidebar.title('Selection of Factors')
@@ -24,7 +24,7 @@ def load_data(filename):
     return pd.read_csv(full_path)
 
 
-st.header("Price Optimisation Based on Selected Factors")
+st.header("Price Optimisation Based on Total Volume of Cable Car, Age, Type of Trip, Citizenship")
 
 #loading the data 
 cable_car_data = load_data('cable_car_cleaned_v2.csv')
@@ -32,77 +32,21 @@ dist_dur_price_data = app.load_data('distance_duration_price')
 
 
 # Filters in the sidebar
-'''
-#FILTER 1: Duration
 
-st.sidebar.header("Preferred Duration")
-selected_duration = st.sidebar.slider(
-    'Select a duration', 0, 100, 50, 
-    key='duration_select'
-    #unique identifier for the duration
-)
-custom_duration = st.sidebar.number_input(
-    "Or enter a custom value", 
-    min_value=0, max_value=100, 
-    value=50)
-
-selected_value = selected_duration if custom_duration is None else custom_duration
-
-
-
-#filtered_data = cable_car_data[cable_car_data['Duration (Mins)'].isin(selected_value)]
-
-filtered_data = cable_car_data[cable_car_data['duration'] == selected_value]
-
-#FILTER 2: DISTANCE 
-
-st.sidebar.header("Preferred Distance")
-selected_distance = st.sidebar.slider(
-    'Select a distance', 0, 15, 3, 
-    key='distance_select'
-    #unique identifier for the duration
-)
-custom_distance = st.sidebar.number_input(
-    "Or enter a custom value", 
-    min_value=0, max_value=15, 
-    value=3)
-
-selected_distance_new = selected_distance if custom_distance is None else custom_distance
-
-filtered_data_distance = cable_car_data[cable_car_data['distance'] == selected_distance_new]
-
-#FILTER 3: SNOW 
-
-st.sidebar.header("Presence of Snow")
-
-# Dropdown box for selecting 'Yes' or 'No'
-yes_no_options = ['Yes', 'No']
-selected_snow = st.sidebar.selectbox(
-    'Select option', 
-    options=yes_no_options,
-    index=0,  # Default index for 'Yes'
-    key='option_select'
-)
-
-# Logic to determine the selected value
-selected_snow_value = yes_no_options.index(selected_snow)
-filtered_data_snow = cable_car_data[cable_car_data['snow'] == selected_snow]
-'''
-
-#FILTER 4: Total volume of cable car 
+# FILTER 4: Total volume of cable car 
 st.sidebar.header("Total Volume of Cable Car")
-selected_volume = st.sidebar.slider(
-    'Select a volume', 100, 1000000, 5000, 
-    key='volume_select'
-    #unique identifier for the duration
-)
-#I dont think need this 
-custom_volume = st.sidebar.number_input(
-    "Or enter a custom value", 
-    min_value=100, max_value=1000000, 
-    value=5000)
 
-selected_volume_new = selected_volume if custom_volume is None else custom_volume
+# Input for custom volume
+selected_volume_new = st.sidebar.number_input(
+    "Enter a volume", 
+    min_value=100, max_value=1000000, 
+    value=5000,
+    step=1,  # Optional: You can adjust the step size if needed
+    key='volume_input'  # Unique identifier for the input widget
+)
+
+
+selected_volume_new = selected_volume_new
 
 #filtered_data_volume = cable_car_data[cable_car_data['tourist_volume_of_cable_car'] == selected_volume_new]
 #check this because it seems like its == instead of inputting a new value 
@@ -125,26 +69,6 @@ selected_age_index = age_mapping[selected_age]
 
 
 
-'''
-#FILTER 6: NATURE 
-
-st.sidebar.header("City or Nature")
-
-# Dropdown box for selecting 'Yes' or 'No'
-yes_no_options = ['City', 'Nature']
-selected_nature = st.sidebar.selectbox(
-    'Select option', 
-    options=yes_no_options,
-    index=0,  # Default index for 'Yes'
-    key='option_select_nature'
-)
-
-# Logic to determine the selected value
-selected_nature_value = yes_no_options.index(selected_nature)
-
-filtered_data_nature = cable_car_data[cable_car_data['is_nature'] == selected_nature]
-
-'''
 #FILTER 7: TYPE OF TRIP
 st.sidebar.header("Type of Trip")
 
@@ -206,7 +130,7 @@ data['is_one_way'] = selected_trip_value
 data['is_citizen'] = selected_citizen_value
 
 # Send a POST request to the backend
-response = requests.post('http://backend:8080//model/priceoptmodel', json=data)
+response = requests.post('http://localhost:8080/model/priceoptmodel', json=data)
 
 # Check if the request was successful
 if response.status_code == 200:
@@ -218,7 +142,8 @@ if response.status_code == 200:
     
     # Do something with the optimal price
     print("Optimal price:", optimal_price)
-    st.write("Optimal price:", optimal_price)
+    #st.write("Optimal price:", optimal_price)
+    st.write(f"<h2 style='color:red;'>Optimal price: {optimal_price}</h2>", unsafe_allow_html=True)
 else:
     print("Error:", response.text)
 
