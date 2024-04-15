@@ -3,21 +3,12 @@ import pandas as pd
 import mysql.connector
 
 from model import Database
+from model.MLModel import query_model
+from services import price_opt_validator
 
 app = Flask(__name__)
 
 db = Database.Database()
-
-@app.route('/api/data', methods=['GET'])
-def get_data():
-    # To add model logic to get data from database and transform data.
-    #data = {'A': [1, 2, 3], 'B': [4, 5, 6], 'C': [7, 8, 9]}
-    file_path = '../data/bundled_discount.csv'
-    data = pd.read_csv(file_path)
-
-    df = pd.DataFrame(data)
-    df_json = df.to_json(orient="records")
-    return jsonify(df_json)
 
 
 @app.route('/tables/<table_name>', methods=['GET'])
@@ -38,8 +29,6 @@ def dynamic_pricing_table_api():
     # Return the JSON response
     return response
 
-
-
 @app.route('/tables/pricing', methods=['GET'])
 def pricing_table_api():
     # Call the get_pricing_table function to fetch data
@@ -48,8 +37,6 @@ def pricing_table_api():
     response = jsonify(table_data)
     # Return the JSON response
     return response
-
-
 
 @app.route('/tables/local_discount', methods=['GET'])
 def local_discount_table_api():
@@ -60,10 +47,6 @@ def local_discount_table_api():
     # Return the JSON response
     return response
 
-
-
-
-
 @app.route('/tables/bundle_discount', methods=['GET'])
 def bundle_discount_table_api():
     # Call the get_pricing_table function to fetch data
@@ -72,8 +55,6 @@ def bundle_discount_table_api():
     response = jsonify(table_data)
     # Return the JSON response
     return response
-
-
 
 @app.route('/tables/distance_duration_price', methods=['GET'])
 def distance_duration_price_table_api():
@@ -84,9 +65,8 @@ def distance_duration_price_table_api():
     # Return the JSON response
     return response
 
-
 @app.route('/insert/noncitsingle', methods=['POST'])
-def insert_new_rows():
+def insert_new_rows_noncitsingle():
     try:
         # Iterate over the JSON data and insert each row into the database
         data = request.get_json()
@@ -98,15 +78,85 @@ def insert_new_rows():
     except Exception as e:
         # Return an error message if there's an exception
         return jsonify({'error': str(e)}), 400
+
+@app.route('/insert/citsingle', methods=['POST'])
+def insert_new_rows_citsingle():
+    try:
+        # Iterate over the JSON data and insert each row into the database
+        data = request.get_json()
+
+        db.add_data_to_citsingle(data)
+        message = "Insertion success"
+        return jsonify({'message': message})
+
+    except Exception as e:
+        # Return an error message if there's an exception
+        return jsonify({'error': str(e)}), 400
+    
+@app.route("/model/priceoptmodel", methods=["POST"])
+def get_optimal_price_from_ml_model():
+    try:
+        data = request.get_json()
+        age_range, tourist_volume, is_one_way, is_citizen = price_opt_validator.validate_price_opt_data(data)
+        optimal_price_based_on_ml_model = query_model.query_ml_model(age_range, tourist_volume, is_one_way, is_citizen)
+        return jsonify({"optimal_price": optimal_price_based_on_ml_model})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
     
 
-    
+@app.route('/insert/allisbundle', methods=['POST'])
+def insert_new_rows_allisbundle():
+    try:
+        # Iterate over the JSON data and insert each row into the database
+        data = request.get_json()
 
+        db.add_data_to_allisbundle(data)
+        message = "Insertion success"
+        return jsonify({'message': message})
 
-# @app.route('/insert/overseas_data', methods=['POST'])
-# def insert_new_rows_noncitizensingle():
-#     data = request.get_json()
-#     # Call to insert data 
-#     response = db.insert_new_rows_noncitizensingle(data)
+    except Exception as e:
+        # Return an error message if there's an exception
+        return jsonify({'error': str(e)}), 400
 
-#     return response
+@app.route('/insert/overseas', methods=['POST'])
+def insert_new_rows_overseas():
+    try:
+        # Iterate over the JSON data and insert each row into the database
+        data = request.get_json()
+
+        db.add_data_to_overseas(data)
+        message = "Insertion success"
+        return jsonify({'message': message})
+
+    except Exception as e:
+        # Return an error message if there's an exception
+        return jsonify({'error': str(e)}), 400
+
+@app.route('/insert/ped', methods=['POST'])
+def insert_new_rows_ped():
+    try:
+        # Iterate over the JSON data and insert each row into the database
+        data = request.get_json()
+
+        db.add_data_to_ped(data)
+        message = "Insertion success"
+        return jsonify({'message': message})
+
+    except Exception as e:
+        # Return an error message if there's an exception
+        return jsonify({'error': str(e)}), 400
+
+@app.route('/delete/noncitsingle', methods=['DELETE'])
+def delete_rows_noncitsingle():
+    try:
+        # Iterate over the JSON data and insert each row into the database
+        data = request.get_json()
+
+        db.delete_data_from_noncitsingle(data)
+        message = "Deletion success"
+        return jsonify({'message': message})
+
+    except Exception as e:
+        # Return an error message if there's an exception
+        return jsonify({'error': str(e)}), 400

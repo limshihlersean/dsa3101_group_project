@@ -22,9 +22,25 @@ class Database:
         column_headers = [col[0] for col in self.cursor.description]
         return column_headers, self.cursor.fetchall()
 
-    def execute_query_post(self, query,val):
-        self.cursor.execute(query,val)
+    def execute_query_post(self, query,values):
+        self.cursor.execute(query, values)
         self.conn.commit()
+
+    def execute_query_select(self, query, values):
+        try:
+            # Execute the SELECT query with the provided values
+            self.cursor.execute(query, values)
+            # Fetch the result of the query
+            result = self.cursor.fetchone()
+            # Check if the result is not None (i.e., the row exists)
+            if result is not None:
+                return True  # Return True if the row exists
+            else:
+                return False  # Return False if the row does not exist
+        except Exception as e:
+            # Print or log the error message if an exception occurs
+            print(f"Error executing SELECT query: {e}")
+            return False  # Return False in case of an error
 
 
 
@@ -196,4 +212,87 @@ class Database:
             price = row.get("price")
             values = (company,age,events,price)
             self.execute_query_post(query,values)
+
+    def add_data_to_citsingle(self,data):
+        # Prepare the INSERT statement
+        
+
+        for row in data: 
+            query = "INSERT INTO citizen_single (`company`, `year`,`age`, `events`, `price`) VALUES (%s, %s, %s, %s,%s);"
+            company = row.get("company")
+            year = row.get("year")
+            age = row.get("age")
+            events = row.get("events")
+            price = row.get("price")
+            values = (company,year,age,events,price)
+            self.execute_query_post(query,values)
+    
+    def add_data_to_allisbundle(self,data):
+    # Prepare the INSERT statement
+        for row in data: 
+            query = "INSERT INTO all_isbundle (`company`,`age`,`is_citizen`, `events`, `price`,`singleA`,`singleB`,`singleC`, `singleD`,`singleE`) VALUES (%s, %s, %s, %s,%s,%s, %s, %s, %s,%s);"
+            company = row.get("company")
+            age = row.get("age")
+            is_citizen = row.get("is_citizen")
+            events = row.get("events")
+            price = row.get("price")
+            singleA = row.get("singleA")
+            singleB = row.get("singleB")
+            singleC = row.get("singleC")
+            singleD = row.get("singleD")
+            singleE = row.get("singleE")
+            values = (company,age,is_citizen,events,price,singleA,singleB,singleC,singleD,singleE)
+            self.execute_query_post(query,values)
+
+    def add_data_to_overseas(self,data):
+        # Prepare the INSERT statement
+        for row in data: 
+            query = "INSERT INTO overseas (`company`,`country`,`city`,`duration`,`distance`,`snow`,`tourist_volume_of_cable_car`,`cable_car_price`,`age_range`,`is_nature`,`type_of_trip`,`is_citizen`) VALUES (%s, %s , %s, %s, %s, %s,%s,%s, %s, %s, %s,%s);"
+            company = row.get("company")
+            country = row.get("country")
+            city = row.get("city")
+            duration = row.get("duration")
+            distance = row.get("distance")
+            snow = row.get("snow")
+            tourist_volume_of_cable_car = row.get("tourist_volume_of_cable_car")
+            cable_car_price = row.get("cable_car_price")
+            age_range = row.get("age_range")
+            is_nature = row.get("is_nature")
+            type_of_trip = row.get("type_of_trip")
+            is_citizen = row.get("is_citizen")
+
+            values = (company,country,city,duration,distance,snow,tourist_volume_of_cable_car,cable_car_price,age_range,is_nature,type_of_trip,is_citizen)
+            self.execute_query_post(query,values)
+
+    # Inserting Data into PED 
+    def add_data_to_ped(self,data):
+        # Prepare the INSERT statement
+        for row in data: 
+            query = "INSERT INTO ped_data (`is_citizen`,`is_adult`,`price`,`quantity`) VALUES (%s, %s, %s,%s);"
+            is_citizen = row.get("is_citizen")
+            is_adult = row.get("is_adult")
+            price = row.get("price")
+            quantity = row.get("quantity")
+
+            values = (is_citizen,is_adult,price,quantity)
+            self.execute_query_post(query,values)
+
+    def delete_data_from_noncitsingle(self, data):
+        for _, row in data.items():
+            query_select = "SELECT * FROM noncitizen_single WHERE company=%s AND age=%s AND events=%s AND price=%s;"
+            company = row.get("company")
+            age = row.get("age")
+            events = row.get("events")
+            price = row.get("price")
+            values = (company, age, events, price)
+            # Check if the row exists in the database
+            if self.execute_query_select(query_select, values):
+                # If the row exists, then proceed with deletion
+                query_delete = "DELETE FROM noncitizen_single WHERE company=%s AND age=%s AND events=%s AND price=%s;"
+                self.execute_query_post(query_delete, values)
+            else:
+                # If the row doesn't exist, log a message or raise an exception as per your requirement
+                print("Row not found in database:", values)
+
+
 
