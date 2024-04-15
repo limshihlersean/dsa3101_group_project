@@ -3,47 +3,59 @@ import streamlit as st
 import requests
 import app
 
-def overseas_table():
-    return app.load_data('overseas')
+st.title("View your data here!")  # add a title
 
-def all_isbundle_table():
-    return app.load_data('all_isbundle')
+def dataframe_with_selections(df):
+    df_with_selections = df.copy()
+    df_with_selections.insert(0, "Select", False)
 
-def citizen_single_table():
-    return app.load_data('citizen_single')
+    # Get dataframe row-selections from user with st.data_editor
+    edited_df = st.data_editor(
+        df_with_selections,
+        hide_index=True,
+        column_config={"Select": st.column_config.CheckboxColumn(required=True)},
+        disabled=df.columns,
+    )
 
-def noncitizen_single_table():
-    return app.load_data('noncitizen_single')
+    # Filter the dataframe using the temporary column, then drop the column
+    selected_rows = edited_df[edited_df.Select]
+    return selected_rows.drop('Select', axis=1)
 
-st.title("Your data")  # add a title
+overseas_table = app.load_data('overseas')
+all_isbundle_table = app.load_data('all_isbundle')
+citizen_single_table = app.load_data('citizen_single')
+noncitizen_single_table = app.load_data('noncitizen_single')
 
-with st.expander("Overseas"):
-    edited_df = st.data_editor(overseas_table(), num_rows="dynamic")
-    if st.button('Update', key=1):
-        json = edited_df.to_json(orient ='records')
+with st.expander("Overseas Cable Car"):
+    selection = dataframe_with_selections(overseas_table)
+    st.write("Your selection:")
+    st.write(selection)
+    if st.button('Delete', key=1):
+        json = selection.to_json(orient ='records')
         app.update_data(json, 'overseas')
 
-with st.expander("All is bundle"):
-    edited_df = st.data_editor(all_isbundle_table(), num_rows="dynamic")
-    if st.button('Update', key=2):
-        json = edited_df.to_json(orient ='records')
-        app.update_data(json, 'all_isbundle')
+with st.expander("Bundle packages"):
+    selection = dataframe_with_selections(all_isbundle_table)
+    st.write("Your selection:")
+    st.write(selection)
+    if st.button('Delete', key=2):
+        json = selection.to_json(orient ='records')
+        app.update_data(json, 'allisbundle')
 
-
-with st.expander("Citizen Single"): 
-    edited_df = st.data_editor(citizen_single_table(), num_rows="dynamic")
-    if st.button('Update', key=3):
-        json = edited_df.to_json(orient ='records')
+with st.expander("Citizen (Single Attractions)"): 
+    selection = dataframe_with_selections(citizen_single_table)
+    st.write("Your selection:")
+    st.write(selection)
+    if st.button('Delete', key=3):
+        json = selection.to_json(orient ='records')
         app.update_data(json, 'citsingle')
 
 
-with st.expander("Non-citizen Single"): 
-    edited_df = st.data_editor(noncitizen_single_table(), num_rows="dynamic")
-    if st.button('Update', key=4):
-        json = edited_df.to_json(orient ='records')
-        app.update_data(json, 'noncitsingle')
-
-
-
-
+with st.expander("Non-citizen (Single Attractions)"): 
+    selection = dataframe_with_selections(noncitizen_single_table)
+    st.write("Your selection:")
+    st.write(selection)
+    if st.button('Delete', key=4):
+        json = selection.to_json(orient ='index')
+        app.delete_data(json, 'noncitsingle')
 
