@@ -13,18 +13,6 @@ st.title('Competitor Analysis Dashboard')
 # Define the sidebar at the top of your script
 st.sidebar.title('Filter and Selection Sidebar')
 
-
-# Load CSV data
-def load_data(filename):
-    # Construct the full path to the file within the 'data' folder
-    # The '..' moves up one directory level from the current script's location
-    folder_path = os.path.join('..', 'data')
-    full_path = os.path.join(folder_path, filename)
-    
-    # Load and return the CSV file
-    return pd.read_csv(full_path)
-
-
 #------------------------------------------------------------------------------#
 st.header("Cable Car Price Analysis")
 
@@ -57,28 +45,33 @@ selected_countries = st.sidebar.multiselect(
 # Filter data based on selection
 filtered_data = dist_dur_price_data[dist_dur_price_data['country'].isin(selected_countries)]
 
-# Generate scatter plots
-scatter_duration_price = create_scatter_plot(
-    filtered_data,
-    'duration',
-    'price',
-    'country:N',
-    "Duration (Mins) vs. Cable car Price (SGD)"
-)
+if len(filtered_data):
+    # Generate scatter plots
+    scatter_duration_price = create_scatter_plot(
+        filtered_data,
+        'duration',
+        'price',
+        'country:N',
+        "Duration (Mins) vs. Cable car Price (SGD)"
+    )
+    scatter_distance_price = create_scatter_plot(
+        filtered_data,
+        'distance',
+        'price',
+        'country:N',
+        "Distance (KM) vs. Cable car Price (SGD)"
+    )
+    # Combine the scatter plots side by side
+    combined_scatter_plots = alt.hconcat(scatter_duration_price, scatter_distance_price)  
+    # Display the scatter plots
+    st.altair_chart(combined_scatter_plots, use_container_width=True)      
+else:
+    st.write("Please select at least one category to visualize the Cable Car Price Analysis.")
 
-scatter_distance_price = create_scatter_plot(
-    filtered_data,
-    'distance',
-    'price',
-    'country:N',
-    "Distance (KM) vs. Cable car Price (SGD)"
-)
 
-# Combine the scatter plots side by side
-combined_scatter_plots = alt.hconcat(scatter_duration_price, scatter_distance_price)
 
-# Display the scatter plots
-st.altair_chart(combined_scatter_plots, use_container_width=True)
+
+
 
 #------------------------------------------------------------------------------#
 
@@ -95,7 +88,6 @@ def create_price_comparison_chart(data):
         color='age:N',  # Assuming 'age' column contains the ticket type
         tooltip=['company', 'age', 'price']
     ).properties(
-        title='Competitor Pricing Comparison',
         width=200,  # Adjust the width as needed
         height=200  # Adjust the height as needed
     ).facet(
@@ -115,39 +107,42 @@ def create_price_comparison_chart(data):
 # Load the data
 pricing_data = app.load_data('pricing')
 
-# Streamlit sidebar widget for category and attraction selection
-st.sidebar.header('Filters for Standard Pricing Overview')
+st.sidebar.header("Filter for Standard Pricing Overview")
+
+selected_ages = st.sidebar.multiselect(
+    'Select Age Groups:',
+    options=pricing_data['age'].unique(),
+    default=pricing_data['age'].unique()[:3],
+    key='age_select_pricing'
+)
+filtered_data = pricing_data[pricing_data['age'].isin(selected_ages)]
+
 selected_categories = st.sidebar.multiselect(
     'Select Categories:',
-    options=pricing_data['table_name'].unique(),
-    default=pricing_data['table_name'].unique()[0],
+    options=filtered_data['table_name'].unique(),
+    default=filtered_data['table_name'].unique()[:1],
     key='category_select_pricing'
 )
-
-filtered_data = pricing_data[pricing_data['table_name'].isin(selected_categories)]
+filtered_data = filtered_data[filtered_data['table_name'].isin(selected_categories)]
 
 selected_attractions = st.sidebar.multiselect(
     'Select Attractions:',
     options=filtered_data['company'].unique(),
-    default=filtered_data['company'].unique()[:3]if len(filtered_data['company'].unique()) >= 3 else filtered_data['company'].unique(),
+    default=filtered_data['company'].unique()[:3] if len(filtered_data['company'].unique()) >= 3 else filtered_data['company'].unique(),
     key='attraction_select_pricing'
 )
 
-# Apply filters to pricing_data based on selected categories and attractions
-filtered_pricing_data = pricing_data[pricing_data['table_name'].isin(selected_categories)]
-filtered_pricing_data = filtered_pricing_data[filtered_pricing_data['company'].isin(selected_attractions)]
+filtered_pricing_data = filtered_data[filtered_data['company'].isin(selected_attractions)]
 
-# Create the price comparison chart using the filtered data
-price_comparison_chart = create_price_comparison_chart(filtered_pricing_data)
-
-# Display the chart in the Streamlit app
-st.altair_chart(price_comparison_chart, use_container_width=True)
+if len(filtered_pricing_data):
+    price_comparison_chart = create_price_comparison_chart(filtered_pricing_data)
+    st.altair_chart(price_comparison_chart, use_container_width=True)
+else:
+    st.write("Please select at least one category to visualize the standard pricing overview.")
 
 #------------------------------------------------------------------------------#
 
-import streamlit as st
-import altair as alt
-import pandas as pd
+st.header("Dynamic Pricing Chart")
 
 # Assuming 'data' is the DataFrame created from your JSON data
 data = app.load_data('dynamic_pricing')
@@ -233,7 +228,7 @@ if selected_companies:
     dynamic_pricing_chart = create_dynamic_pricing_chart(data, selected_companies)
     st.altair_chart(dynamic_pricing_chart, use_container_width=True)
 else:
-    st.write("Please select at least one company to visualize the dynamic pricing data.")
+    st.write("Please select at least one category to visualize the dynamic pricing data.")
 
 
 #------------------------------------------------------------------------------#
@@ -251,8 +246,6 @@ loc_disc_data.drop_duplicates(inplace=True)
 
 # Filter out any rows with missing data
 loc_disc_data = loc_disc_data.dropna(subset=['non_citizen_price', 'citizen_price', 'discount'])
-
-st.write('Max discount:', loc_disc_data['discount'].max())
 
 # Function to create a grouped bar chart with age categories
 # Function to create a horizontal bar chart with side-by-side bars for different age categories
@@ -289,7 +282,7 @@ st.sidebar.header('Filter for Local Discounts')
 selected_age_categories = st.sidebar.multiselect(
     'Select Age Categories:',
     options=loc_disc_data['age'].unique(),
-    default=loc_disc_data['age'].unique()[0],
+    default=loc_disc_data['age'].unique()[:1],
     key='age_category_select'
 )
 
@@ -307,9 +300,15 @@ selected_attractions = st.sidebar.multiselect(
 # Apply filters to data based on selected attractions
 filtered_data = filtered_age_category_data[filtered_age_category_data['company'].isin(selected_attractions)]
 
-# Create and display the price comparison chart
-local_discount_bar_chart = create_local_discount_bar_chart(filtered_data, 'Local Discounts by Attraction')
-st.altair_chart(local_discount_bar_chart, use_container_width=True)
+if len(filtered_data):
+    # Create and display the price comparison chart
+    local_discount_bar_chart = create_local_discount_bar_chart(filtered_data, 'Local Discounts by Attraction')
+    st.altair_chart(local_discount_bar_chart, use_container_width=True)
+else:
+    st.write("Please select at least one category to visualize the Local Discounts.")
+
+
+
 
 #------------------------------------------------------------------------------#
 st.header("Bundled Discounts")
@@ -375,9 +374,12 @@ filtered_data = bun_data[bun_data['age'].isin(selected_ages)]
 filtered_data = filtered_data[filtered_data['is_citizen'] == 1]
 filtered_data = filtered_data[filtered_data['company'].isin(selected_attractions)]
 
-# Create and display the price comparison chart
-discount_bar_chart = create_grouped_discount_bar_chart(filtered_data, 'Discounts by Attraction')
-st.altair_chart(discount_bar_chart, use_container_width=True)
+if len(filtered_data):
+    # Create and display the price comparison chart
+    discount_bar_chart = create_grouped_discount_bar_chart(filtered_data, 'Bundled Discounts for Locals')
+    st.altair_chart(discount_bar_chart, use_container_width=True)
+else:
+    st.write("Please select at least one category to visualize the Local Bundled Discounts.")
 
 st.sidebar.subheader('Filter for Non-Local Categories')
 # Filter by Age
@@ -401,8 +403,13 @@ filtered_data = bun_data[bun_data['age'].isin(selected_ages)]
 filtered_data = filtered_data[filtered_data['is_citizen'] == 0]
 filtered_data = filtered_data[filtered_data['company'].isin(selected_attractions)]
 
-# Create and display the price comparison chart
-discount_bar_chart = create_grouped_discount_bar_chart(filtered_data, 'Discounts by Attraction')
-st.altair_chart(discount_bar_chart, use_container_width=True)
+if len(filtered_data):
+    # Create and display the price comparison chart
+    discount_bar_chart = create_grouped_discount_bar_chart(filtered_data, 'Bundled Discounts for Non-Locals')
+    st.altair_chart(discount_bar_chart, use_container_width=True)
+else:
+    st.write("Please select at least one category to visualize the Non-Local Bundled Discounts.")
+
+
 
 #------------------------------------------------------------------------------#'''
