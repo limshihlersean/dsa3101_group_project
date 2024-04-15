@@ -206,7 +206,7 @@ data['is_one_way'] = selected_trip_value
 data['is_citizen'] = selected_citizen_value
 
 # Send a POST request to the backend
-response = requests.post('http://backend:8080/model/priceoptmodel', json=data)
+response = requests.post('http://backend:8080/Optimise', json=data)
 
 # Check if the request was successful
 if response.status_code == 200:
