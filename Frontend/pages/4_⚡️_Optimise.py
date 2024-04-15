@@ -110,16 +110,20 @@ selected_volume_new = selected_volume if custom_volume is None else custom_volum
 #FILTER 5: AGE RANGE
 st.sidebar.header("Age")
 
-# Dropdown box for selecting different ages
-multiple_options = ['Child', 'Student', 'Adult', 'Senior Citizen', 'Disabled']
+
+multiple_options = ['Child', 'Student', 'Adult', 'Senior Citizen/ Handicapped']
 selected_age = st.sidebar.selectbox(
     'Select option', 
     options=multiple_options,
-    index=0,  # Default index for 'Yes'
+    index=0,  # Default index for 'Child'
     key='option_select_age'
 )
-selected_age_index = multiple_options.index(selected_age)
-filtered_data_age = cable_car_data[cable_car_data['age_range'] == selected_age]
+
+# Mapping selected age to its corresponding index
+age_mapping = {'Child': 0, 'Student': 1, 'Adult': 2, 'Senior Citizen/ Handicapped': 3}
+selected_age_index = age_mapping[selected_age]
+
+
 
 '''
 #FILTER 6: NATURE 
@@ -221,12 +225,4 @@ else:
 
 
 
-#display output
-#st.write("Adult (Citizen):", prediction1)
-#st.write("Child (Citizen):", prediction1)
-#st.write("Senior (Citizen):", prediction1)
-#st.write("Adult (Non-Citizen):", prediction1)
-#st.write("Child (Non-Citizen):", prediction1)
-#st.write("Senior (Non-Citizen):", prediction1)
 
-#what about the disabled -- since it is one of the categories 
