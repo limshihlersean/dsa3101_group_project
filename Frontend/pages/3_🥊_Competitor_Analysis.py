@@ -321,9 +321,6 @@ bun_data['original_price'] = pd.to_numeric(bun_data['original_price'], errors='c
 bun_data['price'] = pd.to_numeric(bun_data['price'], errors='coerce')
 bun_data['discount'] = pd.to_numeric(bun_data['discount'], errors='coerce')
 
-# Filter out any rows with missing data
-data = bun_data.dropna(subset=['original_price', 'price', 'discount'])
-
 def create_grouped_discount_bar_chart(data, title):
     # Grouped horizontal bar chart
     chart = alt.Chart(data).mark_bar().encode(
@@ -350,29 +347,36 @@ def create_grouped_discount_bar_chart(data, title):
 
     return chart
 
+
 # Streamlit sidebar widget for filters
 st.sidebar.header('Filters for Bundled Discounts')
 st.sidebar.subheader('Filter for Local Categories')
-# Filter by Age
+
+# Filter by Citizenship Status
+filtered_local_data = bun_data[bun_data['is_citizen'] == 1]
+
+# Streamlit sidebar widget for age category selection
+st.sidebar.header('Filter for Non-Locals Discounts')
 selected_ages = st.sidebar.multiselect(
     'Select Age Group:',
-    options=bun_data['age'].unique(),
-    default=bun_data['age'].unique(),  # Default to all age groups selected
+    options=filtered_local_data['age'].unique(),
+    default=filtered_local_data['age'].unique()[:1] if len(filtered_local_data['age'].unique()) > 0 else [],
     key='age_select_local'
 )
 
-# Filter by Company
-selected_attractions = st.sidebar.multiselect(
+# Filter the data based on selected age groups
+filtered_age_data = filtered_local_data[filtered_local_data['age'].isin(selected_ages)]
+
+# Streamlit sidebar widget for company selection
+selected_companies = st.sidebar.multiselect(
     'Select Companies:',
-    options=bun_data['company'].unique(),
-    default=bun_data['company'].unique()[:5],  # Default to top 5 companies selected
+    options=filtered_age_data['company'].unique(),
+    default=filtered_age_data['company'].unique()[:5] if len(filtered_age_data['company'].unique()) >= 5 else filtered_age_data['company'].unique(),
     key='company_select_local'
 )
 
-# Apply filters to data based on selected age groups, citizenship status, and companies
-filtered_data = bun_data[bun_data['age'].isin(selected_ages)]
-filtered_data = filtered_data[filtered_data['is_citizen'] == 1]
-filtered_data = filtered_data[filtered_data['company'].isin(selected_attractions)]
+# Apply filters to data based on selected age groups and companies
+filtered_data = filtered_age_data[filtered_age_data['company'].isin(selected_companies)]
 
 if len(filtered_data):
     # Create and display the price comparison chart
@@ -380,28 +384,38 @@ if len(filtered_data):
     st.altair_chart(discount_bar_chart, use_container_width=True)
 else:
     st.write("Please select at least one category to visualize the Local Bundled Discounts.")
+filtered_age_data = filtered_local_data[filtered_local_data['age'].isin(selected_ages)]
+
+
+#-----------------------------
 
 st.sidebar.subheader('Filter for Non-Local Categories')
-# Filter by Age
+
+# Filter by Citizenship Status
+filtered_local_data = bun_data[bun_data['is_citizen'] == 0]
+
+# Streamlit sidebar widget for age category selection
+st.sidebar.header('Filter for Non-Locals Discounts')
 selected_ages = st.sidebar.multiselect(
     'Select Age Group:',
-    options=bun_data['age'].unique(),
-    default=bun_data['age'].unique(),  # Default to all age groups selected
+    options=filtered_local_data['age'].unique(),
+    default=filtered_local_data['age'].unique()[:1] if len(filtered_local_data['age'].unique()) > 0 else [],
     key='age_select_non_local'
 )
 
-# Filter by Company
-selected_attractions = st.sidebar.multiselect(
+# Filter the data based on selected age groups
+filtered_age_data = filtered_local_data[filtered_local_data['age'].isin(selected_ages)]
+
+# Streamlit sidebar widget for company selection
+selected_companies = st.sidebar.multiselect(
     'Select Companies:',
-    options=bun_data['company'].unique(),
-    default=bun_data['company'].unique()[:5],  # Default to top 5 companies selected
+    options=filtered_age_data['company'].unique(),
+    default=filtered_age_data['company'].unique()[:5] if len(filtered_age_data['company'].unique()) >= 5 else filtered_age_data['company'].unique(),
     key='company_select_non_local'
 )
 
-# Apply filters to data based on selected age groups, citizenship status, and companies
-filtered_data = bun_data[bun_data['age'].isin(selected_ages)]
-filtered_data = filtered_data[filtered_data['is_citizen'] == 0]
-filtered_data = filtered_data[filtered_data['company'].isin(selected_attractions)]
+# Apply filters to data based on selected age groups and companies
+filtered_data = filtered_age_data[filtered_age_data['company'].isin(selected_companies)]
 
 if len(filtered_data):
     # Create and display the price comparison chart
@@ -409,7 +423,3 @@ if len(filtered_data):
     st.altair_chart(discount_bar_chart, use_container_width=True)
 else:
     st.write("Please select at least one category to visualize the Non-Local Bundled Discounts.")
-
-
-
-#------------------------------------------------------------------------------#'''
