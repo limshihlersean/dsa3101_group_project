@@ -111,7 +111,7 @@ selected_volume_new = selected_volume if custom_volume is None else custom_volum
 st.sidebar.header("Age")
 
 
-multiple_options = ['Child', 'Student', 'Adult', 'Senior Citizen/ Handicapped']
+multiple_options = ['Child', 'Student', 'Adult', 'Senior Citizen', 'Handicapped']
 selected_age = st.sidebar.selectbox(
     'Select option', 
     options=multiple_options,
@@ -120,7 +120,7 @@ selected_age = st.sidebar.selectbox(
 )
 
 # Mapping selected age to its corresponding index
-age_mapping = {'Child': 0, 'Student': 1, 'Adult': 2, 'Senior Citizen/ Handicapped': 3}
+age_mapping = {'Child': 0, 'Student': 1, 'Adult': 2, 'Senior Citizen': 3, 'Handicapped':4}
 selected_age_index = age_mapping[selected_age]
 
 
