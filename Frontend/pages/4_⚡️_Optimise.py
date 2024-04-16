@@ -98,8 +98,9 @@ selected_citizenship = st.sidebar.selectbox(
 )
 
 # Logic to determine the selected value
-selected_citizen_value = yes_no_options.index(selected_citizenship)
-filtered_data_citizen = cable_car_data[cable_car_data['is_citizen'] == selected_trip]
+#selected_citizen_value = yes_no_options.index(selected_citizenship)
+#filtered_data_citizen = cable_car_data[cable_car_data['is_citizen'] == selected_trip]
+selected_citizen_value = 1 if selected_citizenship == 'Citizen' else 0
 
 
 #Generating the optimal prices 
