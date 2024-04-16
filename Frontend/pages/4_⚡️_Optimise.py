@@ -19,7 +19,7 @@ def load_data(filename):
     # The '..' moves up one directory level from the current script's location
     folder_path = os.path.join('..', 'data')
     full_path = os.path.join(folder_path, filename)
-    
+    print(full_path)
     # Load and return the CSV file
     return pd.read_csv(full_path)
 
