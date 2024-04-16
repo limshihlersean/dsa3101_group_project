@@ -14,8 +14,10 @@ jsonschema==4.21.1
 jsonschema-specifications==2023.12.1
 markdown-it-py==3.0.0
 MarkupSafe==2.1.5
+matplotlib==3.8.4
 mdurl==0.1.2
 numpy==1.26.4
+openpyxl==3.1.2
 packaging==23.2
 pandas==2.2.1
 pillow==10.2.0
@@ -39,4 +41,4 @@ tornado==6.4
 typing-extensions==4.10.0
 tzdata==2024.1
 urllib3==2.2.1
-matplotlib==3.8.3
+
