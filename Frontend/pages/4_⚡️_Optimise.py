@@ -149,7 +149,31 @@ if response.status_code == 200:
 else:
     print("Error:", response.text)
 
+additional_point = pd.DataFrame({
+    'is_citizen': [selected_citizen_value],
+    'age_range': [selected_age_index],
+    'count': [50]  # Adjust the count value as needed
+})
 
 
+df = pd.DataFrame(cable_car_data)
+# Calculate count of observations for each combination of 'is_citizen' and 'age_range'
+counts = df.groupby(['is_citizen', 'age_range']).size().reset_index(name='count')
 
+# Scatter plot
+scatter = alt.Chart(counts).mark_circle().encode(
+    x='age_range',
+    y='is_citizen',
+    size='count',
+    color=alt.condition(
+        alt.datum.age_range == selected_age_index and alt.datum.is_citizen == selected_citizen_value,
+        alt.value('red'),  # Condition for the additional point
+        alt.value('blue')  # Default color for other points
+    )
+).properties(
+    width=600,
+    height=400
+)
 
+# Display the plot
+st.write(scatter)
