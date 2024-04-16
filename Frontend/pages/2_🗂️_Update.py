@@ -31,24 +31,24 @@ with st.expander("Overseas Cable Car"):
     st.write("Your selection:")
     st.write(selection)
     if st.button('Delete', key=1):
-        json = selection.to_json(orient ='records')
-        app.update_data(json, 'overseas')
+        json = selection.to_json(orient ='index')
+        app.delete_data(json, 'overseas')
 
 with st.expander("Bundle packages"):
     selection = dataframe_with_selections(all_isbundle_table)
     st.write("Your selection:")
     st.write(selection)
     if st.button('Delete', key=2):
-        json = selection.to_json(orient ='records')
-        app.update_data(json, 'allisbundle')
+        json = selection.to_json(orient ='index')
+        app.delete_data(json, 'all_isbundle')
 
 with st.expander("Citizen (Single Attractions)"): 
     selection = dataframe_with_selections(citizen_single_table)
     st.write("Your selection:")
     st.write(selection)
     if st.button('Delete', key=3):
-        json = selection.to_json(orient ='records')
-        app.update_data(json, 'citsingle')
+        json = selection.to_json(orient ='index')
+        app.delete_data(json, 'citizen_single')
 
 
 with st.expander("Non-citizen (Single Attractions)"): 
@@ -57,5 +57,5 @@ with st.expander("Non-citizen (Single Attractions)"):
     st.write(selection)
     if st.button('Delete', key=4):
         json = selection.to_json(orient ='index')
-        app.delete_data(json, 'noncitsingle')
+        app.delete_data(json, 'noncitizen_single')
 
