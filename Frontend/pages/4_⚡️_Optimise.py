@@ -27,7 +27,7 @@ def load_data(filename):
 st.header("Price Optimisation Based on Total Volume of Cable Car, Age, Type of Trip, Citizenship")
 
 #loading the data 
-cable_car_data = load_data('cable_car_cleaned_v2.csv')
+cable_car_data = load_data('../backend/data/cable_car_cleaned_v2.csv')
 dist_dur_price_data = app.load_data('distance_duration_price')
 
 
