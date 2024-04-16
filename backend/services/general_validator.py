@@ -2,9 +2,9 @@ def validate_age_range(age_range):
     try:
         age_range = int(age_range)
     except:
-        raise ValueError("Invalid age range: age range need to be 0, 1, 2 or 3")
-    if (age_range > 3 or age_range < 0):
-        raise ValueError("Invalid age range: age range need to be 0, 1, 2 or 3")
+        raise ValueError("Invalid age range: age range need to be 0, 1, 2, 3 or 4")
+    if (age_range > 4 or age_range < 0):
+        raise ValueError("Invalid age range: age range need to be 0, 1, 2, 3 or 4")
     return age_range
 
 

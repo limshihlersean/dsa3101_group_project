@@ -4,7 +4,7 @@ import pandas as pd
 import json
 
 # Define the base URL for the backend API
-BASE_URL = 'http://backend:8080'
+BASE_URL = 'http://localhost:8080'
 
 #load overseas table
 def load_data(table_name):
@@ -44,3 +44,6 @@ def delete_data(json_data, endpoint):
         st.success("Data deleted successfully.")
     else:
         st.error("Failed to delete data in the database.")
+
+#PRICE OPTIMISATION MODEL
+#post parameter data to the backend 

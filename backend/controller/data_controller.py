@@ -65,7 +65,7 @@ def distance_duration_price_table_api():
     # Return the JSON response
     return response
 
-@app.route('/insert/noncitsingle', methods=['POST'])
+@app.route('/insert/noncitizen_single', methods=['POST'])
 def insert_new_rows_noncitsingle():
     try:
         # Iterate over the JSON data and insert each row into the database
@@ -79,7 +79,7 @@ def insert_new_rows_noncitsingle():
         # Return an error message if there's an exception
         return jsonify({'error': str(e)}), 400
 
-@app.route('/insert/citsingle', methods=['POST'])
+@app.route('/insert/citizen_single', methods=['POST'])
 def insert_new_rows_citsingle():
     try:
         # Iterate over the JSON data and insert each row into the database
@@ -105,7 +105,7 @@ def get_optimal_price_from_ml_model():
 
     
 
-@app.route('/insert/allisbundle', methods=['POST'])
+@app.route('/insert/all_isbundle', methods=['POST'])
 def insert_new_rows_allisbundle():
     try:
         # Iterate over the JSON data and insert each row into the database
@@ -147,13 +147,70 @@ def insert_new_rows_ped():
         # Return an error message if there's an exception
         return jsonify({'error': str(e)}), 400
 
-@app.route('/delete/noncitsingle', methods=['DELETE'])
+@app.route('/delete/noncitizen_single', methods=['DELETE'])
 def delete_rows_noncitsingle():
     try:
         # Iterate over the JSON data and insert each row into the database
         data = request.get_json()
 
         db.delete_data_from_noncitsingle(data)
+        message = "Deletion success"
+        return jsonify({'message': message})
+
+    except Exception as e:
+        # Return an error message if there's an exception
+        return jsonify({'error': str(e)}), 400
+
+@app.route('/delete/citizen_single', methods=['DELETE'])
+def delete_rows_citsingle():
+    try:
+        # Iterate over the JSON data and insert each row into the database
+        data = request.get_json()
+
+        db.delete_data_from_citsingle(data)
+        message = "Deletion success"
+        return jsonify({'message': message})
+
+    except Exception as e:
+        # Return an error message if there's an exception
+        return jsonify({'error': str(e)}), 400
+
+
+@app.route('/delete/all_isbundle', methods=['DELETE'])
+def delete_rows_allisbundle():
+    try:
+        # Iterate over the JSON data and insert each row into the database
+        data = request.get_json()
+
+        db.delete_data_from_allisbundle(data)
+        message = "Deletion success"
+        return jsonify({'message': message})
+
+    except Exception as e:
+        # Return an error message if there's an exception
+        return jsonify({'error': str(e)}), 400
+
+@app.route('/delete/overseas', methods=['DELETE'])
+def delete_rows_overseas():
+    try:
+        # Iterate over the JSON data and insert each row into the database
+        data = request.get_json()
+
+        db.delete_data_from_overseas(data)
+        message = "Deletion success"
+        return jsonify({'message': message})
+
+    except Exception as e:
+        # Return an error message if there's an exception
+        return jsonify({'error': str(e)}), 400
+
+@app.route('/delete/ped', methods=['DELETE'])
+def delete_rows_ped():
+    try:
+        # Iterate over the JSON data and insert each row into the database
+        data = request.get_json()
+
+        db.delete_data_from_ped(data)
         message = "Deletion success"
         return jsonify({'message': message})
 
