@@ -39,8 +39,8 @@ st.sidebar.header("Total Volume of Cable Car")
 # Input for custom volume
 selected_volume_new = st.sidebar.number_input(
     "Enter a volume", 
-    min_value=100, max_value=1000000, 
-    value=5000,
+    min_value=100000, max_value=1000000, 
+    value=100000,
     step=1,  # Optional: You can adjust the step size if needed
     key='volume_input'  # Unique identifier for the input widget
 )
