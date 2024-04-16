@@ -44,3 +44,6 @@ def delete_data(json_data, endpoint):
         st.success("Data deleted successfully.")
     else:
         st.error("Failed to delete data in the database.")
+
+#PRICE OPTIMISATION MODEL
+#post parameter data to the backend 

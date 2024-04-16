@@ -356,7 +356,6 @@ st.sidebar.subheader('Filter for Local Categories')
 filtered_local_data = bun_data[bun_data['is_citizen'] == 1]
 
 # Streamlit sidebar widget for age category selection
-st.sidebar.header('Filter for Non-Locals Discounts')
 selected_ages = st.sidebar.multiselect(
     'Select Age Group:',
     options=filtered_local_data['age'].unique(),
@@ -395,7 +394,7 @@ st.sidebar.subheader('Filter for Non-Local Categories')
 filtered_local_data = bun_data[bun_data['is_citizen'] == 0]
 
 # Streamlit sidebar widget for age category selection
-st.sidebar.header('Filter for Non-Locals Discounts')
+
 selected_ages = st.sidebar.multiselect(
     'Select Age Group:',
     options=filtered_local_data['age'].unique(),

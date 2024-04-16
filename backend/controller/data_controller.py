@@ -65,7 +65,7 @@ def distance_duration_price_table_api():
     # Return the JSON response
     return response
 
-@app.route('/insert/noncitsingle', methods=['POST'])
+@app.route('/insert/noncitizen_single', methods=['POST'])
 def insert_new_rows_noncitsingle():
     try:
         # Iterate over the JSON data and insert each row into the database
@@ -79,7 +79,7 @@ def insert_new_rows_noncitsingle():
         # Return an error message if there's an exception
         return jsonify({'error': str(e)}), 400
 
-@app.route('/insert/citsingle', methods=['POST'])
+@app.route('/insert/citizen_single', methods=['POST'])
 def insert_new_rows_citsingle():
     try:
         # Iterate over the JSON data and insert each row into the database
@@ -105,7 +105,7 @@ def get_optimal_price_from_ml_model():
 
     
 
-@app.route('/insert/allisbundle', methods=['POST'])
+@app.route('/insert/all_isbundle', methods=['POST'])
 def insert_new_rows_allisbundle():
     try:
         # Iterate over the JSON data and insert each row into the database
@@ -147,7 +147,7 @@ def insert_new_rows_ped():
         # Return an error message if there's an exception
         return jsonify({'error': str(e)}), 400
 
-@app.route('/delete/noncitsingle', methods=['DELETE'])
+@app.route('/delete/noncitizen_single', methods=['DELETE'])
 def delete_rows_noncitsingle():
     try:
         # Iterate over the JSON data and insert each row into the database
@@ -161,7 +161,7 @@ def delete_rows_noncitsingle():
         # Return an error message if there's an exception
         return jsonify({'error': str(e)}), 400
 
-@app.route('/delete/citsingle', methods=['DELETE'])
+@app.route('/delete/citizen_single', methods=['DELETE'])
 def delete_rows_citsingle():
     try:
         # Iterate over the JSON data and insert each row into the database
@@ -176,7 +176,7 @@ def delete_rows_citsingle():
         return jsonify({'error': str(e)}), 400
 
 
-@app.route('/delete/allisbundle', methods=['DELETE'])
+@app.route('/delete/all_isbundle', methods=['DELETE'])
 def delete_rows_allisbundle():
     try:
         # Iterate over the JSON data and insert each row into the database
