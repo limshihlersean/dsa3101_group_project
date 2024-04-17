@@ -149,3 +149,5 @@ if st.sidebar.button("Generate"):
     else:
         print("Error:", response.text)
 
+#st.image('https://www.mountfaberleisure.com/wp-content/uploads/2024/03/1080-x-1080_SkyOrb-SM-379x293.jpg', caption='Image of SkyOrb Cabins, the world\'s first chrome-finished spherical cable car cabin')
+
