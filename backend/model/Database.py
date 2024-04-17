@@ -296,15 +296,18 @@ class Database:
 
     def delete_data_from_citsingle(self,data):
         for _, row in data.items():
-            query_select = "SELECT * FROM citizen_single WHERE company=%s AND year=%s AND age=%s AND events=%s AND price=%s;"
+            # query_select = "SELECT * FROM citizen_single WHERE company=%s AND year=%s AND age=%s AND events=%s AND price=%s;"
+            query_select = "SELECT * FROM citizen_single WHERE company=%s AND year=%s AND age=%s;"
             company = row.get("company")
             year = row.get("year")
             age = row.get("age")
-            events = row.get("events")
-            price = row.get("price")
-            values = (company,year,age,events,price)
+            # events = row.get("events")
+            # price = row.get("price")
+            values = (company,year,age)
+            # values = (company,year,age,events,price)
             if self.execute_query_select(query_select, values):
-                query_delete = "DELETE FROM citizen_single WHERE company=%s AND year=%s AND age=%s AND events=%s AND price=%s;"
+                # query_delete = "DELETE FROM citizen_single WHERE company=%s AND year=%s AND age=%s AND events=%s AND price=%s;"
+                query_delete = "DELETE FROM citizen_single WHERE company=%s AND year=%s AND age=%s;"
                 self.execute_query_post(query_delete,values)
             else:
                 # If the row doesn't exist, log a message or raise an exception as per your requirement
@@ -312,20 +315,23 @@ class Database:
 
     def delete_data_from_allisbundle(self,data):
         for _, row in data.items():
-            query_select = "SELECT * FROM all_isbundle WHERE company=%s AND age=%s AND is_citizen=%s AND events=%s AND price=%s AND singleA=%s AND singleB=%s AND singleC=%s AND singleD=%s AND singleE=%s;"
+            # query_select = "SELECT * FROM all_isbundle WHERE company=%s AND age=%s AND is_citizen=%s AND events=%s AND price=%s AND singleA=%s AND singleB=%s AND singleC=%s AND singleD=%s AND singleE=%s;"
+            query_select = "SELECT * FROM all_isbundle WHERE company=%s AND age=%s AND is_citizen=%s;"
             company = row.get("company")
             age = row.get("age")
             is_citizen = row.get("is_citizen")
-            events = row.get("events")
-            price = row.get("price")
-            singleA = row.get("singleA")
-            singleB = row.get("singleB")
-            singleC = row.get("singleC")
-            singleD = row.get("singleD")
-            singleE = row.get("singleE")
-            values = (company,age,is_citizen,events,price,singleA,singleB,singleC,singleD,singleE)
+            # events = row.get("events")
+            # price = row.get("price")
+            # singleA = row.get("singleA")
+            # singleB = row.get("singleB")
+            # singleC = row.get("singleC")
+            # singleD = row.get("singleD")
+            # singleE = row.get("singleE")
+            # values = (company,age,is_citizen,events,price,singleA,singleB,singleC,singleD,singleE)
+            values = (company,age,is_citizen)
             if self.execute_query_select(query_select, values):
-                query_delete = "DELETE FROM all_isbundle WHERE company=%s AND age=%s AND is_citizen=%s AND events=%s AND price=%s AND singleA=%s AND singleB=%s AND singleC=%s AND singleD=%s AND singleE=%s;"
+                # query_delete = "DELETE FROM all_isbundle WHERE company=%s AND age=%s AND is_citizen=%s AND events=%s AND price=%s AND singleA=%s AND singleB=%s AND singleC=%s AND singleD=%s AND singleE=%s;"
+                query_delete = "DELETE FROM all_isbundle WHERE company=%s AND age=%s AND is_citizen=%s;"
                 self.execute_query_post(query_delete,values)
             else:
                 # If the row doesn't exist, log a message or raise an exception as per your requirement
@@ -333,24 +339,29 @@ class Database:
 
     def delete_data_from_overseas(self,data):
         for _, row in data.items():
-            query_select = "SELECT * FROM overseas WHERE company=%s AND country=%s AND city=%s AND duration=%s AND distance=%s AND snow=%s AND tourist_volume_of_cable_car=%s AND cable_car_price=%s AND age_range=%s AND is_nature=%s AND type_of_trip=%s AND is_citizen=%s;"
+            # query_select = "SELECT * FROM overseas WHERE company=%s AND country=%s AND city=%s AND duration=%s AND distance=%s AND snow=%s AND tourist_volume_of_cable_car=%s AND cable_car_price=%s AND age_range=%s AND is_nature=%s AND type_of_trip=%s AND is_citizen=%s;"
+            # company = row.get("company")
+            # country = row.get("country")
+            # city = row.get("city")
+            # duration = row.get("duration")
+            # distance = row.get("distance")
+            # snow = row.get("snow")
+            # tourist_volume_of_cable_car = row.get("tourist_volume_of_cable_car")
+            # cable_car_price = row.get("cable_car_price")
+            # age_range = row.get("age_range")
+            # is_nature = row.get("is_nature")
+            # type_of_trip = row.get("type_of_trip")
+            # is_citizen = row.get("is_citizen")
+            query_select = "SELECT * FROM overseas WHERE company=%s AND age_range=%s AND type_of_trip=%s AND is_citizen=%s;"
             company = row.get("company")
-            country = row.get("country")
-            city = row.get("city")
-            duration = row.get("duration")
-            distance = row.get("distance")
-            snow = row.get("snow")
-            tourist_volume_of_cable_car = row.get("tourist_volume_of_cable_car")
-            cable_car_price = row.get("cable_car_price")
             age_range = row.get("age_range")
-            is_nature = row.get("is_nature")
             type_of_trip = row.get("type_of_trip")
             is_citizen = row.get("is_citizen")
 
 
-            values = (company,country,city,duration,distance,snow,tourist_volume_of_cable_car,cable_car_price,age_range,is_nature,type_of_trip,is_citizen)
+            values = (company,age_range,type_of_trip,is_citizen)
             if self.execute_query_select(query_select, values):
-                query_delete = "DELETE FROM overseas WHERE company=%s AND country=%s AND city=%s AND duration=%s AND distance=%s AND snow=%s AND tourist_volume_of_cable_car=%s AND cable_car_price=%s AND age_range=%s AND is_nature=%s AND type_of_trip=%s AND is_citizen=%s;"
+                query_delete = "DELETE FROM overseas WHERE company=%s AND age_range=%s AND type_of_trip=%s AND is_citizen=%s;"
                 self.execute_query_post(query_delete,values)
             else:
                 # If the row doesn't exist, log a message or raise an exception as per your requirement
@@ -358,7 +369,7 @@ class Database:
 
     def delete_data_from_ped(self,data):
         for _, row in data.items():
-            query_select = "DELETE FROM ped_data WHERE is_citizen=%s AND is_adult=%s AND price=%s AND quantity=%s;"
+            query_select = "SELECT * FROM ped_data WHERE is_citizen=%s AND is_adult=%s AND price=%s AND quantity=%s;"
             is_citizen = row.get("is_citizen")
             is_adult = row.get("is_adult")
             price = row.get("price")
