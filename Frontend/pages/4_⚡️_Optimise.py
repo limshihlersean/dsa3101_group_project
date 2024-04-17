@@ -19,7 +19,7 @@ def load_data(filename):
     # The '..' moves up one directory level from the current script's location
     folder_path = os.path.join('..', 'data')
     full_path = os.path.join(folder_path, filename)
-    
+    print(full_path)
     # Load and return the CSV file
     return pd.read_csv(full_path)
 
@@ -27,8 +27,9 @@ def load_data(filename):
 st.header("Price Optimisation Based on Total Volume of Cable Car, Age, Type of Trip, Citizenship")
 
 #loading the data 
-cable_car_data = load_data('cable_car_cleaned_v2.csv')
-dist_dur_price_data = app.load_data('distance_duration_price')
+#cable_car_data = load_data('cable_car_cleaned_v2.csv')
+cable_car_data = app.load_data('overseas')
+#dist_dur_price_data = app.load_data('distance_duration_price')
 
 
 # Filters in the sidebar
@@ -131,7 +132,7 @@ data['is_one_way'] = selected_trip_value
 data['is_citizen'] = selected_citizen_value
 
 # Send a POST request to the backend
-response = requests.post('http://localhost:8080/model/priceoptmodel', json=data)
+response = requests.post('http://backend:8080/model/priceoptmodel', json=data)
 
 # Check if the request was successful
 if response.status_code == 200:
@@ -148,7 +149,31 @@ if response.status_code == 200:
 else:
     print("Error:", response.text)
 
+additional_point = pd.DataFrame({
+    'is_citizen': [selected_citizen_value],
+    'age_range': [selected_age_index],
+    'count': [50]  # Adjust the count value as needed
+})
 
 
+df = pd.DataFrame(cable_car_data)
+# Calculate count of observations for each combination of 'is_citizen' and 'age_range'
+counts = df.groupby(['is_citizen', 'age_range']).size().reset_index(name='count')
 
+# Scatter plot
+scatter = alt.Chart(counts).mark_circle().encode(
+    x='age_range',
+    y='is_citizen',
+    size='count',
+    color=alt.condition(
+        alt.datum.age_range == selected_age_index and alt.datum.is_citizen == selected_citizen_value,
+        alt.value('red'),  # Condition for the additional point
+        alt.value('blue')  # Default color for other points
+    )
+).properties(
+    width=600,
+    height=400
+)
 
+# Display the plot
+st.write(scatter)
