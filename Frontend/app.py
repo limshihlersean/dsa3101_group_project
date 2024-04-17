@@ -39,8 +39,8 @@ def delete_data(json_data, endpoint):
         print("Error decoding JSON:", e)
     if response.status_code == 200:
         st.write("Your updated data:")
-        noncitizen_single_table = load_data('noncitizen_single') 
-        st.write(noncitizen_single_table)
+        updated_table = load_data(endpoint) 
+        st.write(updated_table)
         st.success("Data deleted successfully.")
     else:
         st.error("Failed to delete data in the database.")
