@@ -117,63 +117,37 @@ if st.sidebar.button("Generate"):
 
 #Converting the input data into a dictionary format 
 # Initialize an empty dictionary to store the selected filters and values
-data = {}
+    data = {}
 
-# Add selected volume to the dictionary
-data['tourist_volume'] = selected_volume_new
+    # Add selected volume to the dictionary
+    data['tourist_volume'] = selected_volume_new
 
-# Add selected age to the dictionary
-data['age_range'] = selected_age_index
+    # Add selected age to the dictionary
+    data['age_range'] = selected_age_index
 
-# Add selected trip to the dictionary
-data['is_one_way'] = selected_trip_value
+    # Add selected trip to the dictionary
+    data['is_one_way'] = selected_trip_value
 
-# Add selected citizenship to the dictionary
-data['is_citizen'] = selected_citizen_value
+    # Add selected citizenship to the dictionary
+    data['is_citizen'] = selected_citizen_value
 
-# Send a POST request to the backend
-response = requests.post('http://backend:8080/model/priceoptmodel', json=data)
+    # Send a POST request to the backend
+    response = requests.post('http://backend:8080/model/priceoptmodel', json=data)
 
-# Check if the request was successful
-if response.status_code == 200:
-    # Extract the response data
-    response_data = response.json()
-    
-    # Extract the optimal price from the response
-    optimal_price = response_data["optimal_price"]
-    
-    # Do something with the optimal price
-    print("Optimal price:", optimal_price)
-    #st.write("Optimal price:", optimal_price)
-    st.write(f"<h2 style='color:red;'>Optimal price: {optimal_price}</h2>", unsafe_allow_html=True)
-else:
-    print("Error:", response.text)
+    # Check if the request was successful
+    if response.status_code == 200:
+        # Extract the response data
+        response_data = response.json()
+        
+        # Extract the optimal price from the response
+        optimal_price = response_data["optimal_price"]
+        
+        # Do something with the optimal price
+        print("Optimal price:", optimal_price)
+        #st.write("Optimal price:", optimal_price)
+        st.write(f"<h2 style='color:red;'>Optimal price: {optimal_price}</h2>", unsafe_allow_html=True)
+    else:
+        print("Error:", response.text)
 
-additional_point = pd.DataFrame({
-    'is_citizen': [selected_citizen_value],
-    'age_range': [selected_age_index],
-    'count': [50]  # Adjust the count value as needed
-})
+#st.image('https://www.mountfaberleisure.com/wp-content/uploads/2024/03/1080-x-1080_SkyOrb-SM-379x293.jpg', caption='Image of SkyOrb Cabins, the world\'s first chrome-finished spherical cable car cabin')
 
-
-df = pd.DataFrame(cable_car_data)
-# Calculate count of observations for each combination of 'is_citizen' and 'age_range'
-counts = df.groupby(['is_citizen', 'age_range']).size().reset_index(name='count')
-
-# Scatter plot
-scatter = alt.Chart(counts).mark_circle().encode(
-    x='age_range',
-    y='is_citizen',
-    size='count',
-    color=alt.condition(
-        alt.datum.age_range == selected_age_index and alt.datum.is_citizen == selected_citizen_value,
-        alt.value('red'),  # Condition for the additional point
-        alt.value('blue')  # Default color for other points
-    )
-).properties(
-    width=600,
-    height=400
-)
-
-# Display the plot
-st.write(scatter)
