@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 import streamlit as st
 import app
 
+st.set_page_config(layout="wide")
+
 def apply_filters(data, is_citizen_value, is_adult_value):
     if data is not None:
         filtered_data = data[(data['is_citizen'] == is_citizen_value) & (data['is_adult'] == is_adult_value)]
@@ -48,7 +50,7 @@ def analyze_group(group_df):
             })
 
             st.write("Results Table:")
-            st.dataframe(results_df)
+            st.dataframe(results_df, use_container_width=True)
 
             fig, ax = plt.subplots(figsize=(10, 6))
             ax.plot(new_prices[:-1], new_quantities[:-1], marker='o', linestyle='-', color='b')
@@ -98,7 +100,7 @@ else:
     filtered_backend_data = apply_filters(backend_data, is_citizen_value, is_adult_value)
     if not filtered_backend_data.empty:
         st.write("Filtered Data:")
-        st.dataframe(filtered_backend_data)
+        st.dataframe(filtered_backend_data, use_container_width=True)
         if st.button('Analyze Filtered Data'):
             analyze_group(filtered_backend_data)
     else:
