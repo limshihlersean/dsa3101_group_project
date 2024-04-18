@@ -38,8 +38,8 @@ def load_data(filename):
     return pd.read_csv(full_path)
 
 #st.header("Price Optimization Based on Total Volume of Cable Car, Age, Type of Trip, Citizenship")
-st.write("<h1 style='color: darkgreen;'>Price Optimization Based on Total Volume of Cable Car, Age, Type of Trip, Citizenship</h1>", unsafe_allow_html=True)
-
+#st.write("<h1 style='color: darkgreen;'>Price Optimization Based on Total Volume of Cable Car, Age, Type of Trip, Citizenship</h1>", unsafe_allow_html=True)
+st.write("Price Optimization Based on Total Volume of Cable Car, Age, Type of Trip, Citizenship")
 st.subheader("Explore the optimal price of cable car with your inputs")
 st.markdown("""Click on the different dropdowns to select your parameters. Then, you may click on "generate" to obtain the best price of a cable car ticket for your given parameters! """)
 #loading the data 
@@ -162,7 +162,7 @@ if st.button("Generate"):
         # Do something with the optimal price
         print("Optimal price:", optimal_price)
         #st.write("Optimal price:", optimal_price)
-        st.write(f"<h2 style='color:red;'>Optimal price: ${optimal_price:.2f}</h2>", unsafe_allow_html=True)
+        st.write(f"<h2 style='color:#106732;'>Optimal price: ${optimal_price:.2f}</h2>", unsafe_allow_html=True)
 
     else:
         print("Error:", response.text)
