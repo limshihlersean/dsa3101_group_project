@@ -51,7 +51,7 @@ def analyze_group(group_df):
     })
 
     # Define color for visibility in dark and light mode
-    point_color = 'blue'
+    point_color = 'orange'
 
     # Altair chart for Price vs Quantity
     line_chart = alt.Chart(chart_df).mark_line().encode(
@@ -92,9 +92,8 @@ def analyze_group(group_df):
 
     st.altair_chart(chart, use_container_width=True)
 
-    # Displaying results in the app
-    st.write(f"Optimal price that maximizes revenue: ${optimal_price:.2f}")
-    st.write(f"Price Elasticity of Demand (PED) at the optimal price: {PED[optimal_price_index]:.2f}")
+    st.write(f"Optimal price that maximizes revenue: ${closest_ped_price:.2f}")
+    st.write(f"Price Elasticity of Demand (PED) at the optimal price: {PED[closest_ped_index]:.2f}")
 
 st.title('Price Elasticity of Demand Analysis')
 st.write("Our Price Elasticity of Demand page aims to set the best price for our new cable car rides that keeps both revenue and customer satisfaction high")
