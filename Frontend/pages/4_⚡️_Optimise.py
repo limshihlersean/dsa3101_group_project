@@ -7,8 +7,24 @@ import numpy as np
 import app
 import requests
 
+# Center-align the content
+st.markdown("""
+    <style>
+        .centered {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 #show title of the dashboard 
 st.title('Price Optimisation')
+
+st.markdown('<h1 style="text-align: center;">Selection of Factors</h1>', unsafe_allow_html=True)
+st.markdown('<h2 style="text-align: center;">Price Optimisation Based on Total Volume of Cable Car, Age, Type of Trip, Citizenship</h2>', unsafe_allow_html=True)
+
 
 #sidebar 
 st.sidebar.title('Selection of Factors')
@@ -35,7 +51,7 @@ cable_car_data = app.load_data('overseas')
 # Filters in the sidebar
 
 # FILTER 4: Total volume of cable car 
-st.sidebar.header("Total Volume of Cable Car")
+#st.sidebar.header("Total Volume of Cable Car")
 
 # Input for custom volume
 selected_volume_new = st.sidebar.number_input(
@@ -53,7 +69,7 @@ selected_volume_new = selected_volume_new
 #check this because it seems like its == instead of inputting a new value 
 
 #FILTER 5: AGE RANGE
-st.sidebar.header("Age")
+#st.sidebar.header("Age")
 
 
 multiple_options = ['Child', 'Student', 'Adult', 'Senior Citizen', 'Handicapped']
@@ -71,7 +87,7 @@ selected_age_index = age_mapping[selected_age]
 
 
 #FILTER 7: TYPE OF TRIP
-st.sidebar.header("Type of Trip")
+#st.sidebar.header("Type of Trip")
 
 # Dropdown box for selecting 'Yes' or 'No'
 yes_no_options = ['Round trip', 'One-way trip']
@@ -87,7 +103,7 @@ selected_trip_value = yes_no_options.index(selected_trip)
 #filtered_data_trip = cable_car_data[cable_car_data['type_of_trip'] == selected_trip]
 
 #FILTER 7: CITIZENSHIP
-st.sidebar.header("Citizenship")
+#st.sidebar.header("Citizenship")
 
 # Dropdown box for selecting 'Yes' or 'No'
 yes_no_options = ['Citizen', 'Non-citizen']
@@ -106,7 +122,7 @@ selected_citizen_value = 1 if selected_citizenship == 'Citizen' else 0
 
 #Generating the optimal prices 
 # Create a "Generate" button
-if st.sidebar.button("Generate"):
+if st.button("Generate"):
     # Prepare the data to be sent to the backend
     selected_filters = {
         'selected_volume': selected_volume_new,
