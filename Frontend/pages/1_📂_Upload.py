@@ -90,7 +90,7 @@ def save_uploaded_file(uploaded_file):
     if uploaded_file is not None:
         dataframe = pd.read_csv(uploaded_file)
         st.session_state['uploaded_data'] = dataframe
-        st.write(dataframe)
+        #st.write(dataframe)
         st.dataframe(dataframe, use_container_width=True)
         st.success("File uploaded successfully!")
 
