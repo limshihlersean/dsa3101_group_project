@@ -13,7 +13,6 @@ st.markdown("""
 def display_headers_as_table(df):
     # Extract headers
     headers = df.columns.tolist()
-    #edited_headers = [header.replace('_', ' ') for header in headers]
 
     # Create a DataFrame with headers as the only row
     headers_df = pd.DataFrame(None, columns=headers)

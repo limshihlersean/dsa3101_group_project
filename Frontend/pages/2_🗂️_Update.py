@@ -30,10 +30,10 @@ def dataframe_with_selections(df):
 
     return selected_rows.drop('Select', axis=1)
 
-overseas_table = app.load('overseas')
-all_isbundle_table = app.load('all_isbundle')
-citizen_single_table = app.load('citizen_single')
-noncitizen_single_table = app.load('noncitizen_single')
+overseas_table = app.load_data('overseas')
+all_isbundle_table = app.load_data('all_isbundle')
+citizen_single_table = app.load_data('citizen_single')
+noncitizen_single_table = app.load_data('noncitizen_single')
 
 with st.expander("Overseas Cable Car"):
     selection = dataframe_with_selections(overseas_table)
