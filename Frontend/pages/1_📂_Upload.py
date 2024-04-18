@@ -73,3 +73,30 @@ with st.expander("Non-citizen (Single Attractions)"):
         if st.button('Update', key=8):
             json = dataframe.to_json(orient ='records')
             app.update_data(json, 'noncitizen_single')
+
+# upload_page.py
+
+import streamlit as st
+import pandas as pd
+
+st.title("Upload your PED data here!")
+
+st.markdown("""
+            Upload the CSV file for analysis here. After uploading, you can navigate to the Price Elasticity of Demand page.
+            """)
+
+# Function to save the uploaded file in Streamlit's session state
+def save_uploaded_file(uploaded_file):
+    if uploaded_file is not None:
+        dataframe = pd.read_csv(uploaded_file)
+        st.session_state['uploaded_data'] = dataframe
+        st.write(dataframe)
+        st.dataframe(dataframe, use_container_width=True)
+        st.success("File uploaded successfully!")
+
+# Upload file and save it to session state
+uploaded_file = st.file_uploader("Choose a CSV file", type=['csv'])
+save_uploaded_file(uploaded_file)
+
+# Reminder to go to the PED Analysis page for further analysis
+st.markdown("Please go to the **PED Analysis** page to view the analysis.")

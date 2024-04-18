@@ -51,7 +51,7 @@ def analyze_group(group_df):
     })
 
     # Define color for visibility in dark and light mode
-    point_color = 'firebrick'
+    point_color = 'blue'
 
     # Altair chart for Price vs Quantity
     line_chart = alt.Chart(chart_df).mark_line().encode(
@@ -79,7 +79,7 @@ def analyze_group(group_df):
         align='left',
         dx=10,  # Nudge text to right so it doesn't overlay the point
         dy=-10,  # Nudge text up to avoid overlap
-        fontSize=12,
+        fontSize=25,
         color=point_color
     ).encode(
         x='x:Q',
@@ -120,3 +120,4 @@ if not filtered_backend_data.empty:
         analyze_group(filtered_backend_data)
 else:
     st.error("No data available for the selected criteria or 'ped_data' not loaded correctly.")
+
