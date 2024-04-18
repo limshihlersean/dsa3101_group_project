@@ -162,7 +162,7 @@ if st.button("Generate"):
         # Do something with the optimal price
         print("Optimal price:", optimal_price)
         #st.write("Optimal price:", optimal_price)
-        st.write(f"<h2 style='color:red;'>Optimal price: ${optimal_price:.2f}</h2>", unsafe_allow_html=True)
+        st.write(f"<h2 style='color:darkgreen;'>Optimal price: ${optimal_price:.2f}</h2>", unsafe_allow_html=True)
 
     else:
         print("Error:", response.text)
