@@ -22,12 +22,10 @@ st.markdown("""
 #show title of the dashboard 
 st.title('Price Optimisation')
 
-st.markdown('<h1 style="text-align: center;">Selection of Factors</h1>', unsafe_allow_html=True)
-st.markdown('<h2 style="text-align: center;">Price Optimisation Based on Total Volume of Cable Car, Age, Type of Trip, Citizenship</h2>', unsafe_allow_html=True)
+#st.markdown('<h1 style="text-align: center;">Selection of Factors</h1>', unsafe_allow_html=True)
+#st.markdown('<h2 style="text-align: center;">Price Optimisation Based on Total Volume of Cable Car, Age, Type of Trip, Citizenship</h2>', unsafe_allow_html=True)
 
 
-#sidebar 
-st.sidebar.title('Selection of Factors')
 
 #load csv file 
 def load_data(filename):
@@ -39,8 +37,11 @@ def load_data(filename):
     # Load and return the CSV file
     return pd.read_csv(full_path)
 
+st.header("Price Optimization Based on Total Volume of Cable Car, Age, Type of Trip, Citizenship")
+#st.header("<span style='color:blue'>Price Optimization Based on Total Volume of Cable Car, Age, Type of Trip, Citizenship </span>", unsafe_allow_html=True)
 
-st.header("Price Optimisation Based on Total Volume of Cable Car, Age, Type of Trip, Citizenship")
+st.subheader("Explore the optimal price of cable car with your inputs")
+st.write("")
 
 #loading the data 
 #cable_car_data = load_data('cable_car_cleaned_v2.csv')
@@ -51,11 +52,12 @@ cable_car_data = app.load_data('overseas')
 # Filters in the sidebar
 
 # FILTER 4: Total volume of cable car 
-#st.sidebar.header("Total Volume of Cable Car")
+#st.sidebar.header("Total Volume of Customers (per year)")
 
 # Input for custom volume
-selected_volume_new = st.sidebar.number_input(
-    "Enter a volume", 
+
+selected_volume_new = st.number_input(
+    "Input the total volume of customers for your cable car per year", 
     min_value=100000, max_value=1000000, 
     value=100000,
     step=1,  # Optional: You can adjust the step size if needed
@@ -73,8 +75,8 @@ selected_volume_new = selected_volume_new
 
 
 multiple_options = ['Child', 'Student', 'Adult', 'Senior Citizen', 'Handicapped']
-selected_age = st.sidebar.selectbox(
-    'Select option', 
+selected_age = st.selectbox(
+    'Select the age range of your customer', 
     options=multiple_options,
     index=0,  # Default index for 'Child'
     key='option_select_age'
@@ -91,8 +93,8 @@ selected_age_index = age_mapping[selected_age]
 
 # Dropdown box for selecting 'Yes' or 'No'
 yes_no_options = ['Round trip', 'One-way trip']
-selected_trip = st.sidebar.selectbox(
-    'Select option', 
+selected_trip = st.selectbox(
+    'Select the type of trip', 
     options=yes_no_options,
     index=0,  # Default index for 'Yes'
     key='option_select_trip'
@@ -107,8 +109,8 @@ selected_trip_value = yes_no_options.index(selected_trip)
 
 # Dropdown box for selecting 'Yes' or 'No'
 yes_no_options = ['Citizen', 'Non-citizen']
-selected_citizenship = st.sidebar.selectbox(
-    'Select option', 
+selected_citizenship = st.selectbox(
+    'Select the citizenship of your customer', 
     options=yes_no_options,
     index=0,  # Default index for 'Yes'
     key='option_select_citizenship'
@@ -161,7 +163,8 @@ if st.button("Generate"):
         # Do something with the optimal price
         print("Optimal price:", optimal_price)
         #st.write("Optimal price:", optimal_price)
-        st.write(f"<h2 style='color:red;'>Optimal price: {optimal_price}</h2>", unsafe_allow_html=True)
+        st.write(f"<h2 style='color:red;'>Optimal price: ${optimal_price:.2f}</h2>", unsafe_allow_html=True)
+
     else:
         print("Error:", response.text)
 
