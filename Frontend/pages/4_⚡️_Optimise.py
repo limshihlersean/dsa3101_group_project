@@ -41,8 +41,7 @@ def load_data(filename):
 st.write("<h1 style='color: darkgreen;'>Price Optimization Based on Total Volume of Cable Car, Age, Type of Trip, Citizenship</h1>", unsafe_allow_html=True)
 
 st.subheader("Explore the optimal price of cable car with your inputs")
-st.markdown("""Want to find out the best price for a cable car ticket given certain features? Simply follow the instructions below and provide the information required, you will be able to obtain the best price determined by our price optimisation model! """)
-
+st.markdown("""Click on the different dropdowns to select your parameters. Then, you may click on "generate" to obtain the best price of a cable car ticket for your given parameters! """)
 #loading the data 
 #cable_car_data = load_data('cable_car_cleaned_v2.csv')
 cable_car_data = app.load_data('overseas')
