@@ -20,7 +20,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 #show title of the dashboard 
-st.title('Price Optimisation')
+st.write("<h1 style='font-size: 36px;'>Price Optimisation</h1>", unsafe_allow_html=True)
 
 #st.markdown('<h1 style="text-align: center;">Selection of Factors</h1>', unsafe_allow_html=True)
 #st.markdown('<h2 style="text-align: center;">Price Optimisation Based on Total Volume of Cable Car, Age, Type of Trip, Citizenship</h2>', unsafe_allow_html=True)
@@ -37,11 +37,11 @@ def load_data(filename):
     # Load and return the CSV file
     return pd.read_csv(full_path)
 
-st.header("Price Optimization Based on Total Volume of Cable Car, Age, Type of Trip, Citizenship")
-#st.header("<span style='color:blue'>Price Optimization Based on Total Volume of Cable Car, Age, Type of Trip, Citizenship </span>", unsafe_allow_html=True)
+#st.header("Price Optimization Based on Total Volume of Cable Car, Age, Type of Trip, Citizenship")
+st.write("<h1 style='color: darkgreen;'>Price Optimization Based on Total Volume of Cable Car, Age, Type of Trip, Citizenship</h1>", unsafe_allow_html=True)
 
 st.subheader("Explore the optimal price of cable car with your inputs")
-st.write("")
+st.markdown("""Want to find out the best price for a cable car ticket given certain features? Simply follow the instructions below and provide the information required, you will be able to obtain the best price determined by our price optimisation model! """)
 
 #loading the data 
 #cable_car_data = load_data('cable_car_cleaned_v2.csv')
