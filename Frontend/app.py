@@ -6,7 +6,21 @@ import json
 # Define the base URL for the backend API
 BASE_URL = 'http://backend:8080'
 
-#load overseas table
+# load 4 tables with correct headers
+def load(table_name):
+    response = requests.get(BASE_URL + '/tables/' + table_name)
+    if response.status_code == 200:
+        data = response.json()
+        columns = data[0]
+        rows = data[1]
+        edited_headers = [header.replace('_', ' ') for header in columns]
+        df = pd.DataFrame(rows, columns=edited_headers)
+
+        return df
+    else:
+        st.error(f'Failed to get data from backend: {response.status_code}')
+
+#load tables
 def load_data(table_name):
     response = requests.get(BASE_URL + '/tables/' + table_name)
     if response.status_code == 200:
