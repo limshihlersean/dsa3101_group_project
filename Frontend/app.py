@@ -13,8 +13,7 @@ def load_data(table_name):
         data = response.json()
         columns = data[0]
         rows = data[1]
-        headers = [header.replace('_', ' ') for header in columns]
-        df = pd.DataFrame(rows, columns=headers)
+        df = pd.DataFrame(rows, columns=columns)
 
         return df
     else:
