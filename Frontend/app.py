@@ -40,7 +40,7 @@ def delete_data(json_data, endpoint):
     if response.status_code == 200:
         st.write("Your updated data:")
         updated_table = load_data(endpoint) 
-        st.write(updated_table)
+        st.dataframe(updated_table, width=1000)
         st.success("Data deleted successfully.")
     else:
         st.error("Failed to delete data in the database.")
