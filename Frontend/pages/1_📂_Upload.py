@@ -13,7 +13,6 @@ st.markdown("""
 def display_headers_as_table(df):
     # Extract headers
     headers = df.columns.tolist()
-    #edited_headers = [header.replace('_', ' ') for header in headers]
 
     # Create a DataFrame with headers as the only row
     headers_df = pd.DataFrame(None, columns=headers)
@@ -119,11 +118,23 @@ noncitizen_value_constraint = {
     "age": ["Child", "Adult", "Senior"],
 }
 
-overseas_table = app.load('overseas')
-all_isbundle_table = app.load('all_isbundle')
-citizen_single_table = app.load('citizen_single')
-noncitizen_single_table = app.load('noncitizen_single')
+datatype_ped = {
+    "is_citizen": "int64",
+    "is_adult": "int64",
+    "price": "float64",
+    "quantity": "float64",
+}
 
+ped_constraint = {
+    "is_citizen": [0,1],
+    "is_adult": [0,1],
+}
+
+overseas_table = app.load_data('overseas')
+all_isbundle_table = app.load_data('all_isbundle')
+citizen_single_table = app.load_data('citizen_single')
+noncitizen_single_table = app.load_data('noncitizen_single')
+ped_table = app.load_data('ped_data')
 
 
 def read_file(filename): 
@@ -140,15 +151,8 @@ with st.expander("Overseas Cable Car"):
     if uploaded_file is not None:
         # Can be used wherever a "file-like" object is accepted:
         df = pd.read_csv(uploaded_file) 
-
-        # validation
-        is_non_null = validate_null(df)
-        is_type_valid = validate_type(df, datatype_overseas)
-        is_constraint_valid = validate_value_constraint(df, overseas_value_constraint)
-        is_data_valid = is_non_null and is_type_valid and is_constraint_valid
-
         st.dataframe(df)
-        if is_data_valid:
+        if validate_null(df) and validate_type(df, datatype_overseas) and validate_value_constraint(df, overseas_value_constraint):
             if st.button('Update', key=5):
                 json = df.to_json(orient ='records')
                 app.update_data(json, 'overseas')
@@ -159,17 +163,11 @@ with st.expander("Bundle packages"):
     if uploaded_file is not None:
         # Can be used wherever a "file-like" object is accepted:
         df = pd.read_csv(uploaded_file)
-
-         # validation
-        is_non_null = validate_null(df)
-        is_type_valid = validate_type(df, datatype_bundle)
-        is_constraint_valid = validate_value_constraint(df, bundle_value_constraint)
-        is_data_valid = is_non_null and is_type_valid and is_constraint_valid
-
         st.write(df)
-        if st.button('Update', key=6):
-            json = df.to_json(orient ='records')
-            app.update_data(json, 'all_isbundle')
+        if validate_null(df) and validate_type(df, datatype_bundle) and validate_value_constraint(df, bundle_value_constraint):
+            if st.button('Update', key=6):
+                json = df.to_json(orient ='records')
+                app.update_data(json, 'all_isbundle')
 
 with st.expander("Citizen (Single Attractions)"): 
     columns = display_headers_as_table(citizen_single_table)
@@ -177,17 +175,11 @@ with st.expander("Citizen (Single Attractions)"):
     if uploaded_file is not None:
         # Can be used wherever a "file-like" object is accepted:
         df = pd.read_csv(uploaded_file)
-
-        # validation
-        is_non_null = validate_null(df)
-        is_type_valid = validate_type(df, datatype_citizen)
-        is_constraint_valid = validate_value_constraint(df, citizen_value_constraint)
-        is_data_valid = is_non_null and is_type_valid and is_constraint_valid
-
         st.write(df)
-        if st.button('Update', key=7):
-            json = df.to_json(orient ='records')
-            app.update_data(json, 'citizen_single')
+        if validate_null(df) and validate_type(df, datatype_citizen) and validate_value_constraint(df, citizen_value_constraint):
+            if st.button('Update', key=7):
+                json = df.to_json(orient ='records')
+                app.update_data(json, 'citizen_single')
 
 with st.expander("Non-citizen (Single Attractions)"): 
     columns = display_headers_as_table(noncitizen_single_table)
@@ -195,14 +187,22 @@ with st.expander("Non-citizen (Single Attractions)"):
     if uploaded_file is not None:
         # Can be used wherever a "file-like" object is accepted:
         df = pd.read_csv(uploaded_file)
-
-        # validation
-        is_non_null = validate_null(df)
-        is_type_valid = validate_type(df, datatype_noncitizen)
-        is_constraint_valid = validate_value_constraint(df, noncitizen_value_constraint)
-        is_data_valid = is_non_null and is_type_valid and is_constraint_valid
-
         st.write(df)
-        if st.button('Update', key=8):
-            json = df.to_json(orient ='records')
-            app.update_data(json, 'noncitizen_single')
+        # validation
+        if validate_null(df) and validate_type(df, datatype_noncitizen) and validate_value_constraint(df, noncitizen_value_constraint):
+            if st.button('Update', key=8):
+                json = df.to_json(orient ='records')
+                app.update_data(json, 'noncitizen_single')
+
+with st.expander("PED data"): 
+    columns = display_headers_as_table(ped_table)
+    uploaded_file = st.file_uploader("Choose a file", key=9)
+    if uploaded_file is not None:
+        # Can be used wherever a "file-like" object is accepted:
+        df = pd.read_csv(uploaded_file)
+        st.write(df)
+        if validate_null(df) and validate_type(df, datatype_ped) and validate_value_constraint(df, ped_constraint):
+            if st.button('Update', key=10):
+                json = df.to_json(orient ='records')
+                app.update_data(json, 'ped_table')
+
