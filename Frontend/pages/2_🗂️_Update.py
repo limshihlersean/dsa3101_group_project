@@ -34,6 +34,7 @@ overseas_table = app.load_data('overseas')
 all_isbundle_table = app.load_data('all_isbundle')
 citizen_single_table = app.load_data('citizen_single')
 noncitizen_single_table = app.load_data('noncitizen_single')
+ped_table = app.load_data('ped_data')
 
 with st.expander("Overseas Cable Car"):
     selection = dataframe_with_selections(overseas_table)
@@ -60,3 +61,8 @@ with st.expander("Non-citizen (Single Attractions)"):
         json = selection.to_json(orient ='index')
         app.delete_data(json, 'noncitizen_single')
 
+with st.expander("PED data"):
+    selection = dataframe_with_selections(ped_table)
+    if st.button('Delete', key=5):
+        json = selection.to_json(orient ='index')
+        app.delete_data(json, 'ped_table')
