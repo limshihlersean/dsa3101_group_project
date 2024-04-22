@@ -1,8 +1,10 @@
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 import streamlit as st
 import app
+import altair as alt
+
+st.set_page_config(layout="wide")
 
 def apply_filters(data, is_citizen_value, is_adult_value):
     if data is not None:
@@ -18,89 +20,103 @@ def analyze_group(group_df):
         st.error("Selected group has no data or contains non-numeric values.")
         return
 
-    # Ensure both arrays are the same length by limiting them to the shorter length
+    # Ensure both arrays are the same length
     min_length = min(len(prices), len(quantities))
-    prices = prices.iloc[:min_length].tolist()
-    quantities = quantities.iloc[:min_length].tolist()
+    prices = prices.iloc[:min_length]
+    quantities = quantities.iloc[:min_length]
 
-    new_prices = np.arange(min(prices), max(prices) + 1)
+    # Linear interpolation for the new quantities
+    new_prices = np.linspace(min(prices), max(prices), num=100)
     new_quantities = np.interp(new_prices, prices, quantities)
 
-    # Calculate percent changes
-    if len(new_quantities) > 1:
-        percent_change_quantity = np.diff(new_quantities) / new_quantities[:-1]
-        percent_change_price = np.diff(new_prices) / new_prices[:-1]
-        PED = percent_change_quantity / percent_change_price
-        revenue = new_prices[:-1] * new_quantities[:-1]
+    # Calculating percent changes
+    percent_change_quantity = np.diff(new_quantities) / new_quantities[:-1]
+    percent_change_price = np.diff(new_prices) / new_prices[:-1]
+    PED = percent_change_quantity / percent_change_price
+    revenue = new_prices[:-1] * new_quantities[:-1]
 
-        if revenue.size > 0:
-            optimal_price_index = np.argmax(revenue)
-            optimal_price = new_prices[optimal_price_index]
-            closest_ped_index = np.argmin(np.abs(PED + 1))  # Finding PED closest to -1
-            closest_ped_price = new_prices[closest_ped_index]
-            closest_ped_revenue = revenue[closest_ped_index]
+    # Finding optimal price and PED
+    optimal_price_index = np.argmax(revenue)
+    optimal_price = new_prices[optimal_price_index]
+    closest_ped_index = np.argmin(np.abs(PED + 1))
+    closest_ped_price = new_prices[closest_ped_index]
+    closest_ped_revenue = revenue[closest_ped_index]
 
-            results_df = pd.DataFrame({
-                "Price": new_prices[:-1],
-                "Quantity": new_quantities[:-1],
-                "PED": PED,
-                "Revenue": revenue
-            })
+    # Preparing DataFrame for Altair visualization
+    chart_df = pd.DataFrame({
+        'Price': np.round(new_prices[:-1], 2),
+        'Quantity': np.round(new_quantities[:-1], 2),
+        'PED': np.round(PED, 2),
+        'Revenue': np.round(revenue, 2)
+    })
 
-            st.write("Results Table:")
-            st.dataframe(results_df)
+    # Define color for visibility in dark and light mode
+    point_color = 'orange'
 
-            fig, ax = plt.subplots(figsize=(10, 6))
-            ax.plot(new_prices[:-1], new_quantities[:-1], marker='o', linestyle='-', color='b')
-            ax.set_title("Price vs Quantity")
-            ax.set_xlabel("Price")
-            ax.set_ylabel("Quantity")
-            ax.grid(True)
-            ax.annotate(f'Closest PED to -1: ${closest_ped_price}\nRevenue: ${closest_ped_revenue}', 
-                        xy=(closest_ped_price, new_quantities[closest_ped_index]), 
-                        xytext=(closest_ped_price + 5, new_quantities[closest_ped_index] + 10),
-                        arrowprops=dict(facecolor='black', shrink=0.05),
-                        fontsize=10)
-            st.pyplot(fig)
+    # Altair chart for Price vs Quantity
+    line_chart = alt.Chart(chart_df).mark_line().encode(
+        x=alt.X('Price', title='Price', scale=alt.Scale(domain=(min(chart_df['Price']), max(chart_df['Price'])))),
+        y=alt.Y('Quantity', title='Quantity', scale=alt.Scale(domain=(0, max(chart_df['Quantity'])+10))),
+        tooltip=['Price', 'Quantity', 'PED', 'Revenue']
+    )
 
-            st.write(f"Optimal price that maximizes revenue: {optimal_price}")
-            st.write(f"Price Elasticity of Demand (PED) at the optimal price: {PED[optimal_price_index]}")
-        else:
-            st.error("No valid revenue data to analyze.")
-    else:
-        st.error("Not enough data points to calculate changes and elasticity.")
+    # Solid and smaller circle points on the line chart
+    points = line_chart.mark_circle(
+        size=50,
+        color=point_color,
+        opacity=1
+    ).encode(
+        x='Price',
+        y='Quantity'
+    )
+
+    # Text annotation for the closest PED point
+    text = alt.Chart(pd.DataFrame({
+        'x': [closest_ped_price],
+        'y': [new_quantities[closest_ped_index]],
+        'text': [f'Closest PED: {PED[closest_ped_index]:.2f} at Price {closest_ped_price:.2f}']
+    })).mark_text(
+        align='left',
+        dx=10,  # Nudge text to right so it doesn't overlay the point
+        dy=-10,  # Nudge text up to avoid overlap
+        fontSize=25,
+        color=point_color
+    ).encode(
+        x='x:Q',
+        y='y:Q',
+        text='text:N'
+    )
+
+    # Combine the line chart, points, and text annotations
+    chart = alt.layer(line_chart, points, text).interactive()
+
+    st.altair_chart(chart, use_container_width=True)
+
+    st.write(f"Optimal price that maximizes revenue: ${closest_ped_price:.2f}")
+    st.write(f"Price Elasticity of Demand (PED) at the optimal price: {PED[closest_ped_index]:.2f}")
 
 st.title('Price Elasticity of Demand Analysis')
+st.write("Our Price Elasticity of Demand page aims to set the best price for our new cable car rides that keeps both revenue and customer satisfaction high")
 
+
+# Selection boxes for filtering
 is_citizen_selection = st.selectbox('Citizenship Status', options=['Citizen', 'Non-Citizen'])
 is_adult_selection = st.selectbox('Age Group', options=['Adult', 'Child'])
+
+# Mappings
 is_citizen_mapping = {'Citizen': 1, 'Non-Citizen': 0}
 is_adult_mapping = {'Adult': 1, 'Child': 0}
 is_citizen_value = is_citizen_mapping[is_citizen_selection]
 is_adult_value = is_adult_mapping[is_adult_selection]
 
-uploaded_file = st.file_uploader("Choose a file")
-if uploaded_file is not None:
-    file_type = uploaded_file.name.split('.')[-1]
-    if file_type.lower() == 'csv':
-        dataframe = pd.read_csv(uploaded_file)
-    elif file_type.lower() == 'xlsx':
-        dataframe = pd.read_excel(uploaded_file)
-
-    filtered_uploaded_data = apply_filters(dataframe, is_citizen_value, is_adult_value)
-    if st.button('Analyze Uploaded Data'):
-        if not filtered_uploaded_data.empty:
-            analyze_group(filtered_uploaded_data)
-        else:
-            st.error("No data available for the selected criteria.")
+# Processing the backend data
+backend_data = app.load_data('ped_data')
+filtered_backend_data = apply_filters(backend_data, is_citizen_value, is_adult_value)
+if not filtered_backend_data.empty:
+    st.write("Filtered Data:")
+    st.dataframe(filtered_backend_data, use_container_width=True)
+    if st.button('Analyze Filtered Data'):
+        analyze_group(filtered_backend_data)
 else:
-    backend_data = app.load_data('ped_data')
-    filtered_backend_data = apply_filters(backend_data, is_citizen_value, is_adult_value)
-    if not filtered_backend_data.empty:
-        st.write("Filtered Data:")
-        st.dataframe(filtered_backend_data)
-        if st.button('Analyze Filtered Data'):
-            analyze_group(filtered_backend_data)
-    else:
-        st.error("No data available for the selected criteria or 'ped_data' not loaded correctly.")
+    st.error("No data available for the selected criteria or 'ped_data' not loaded correctly.")
 

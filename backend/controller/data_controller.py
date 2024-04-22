@@ -204,7 +204,7 @@ def delete_rows_overseas():
         # Return an error message if there's an exception
         return jsonify({'error': str(e)}), 400
 
-@app.route('/delete/ped', methods=['DELETE'])
+@app.route('/delete/ped_table', methods=['DELETE'])
 def delete_rows_ped():
     try:
         # Iterate over the JSON data and insert each row into the database
