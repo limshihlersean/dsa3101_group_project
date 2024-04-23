@@ -91,7 +91,7 @@ datatype_bundle = {
 }
 
 bundle_value_constraint = {
-    "age": ["Child", "Adult", "Senior"],
+    "age": ["Child", "Adult", "Senior", "Student"],
     "is_citizen": [0,1],
 }
 

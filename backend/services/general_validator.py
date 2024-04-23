@@ -1,5 +1,5 @@
 def validate_age_range(age_range):
-    if value is None:
+    if age_range is None:
         raise ValueError("Cannot leave any fields blank.")
     try:
         age_range = int(age_range)
