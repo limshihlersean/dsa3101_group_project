@@ -4,7 +4,7 @@ import mysql.connector
 
 from model import Database
 from model.MLModel import query_model
-from services import price_opt_validator
+from services import price_opt_validator, noncit_single_validator, citsingle_validator, allisbundle_validator, overseas_validator, ped_validator
 
 app = Flask(__name__)
 
@@ -70,7 +70,8 @@ def insert_new_rows_noncitsingle():
     try:
         # Iterate over the JSON data and insert each row into the database
         data = request.get_json()
-
+        for row in data: 
+            company, age, events, average_price = noncit_single_validator.validate_nonccit_single_data(row)
         db.add_data_to_noncitsingle(data)
         message = "Insertion success"
         return jsonify({'message': message})
@@ -84,7 +85,8 @@ def insert_new_rows_citsingle():
     try:
         # Iterate over the JSON data and insert each row into the database
         data = request.get_json()
-
+        for row in data: 
+            company, year, age, events, average_price = citsingle_validator.validate_citsingle_data(row)
         db.add_data_to_citsingle(data)
         message = "Insertion success"
         return jsonify({'message': message})
@@ -110,7 +112,8 @@ def insert_new_rows_allisbundle():
     try:
         # Iterate over the JSON data and insert each row into the database
         data = request.get_json()
-
+        for row in data: 
+            company, age, is_citizen, events, average_price, singleA, singleB, singleC, singleD, singleE = allisbundle_validator.validate_allisbundle_data(row)
         db.add_data_to_allisbundle(data)
         message = "Insertion success"
         return jsonify({'message': message})
@@ -124,6 +127,8 @@ def insert_new_rows_overseas():
     try:
         # Iterate over the JSON data and insert each row into the database
         data = request.get_json()
+        for row in data: 
+            company,country,city,duration,distance,snow,tourist_volume_of_cable_car,cable_car_price,age_range,is_nature,type_of_trip,is_citizen= overseas_validator.validate_overseas_data(row)
 
         db.add_data_to_overseas(data)
         message = "Insertion success"
@@ -138,6 +143,8 @@ def insert_new_rows_ped():
     try:
         # Iterate over the JSON data and insert each row into the database
         data = request.get_json()
+        for row in data: 
+            is_citizen,is_adult,price,quantity= ped_validator.validate_ped_data(row)
 
         db.add_data_to_ped(data)
         message = "Insertion success"

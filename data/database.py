@@ -126,12 +126,12 @@ cursor.execute("""
         age VARCHAR(50), 
         is_citizen INT,
         events VARCHAR(255),
-        price INT,
-        singleA INT,
-        singleB INT,
-        singleC INT,
-        singleD INT,
-        singleE INT
+        price FLOAT,
+        singleA FLOAT,
+        singleB FLOAT,
+        singleC FLOAT,
+        singleD FLOAT,
+        singleE FLOAT
     )
 """)
 
@@ -170,7 +170,7 @@ cursor.execute("""
         distance FLOAT,
         snow INT,
         tourist_volume_of_cable_car INT,
-        cable_car_price DECIMAL(10, 2),
+        cable_car_price FLOAT,
         age_range INT,
         is_nature INT,
         type_of_trip INT,

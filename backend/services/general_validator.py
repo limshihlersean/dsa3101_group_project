@@ -1,4 +1,6 @@
 def validate_age_range(age_range):
+    if value is None:
+        raise ValueError("Cannot leave any fields blank.")
     try:
         age_range = int(age_range)
     except:
@@ -7,6 +9,13 @@ def validate_age_range(age_range):
         raise ValueError("Invalid age range: age range need to be 0, 1, 2, 3 or 4")
     return age_range
 
+def validate_age_string(value):
+    if value is None:
+        raise ValueError("Cannot leave any fields blank.")
+    valid_age_values = {"Adult", "Child", "Student", "Senior"}
+    if value not in valid_age_values:
+        raise ValueError("Age must be one of: Adult, Child, Student, Senior.")
+    return value
 
 
 def validate_binary_encodings(num, name=None):
@@ -19,6 +28,33 @@ def validate_binary_encodings(num, name=None):
     if (num != 0 and num != 1):
         raise ValueError(f"{name} needs to be either 0 or 1")
     return num
+
+def validate_price(value):
+    if value is None:
+        raise ValueError("Cannot leave any fields blank.")
+    try:
+        value = float(value)
+    except:
+        raise ValueError("Price/quantity needs to be integer/floating point")
+    if value < 0:
+        raise ValueError("Price/quantity must be non-negative.")
+    return value
+
+def validate_null(value):
+    if value is None:
+        raise ValueError("Cannot leave any fields blank.")
+
+def validate_year(value):
+    if value is None:
+        raise ValueError("Cannot leave any fields blank.")
+    try:
+        value = int(value)
+    except:
+        raise ValueError("Year needs to be integer")
+    if value < 0:
+        raise ValueError("Must be valid year")
+    return value
+
 
 def check_json_keys(request_json, key_set):
     """
