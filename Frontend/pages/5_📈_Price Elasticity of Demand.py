@@ -96,8 +96,12 @@ def analyze_group(group_df):
     st.write(f"Price Elasticity of Demand (PED) at the optimal price: {PED[closest_ped_index]:.2f}")
 
 st.title('Price Elasticity of Demand Analysis')
-st.write("Our Price Elasticity of Demand page aims to set the best price for our new cable car rides that keeps both revenue and customer satisfaction high")
-
+st.markdown("Our Price Elasticity of Demand (PED) page helps determine the optimal pricing strategy for the new cable car rides, maximizing revenue. Price Elasticity of Demand (PED) is calculated using the following formula: \n\n"
+            "$$PED = \\frac{\\% \\Delta Qd}{\\% \\Delta P}$$ \n\n"
+            "Where: \n"
+            "- $PED$ is the Price Elasticity of Demand \n"
+            "- $\\% \\Delta Qd$ is the percentage change in quantity demanded \n"
+            "- $\\% \\Delta P$ is the percentage change in price \n\n")
 
 # Selection boxes for filtering
 is_citizen_selection = st.selectbox('Citizenship Status', options=['Citizen', 'Non-Citizen'])
