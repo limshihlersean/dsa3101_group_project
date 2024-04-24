@@ -59,7 +59,6 @@ services:
       - docker-net
     depends_on:
       - db
-    
     env_file:
       - .env
 
