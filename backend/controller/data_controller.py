@@ -86,7 +86,7 @@ def insert_new_rows_citsingle():
         # Iterate over the JSON data and insert each row into the database
         data = request.get_json()
         for row in data: 
-            company, year, age, events, average_price = citsingle_validator.validate_citsingle_data(row)
+            company, year, age, events, price = citsingle_validator.validate_citsingle_data(row)
         db.add_data_to_citsingle(data)
         message = "Insertion success"
         return jsonify({'message': message})
@@ -113,7 +113,7 @@ def insert_new_rows_allisbundle():
         # Iterate over the JSON data and insert each row into the database
         data = request.get_json()
         for row in data: 
-            company, age, is_citizen, events, average_price, singleA, singleB, singleC, singleD, singleE = allisbundle_validator.validate_allisbundle_data(row)
+            company, age, is_citizen, events, price, singleA, singleB, singleC, singleD, singleE = allisbundle_validator.validate_allisbundle_data(row)
         db.add_data_to_allisbundle(data)
         message = "Insertion success"
         return jsonify({'message': message})

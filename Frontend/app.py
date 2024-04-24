@@ -29,6 +29,9 @@ def update_data(json_data, endpoint):
         elif response.status_code == 400:
             error_message = response.json().get('error')  # Extract error message from response
             st.error(f"Failed to update data in the database: {error_message}")
+        elif response.status_code == 500:
+            error_message = response.json().get('error')  # Extract error message from response
+            st.error(f"Failed to update data in the database: {error_message}")
         else:
             st.error("Failed to update data in the database.")
     except json.JSONDecodeError as e:
