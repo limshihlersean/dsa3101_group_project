@@ -5,6 +5,6 @@ def validate_ped_data(data):
         raise KeyError("Key mismatch: Check if the name of keys are correct")
     is_citizen = validate_binary_encodings(data["is_citizen"], name="is_citizen")
     is_adult = validate_binary_encodings(data["is_adult"], name="is_adult")
-    average_price = validate_price(data["average_price"])
+    price = validate_price(data["price"])
     quantity = validate_price(data["quantity"])
     return is_citizen,is_adult,price,quantity
