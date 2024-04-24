@@ -23,12 +23,20 @@ def update_data(json_data, endpoint):
     try:
         json_data_dict = json.loads(json_data)
         response = requests.post(BASE_URL + '/insert/' + endpoint, json=json_data_dict)
+
+        if response.status_code == 200:
+            st.success("Data updated successfully.")
+        elif response.status_code == 400:
+            error_message = response.json().get('error')  # Extract error message from response
+            st.error(f"Failed to update data in the database: {error_message}")
+        elif response.status_code == 500:
+            error_message = response.json().get('error')  # Extract error message from response
+            st.error(f"Failed to update data in the database: {error_message}")
+        else:
+            st.error("Failed to update data in the database.")
     except json.JSONDecodeError as e:
         print("Error decoding JSON:", e)
-    if response.status_code == 200:
-        st.success("Data updated successfully.")
-    else:
-        st.error("Failed to update data in the database.")
+        st.error("Failed to decode JSON data.")
 
 #not working yet not referenced anywhere yet
 def delete_data(json_data, endpoint):

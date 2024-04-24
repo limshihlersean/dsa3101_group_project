@@ -76,9 +76,9 @@ def insert_new_rows_noncitsingle():
         message = "Insertion success"
         return jsonify({'message': message})
 
-    except Exception as e:
-        # Return an error message if there's an exception
-        return jsonify({'error': str(e)}), 400
+    except ValueError as ve:
+        # Return the ValueError message as JSON with a status code of 400
+        return jsonify({'error': str(ve)}), 400
 
 @app.route('/insert/citizen_single', methods=['POST'])
 def insert_new_rows_citsingle():
@@ -86,14 +86,14 @@ def insert_new_rows_citsingle():
         # Iterate over the JSON data and insert each row into the database
         data = request.get_json()
         for row in data: 
-            company, year, age, events, average_price = citsingle_validator.validate_citsingle_data(row)
+            company, year, age, events, price = citsingle_validator.validate_citsingle_data(row)
         db.add_data_to_citsingle(data)
         message = "Insertion success"
         return jsonify({'message': message})
 
-    except Exception as e:
-        # Return an error message if there's an exception
-        return jsonify({'error': str(e)}), 400
+    except ValueError as ve:
+        # Return the ValueError message as JSON with a status code of 400
+        return jsonify({'error': str(ve)}), 400
     
 @app.route("/model/priceoptmodel", methods=["POST"])
 def get_optimal_price_from_ml_model():
@@ -113,14 +113,14 @@ def insert_new_rows_allisbundle():
         # Iterate over the JSON data and insert each row into the database
         data = request.get_json()
         for row in data: 
-            company, age, is_citizen, events, average_price, singleA, singleB, singleC, singleD, singleE = allisbundle_validator.validate_allisbundle_data(row)
+            company, age, is_citizen, events, price, singleA, singleB, singleC, singleD, singleE = allisbundle_validator.validate_allisbundle_data(row)
         db.add_data_to_allisbundle(data)
         message = "Insertion success"
         return jsonify({'message': message})
 
-    except Exception as e:
-        # Return an error message if there's an exception
-        return jsonify({'error': str(e)}), 400
+    except ValueError as ve:
+        # Return the ValueError message as JSON with a status code of 400
+        return jsonify({'error': str(ve)}), 400
 
 @app.route('/insert/overseas', methods=['POST'])
 def insert_new_rows_overseas():
@@ -128,15 +128,14 @@ def insert_new_rows_overseas():
         # Iterate over the JSON data and insert each row into the database
         data = request.get_json()
         for row in data: 
-            company,country,city,duration,distance,snow,tourist_volume_of_cable_car,cable_car_price,age_range,is_nature,type_of_trip,is_citizen= overseas_validator.validate_overseas_data(row)
+            company, country, city, duration, distance, snow, tourist_volume, cable_car_price, age_range, is_nature, type_of_trip, is_citizen = overseas_validator.validate_overseas_data(row)
 
         db.add_data_to_overseas(data)
         message = "Insertion success"
         return jsonify({'message': message})
-
-    except Exception as e:
-        # Return an error message if there's an exception
-        return jsonify({'error': str(e)}), 400
+    except ValueError as ve:
+        # Return the ValueError message as JSON with a status code of 400
+        return jsonify({'error': str(ve)}), 400
 
 @app.route('/insert/ped', methods=['POST'])
 def insert_new_rows_ped():
@@ -150,7 +149,7 @@ def insert_new_rows_ped():
         message = "Insertion success"
         return jsonify({'message': message})
 
-    except Exception as e:
+    except ValueError as e:
         # Return an error message if there's an exception
         return jsonify({'error': str(e)}), 400
 
