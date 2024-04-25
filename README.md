@@ -78,7 +78,7 @@ To install the frontend dependencies, please follow these steps:
 
 ```bash
 pip install -r frontend_requirements.txt
-
+```
 ### Backend Installation
 To install the backend dependencies, please follow these steps:
 
@@ -88,7 +88,7 @@ To install the backend dependencies, please follow these steps:
 4. Run the following command to install the required libraries:
 ```bash
 pip install -r backend_requirements.txt
-
+```
 ## Usage
 
 ### Frontend Usage
@@ -100,6 +100,7 @@ To use the frontend part of the project, follow these steps:
 
 ```bash
 streamlit run main.py
+```
 4. Access the frontend interface in your web browser by navigating to http://localhost:8501.
 
 ### Backend Usage
@@ -110,6 +111,7 @@ To use the backend part of the project, follow these steps:
 3. Run the following command to start the backend server:
 ```bash
 python app.py
+```
 4. The backend server will start running at http://localhost:5000.
 5. Use API endpoints defined in the backend controllers to interact with the server, for example:
   a. Upload data: POST /upload
@@ -131,13 +133,16 @@ If you encounter any bugs or have ideas for new features, please [open an issue]
 3. Create a new branch for your feature or bug fix:
    ```bash
    git checkout -b feature/your-feature-name
+   ```
 4. Make changes to the codebase.
 5. Commit your changes:
 ```bash
 git commit -am 'Add new feature or fix bug'
+```
 6. Push your changes to your fork:
 ```bash
 git push origin feature/your-feature-name
+```
 7. Submit a pull request (PR) to the main repository's main branch. Provide a clear description of your changes and why they are needed.
 
 ## License
