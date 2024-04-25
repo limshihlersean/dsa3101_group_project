@@ -26,10 +26,7 @@ def update_data(json_data, endpoint):
 
         if response.status_code == 200:
             st.success("Data updated successfully.")
-        elif response.status_code == 400:
-            error_message = response.json().get('error')  # Extract error message from response
-            st.error(f"Failed to update data in the database: {error_message}")
-        elif response.status_code == 500:
+        elif response.status_code == 400 or response.status_code == 500 or response.status_code == 404:
             error_message = response.json().get('error')  # Extract error message from response
             st.error(f"Failed to update data in the database: {error_message}")
         else:

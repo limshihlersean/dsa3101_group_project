@@ -18,4 +18,5 @@ RUN pip install -r requirements.txt
 RUN chmod +x entry.sh
 
 # Command to run your script
-CMD ["./entry.sh"]
+#CMD ["./entry.sh"]
+CMD ["python", "database.py"]
