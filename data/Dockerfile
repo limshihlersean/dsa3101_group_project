@@ -12,11 +12,8 @@ COPY local_attractions_noncitizen_alacarte_2024.csv .
 COPY cable_car_cleaned_v2.csv .
 COPY NewCableCarPED.csv .
 COPY .env .
-COPY entry.sh .
 
 RUN pip install -r requirements.txt
-RUN chmod +x entry.sh
 
 # Command to run your script
-#CMD ["./entry.sh"]
 CMD ["python", "database.py"]
