@@ -43,10 +43,10 @@ def validate_overseas_data(data):
     duration = validate_duration(data["duration"])
     distance = validate_distance(data["distance"])
     snow = validate_binary_encodings(data["snow"], name="snow")
-    tourist_volume = validate_tourist_volume(data["tourist_volume"])
+    tourist_volume = validate_tourist_volume(data["tourist_volume_of_cable_car"])
     cable_car_price = validate_price(data["cable_car_price"])
     age_range = validate_age_range(data["age_range"])
     is_nature = validate_binary_encodings(data["is_nature"], name="is_nature")
     type_of_trip = validate_binary_encodings(data["type_of_trip"], name="type_of_trip")
     is_citizen = validate_binary_encodings(data["is_citizen"], name="is_citizen")
-    return company,country,city,duration,distance,snow,tourist_volume_of_cable_car,cable_car_price,age_range,is_nature,type_of_trip,is_citizen
+    return company,country,city,duration,distance,snow,tourist_volume,cable_car_price,age_range,is_nature,type_of_trip,is_citizen
