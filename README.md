@@ -55,6 +55,9 @@ The Update page allows users to view their data in a table form. They can also d
 ### Optimise
 The Price Optimization Interface synthesizes overseas cable car data to suggest optimal pricing strategies, leveraging data-driven analytics and machine learning algorithms.
 
+### Price Elasticity of Demand
+The PED page offers users the optimal price for revenue maximization based on selected filters. It provides visual graphs and allows customization, utilizing user-uploaded datasets for accurate and updated results. 
+
 ## Backend Features
 
 ### Controller
