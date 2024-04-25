@@ -65,4 +65,4 @@ with st.expander("PED data"):
     selection = dataframe_with_selections(ped_table)
     if st.button('Delete', key=5):
         json = selection.to_json(orient ='index')
-        app.delete_data(json, 'ped_table')
+        app.delete_data(json, 'ped_data')

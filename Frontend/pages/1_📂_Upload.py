@@ -204,5 +204,5 @@ with st.expander("PED data"):
         if validate_null(df) and validate_type(df, datatype_ped) and validate_value_constraint(df, ped_constraint):
             if st.button('Update', key=10):
                 json = df.to_json(orient ='records')
-                app.update_data(json, 'ped_table')
+                app.update_data(json, 'ped_data')
 

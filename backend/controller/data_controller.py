@@ -137,7 +137,7 @@ def insert_new_rows_overseas():
         # Return the ValueError message as JSON with a status code of 400
         return jsonify({'error': str(ve)}), 400
 
-@app.route('/insert/ped', methods=['POST'])
+@app.route('/insert/ped_data', methods=['POST'])
 def insert_new_rows_ped():
     try:
         # Iterate over the JSON data and insert each row into the database
@@ -210,7 +210,7 @@ def delete_rows_overseas():
         # Return an error message if there's an exception
         return jsonify({'error': str(e)}), 400
 
-@app.route('/delete/ped_table', methods=['DELETE'])
+@app.route('/delete/ped_data', methods=['DELETE'])
 def delete_rows_ped():
     try:
         # Iterate over the JSON data and insert each row into the database
