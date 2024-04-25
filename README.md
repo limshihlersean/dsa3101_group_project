@@ -124,7 +124,7 @@ Set up a virtual environment for the application to ensure isolated dependencies
 Open a terminal and navigate to the root directory of the cloned repository.
 Run the following command to start Docker Compose:
 ```bash
-docker-compose up —-build
+docker-compose up
 ```
 **Step 4:** Wait for Docker Containers
 Wait for Docker to create the necessary containers for the application.
@@ -158,7 +158,7 @@ If you encounter any bugs or have ideas for new features, please [open an issue]
 4. Make changes to the codebase.
 5. Commit your changes:
 ```bash
-git commit -am 'Add new feature or fix bug'
+git commit -m 'Add new feature or fix bug'
 ```
 6. Push your changes to your fork:
 ```bash
