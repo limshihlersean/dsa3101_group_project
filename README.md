@@ -35,30 +35,34 @@ The code repository for the MFLG project is structured as follows:
 ## Frontend Features
 
 ### Data Input Interface
-Description: Provides a user-friendly interface for inputting data into the application.
-Key Functionality:
+* **Description:**
+Provides a user-friendly interface for inputting data into the application.
+* **Key Functionality:**
 Allows users to enter data relevant to the application, such as ticket information, company details, and pricing data.
 Offers input validation to ensure data accuracy and integrity.
 Supports file upload.
 
 ### Competitor Analysis Page with Interactive Features
-Description: Enables users to perform competitor analysis and visualize data in an interactive manner.
-Key Functionality:
+* **Description:**
+Enables users to perform competitor analysis and visualize data in an interactive manner.
+* **Key Functionality:**
 Presents data-driven insights and visualizations to facilitate competitive analysis.
 Offers interactive charts, graphs, and tables for exploring competitor data.
 Provides filtering, sorting, and comparison features to identify key trends, strengths, and weaknesses of competitors.
 Supports customization options to tailor analysis based on user preferences and requirements.
 
 ### Price Optimization Pages
-Description: Allows users to vary input parameters to query the model and receive an optimized price.
-Key Functionality:
+* **Description:**
+Allows users to vary input parameters to query the model and receive an optimized price.
+* **Key Functionality:**
 Enables users to adjust input parameters such as adult/child, citizen/noncitzen, duration, distance and weather conditions etc.
 Utilizes a model or algorithm to process the input parameters and generate an optimized price recommendation.
 Supports scenario analysis and what-if simulations to explore different pricing strategies and their potential outcomes.
 
 ### Data Validation Methods
-Description: Ensures the integrity and validity of data entered into the application.
-Key Functionality:
+* **Description:**
+Ensures the integrity and validity of data entered into the application.
+* **Key Functionality:**
 Implements validation logic to verify the correctness and completeness of user inputs.
 Validates data against predefined rules, formats, or constraints to prevent errors or inconsistencies.
 Handles edge cases and boundary conditions to maintain data quality and reliability.
@@ -67,30 +71,34 @@ Provides feedback and error messages to users to assist in correcting invalid or
 ## Backend Features
 
 ### Database
-Description: Manages the storage and retrieval of application data.
-Key Functionality:
+* **Description:**
+Manages the storage and retrieval of application data.
+* **Key Functionality:**
 Utilizes MySQL as the database management system to store structured data.
 Defines tables and relationships to organize and represent data entities.
 Supports CRUD (Create, Read, Update, Delete) operations to interact with data stored in the database.
 Ensures data integrity and consistency through constraints, indexes, and foreign key relationships.
 
 ### Price Optimization Model
-Description: Utilizes algorithms or machine learning models to optimize pricing strategies.
-Key Functionality:
+* **Description:**
+Utilizes algorithms or machine learning models to optimize pricing strategies.
+* **Key Functionality:**
 Analyzes historical data and other relevant factors to generate price recommendations.
 Provides insights and recommendations to help users make informed decisions about pricing adjustments.
 
 ### RESTful APIs with Flask
-Description: Provides endpoints and routes to handle HTTP requests and serve data to the frontend.
-Key Functionality:
+* **Description:**
+Provides endpoints and routes to handle HTTP requests and serve data to the frontend.
+* **Key Functionality:**
 Implements RESTful APIs using Flask, a lightweight web framework for Python.
 Defines routes to handle different types of requests, such as GET, POST, and DELETE.
 Processes incoming requests, interacts with the database, and returns data or responses to the client.
 Enables communication between the frontend and backend components of the application.
 
 ### Data Validation Methods
-Description: Ensures the integrity and validity of data entered into the application.
-Key Functionality:
+* **Description:**
+Ensures the integrity and validity of data entered into the application.
+* **Key Functionality:**
 Implements validation logic to verify the correctness and completeness of user inputs.
 Validates data against predefined rules, formats, or constraints to prevent errors or inconsistencies.
 Handles edge cases and boundary conditions to maintain data quality and reliability.
@@ -106,25 +114,31 @@ For further details or inquiries, please refer to the project repository or cont
 ## Installation
 
 To run/test the app locally, follow these step-by-step instructions:
-Step 1: Clone Git Repo
+
+**Step 1:** Clone Git Repo
 Clone this Git repository containing the application source code to your local machine.
-Step 2: Create a Virtual Environment
+
+**Step 2:** Create a Virtual Environment
 Set up a virtual environment for the application to ensure isolated dependencies.
-Step 3: Start Docker Compose
+
+**Step 3:** Start Docker Compose
 Open a terminal and navigate to the root directory of the cloned repository.
 Run the following command to start Docker Compose:
 ```bash
 docker-compose up —-build
 ```
-Step 4: Wait for Docker Containers
+**Step 4:** Wait for Docker Containers
 Wait for Docker to create the necessary containers for the application.
-Step 5: Access the Dashboard
+
+**Step 5:** Access the Dashboard
 Open your web browser (Chrome/Safari) and type the following URL in the address bar:
 ```bash
 localhost:8501
 ```
-Step 6: Use the Dashboard
+
+**Step 6:** Use the Dashboard
 Once the page loads, you can interact with the dashboard to explore its features and functionalities.
+
 Dependencies will be automatically installed through the Dockerfile, which references the requirements.txt file.
 
 
