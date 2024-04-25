@@ -46,7 +46,13 @@ The Data Input Interface allows users to upload and update data files, providing
 ### Competitor Analysis
 The Competitor Analysis feature offers a panoramic view of the pricing landscape, conducting comparative analysis against industry benchmarks.
 
-### Price Optimization Interface
+### Upload
+The Upload page allows users to upload their own data into the database.
+
+### Update
+The Update page allows users to view their data in a table form. They can also delete their data by selecting the rows they would like to delete on this page.
+
+### Optimise
 The Price Optimization Interface synthesizes overseas cable car data to suggest optimal pricing strategies, leveraging data-driven analytics and machine learning algorithms.
 
 ## Backend Features
