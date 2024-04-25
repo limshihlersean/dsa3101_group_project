@@ -61,13 +61,14 @@ The PED page offers users the optimal price for revenue maximization based on se
 ## Backend Features
 
 ### Controller
-The Controller directory houses the Flask server routes, managing interactions between the client-side interface and server-side functionality.
+The Controller directory houses the Flask server routes, managing interactions between the client-side interface and server-side functionality. It orchestrates HTTP requests and responses, ensuring smooth user experience and maintaining code organization.
 
 ### Model
-The Model subdirectory plays a pivotal role in facilitating accurate pricing predictions for the cable car service and serves as the repository for the business logic related to handling the MySQL database.
+The model subdirectory plays a pivotal role in facilitating accurate pricing predictions for the cable car service and serves as the repository for the business logic related to handling the mySQL database. It encompasses modules dedicated to implementing and managing the machine learning model utilized for price optimization and also includes modules responsible for data retrieval, storage and manipulation.
 
 ### Services
-The Services subdirectory ensures the reliability and consistency of data used in the cable car pricing prediction system, providing a structured approach to data validation.
+The services subdirectory plays a crucial role in ensuring the reliability and consistency of data used in the cable car pricing prediction system. It provides a structured approach to data validation, helping maintain clean and valid datasets for accurate analysis and prediction.
+Each module within the services subfolder is dedicated to validating specific data attributes or parameters used in the cable car pricing prediction system. 
 
 ### Conclusion
 The MFLG project leverages data-driven analytics to optimize cable car pricing strategies. With features like the Data Input Interface, Competitor Analysis, and Price Optimization Interface, it offers a comprehensive solution for strategic price optimization. The structured organization of the frontend and backend components promotes ease of maintenance, scalability, and future enhancements to the pricing prediction system.
