@@ -77,7 +77,7 @@ To install the frontend dependencies, please follow these steps:
 4. Run the following command to install the required libraries:
 
 ```bash
-pip install -r frontend_requirements.txt
+pip install -r requirements.txt
 ```
 ### Backend Installation
 To install the backend dependencies, please follow these steps:
@@ -87,7 +87,7 @@ To install the backend dependencies, please follow these steps:
 3. Activate the virtual environment (if created).
 4. Run the following command to install the required libraries:
 ```bash
-pip install -r backend_requirements.txt
+pip install -r requirements.txt
 ```
 ## Usage
 
