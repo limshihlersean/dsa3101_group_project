@@ -8,10 +8,9 @@
 4. [Repository Structure](#repository-structure)
 5. [Frontend Features](#frontend-features)
 6. [Backend Features](#backend-features)
-7. [Installation](#installation)
-8. [Usage](#usage)
-9. [Contributing](#contributing)
-10. [License](#license)
+7. [Installation and Usage](#installation-and-usage)
+8. [Contributing](#contributing)
+9. [License](#license)
 
 ## Introduction and Overview
 
@@ -111,7 +110,7 @@ The MFLG project leverages data-driven analytics to optimize cable car pricing s
 For further details or inquiries, please refer to the project repository or contact the project team.
 
 
-## Installation
+## Installation and Usage
 
 To run/test the app locally, follow these step-by-step instructions:
 
