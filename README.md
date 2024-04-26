@@ -148,15 +148,23 @@ To run the deployed app, follow these step-by-step instructions:
 
 **Step 1:** 
 SSH into the EC2 Instance called “Team_Vamos” on research.rlcatalyst website using the following commands:
-Ssh -i /path/to/private_key.pem -L 8501:localhost:8501 ec2-user@ec2-instance-public-dns
+```bash
+ssh -i /path/to/private_key.pem -L 8501:localhost:8501 ec2-user@ec2-instance-public-dns
+```
 
 **Step 2:**
 If the app is not already running, run the following commands:
+
+```bash
 cd dsa3101_group_project
 docker-compose up
+```
 
 **Step 3:**
-Open local browser and type “localhost:8501”. Once the page loads, you can interact with the dashboard to explore its features and functionalities.
+Open your web browser (Chrome/Safari) and type the following URL in the address bar: localhost:8501
+
+**Step 4:**
+Once the page loads, you can interact with the dashboard to explore its features and functionalities.
 
 
 ## Contributing
