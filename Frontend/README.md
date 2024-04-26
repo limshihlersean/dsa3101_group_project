@@ -29,37 +29,12 @@ To manage and specify dependencies required for frontend
 This Dockerfile is creating an environment to run a Streamlit web application. It copies the project files into the container, installs the required dependencies specified in the requirements.txt file, exposes port 8501 for accessing the Streamlit application, and runs the Streamlit application specified by 1_🏡_Home.py when the container is launched.
 
 To build a Docker image using the provided Dockerfile, follow these instructions:
-1. Navigate to the Repository Directory:
-- Open a terminal or command prompt.
-- Use the cd command to navigate to the directory where the repository is located.
-
-2. Build the Docker Image:
-- Run the following command to build the Docker image:
-```base
-docker build -t cablecar .
-```
-
-3. Verify the Docker Image:
-- After the build process completes, you can verify that the Docker image was created successfully by running:
-```base
-docker images
-```
-
-4. Run the Docker Container:
-- Once you have verified that the Docker image was created, you can run a Docker container using the following command:
-```base
-docker run -d -p 8501:8501 cablecar
-```
-
-5. Access Your Flask Application:
-- Your Flask application should now be running in a Docker container. You can access it by opening a web browser and navigating to http://localhost:8501
-
-
-
-
-
-
-
+1) Use a Python base image
+2) Set working directory in the container
+3) Copy the current directory contents into the container at app
+4) Install any needed packages specified in requirements.txt
+5) Make port 8501 available to the world outside this container
+6) Run Home.py when the container launches
 
 
 
