@@ -1,4 +1,4 @@
-# DSA3101 Group Project
+# DSA3101 Group Project By Team Vamos
 
 
 ## Table of Contents
