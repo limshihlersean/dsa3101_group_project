@@ -128,6 +128,9 @@ docker-compose up
 ```
 **Step 4:** Wait for Docker Containers
 Wait for Docker to create the necessary containers for the application.
+![data_flows drawio](https://github.com/limshihlersean/dsa3101_group_project/assets/98541932/3959907a-f743-4245-ba4c-9c08aa53decd)
+
+Once it says “Connected to MySQL server successfully!!!!”,  go to step 5.
 
 **Step 5:** Access the Dashboard
 Open your web browser (Chrome/Safari) and type the following URL in the address bar:
@@ -139,6 +142,20 @@ localhost:8501
 Once the page loads, you can interact with the dashboard to explore its features and functionalities.
 
 Dependencies will be automatically installed through the Dockerfile, which references the requirements.txt file.
+
+To run the deployed app, follow these step-by-step instructions:
+
+**Step 1:** 
+SSH into the EC2 Instance called “Team_Vamos” on research.rlcatalyst website using the following commands:
+Ssh -i /path/to/private_key.pem -L 8501:localhost:8501 ec2-user@ec2-instance-public-dns
+
+**Step 2:**
+If the app is not already running, run the following commands:
+cd dsa3101_group_project
+docker-compose up
+
+**Step 3:**
+Open local browser and type “localhost:8501”. Once the page loads, you can interact with the dashboard to explore its features and functionalities.
 
 
 ## Contributing
