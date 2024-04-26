@@ -200,37 +200,61 @@ class Database:
         self.cursor.executemany(query, values)
         self.conn.commit()
 
-    def add_data_to_noncitsingle(self,data):
-        # Prepare the INSERT statement
-        
-
-        for row in data: 
-            query = "INSERT INTO noncitizen_single (`company`, `age`, `events`, `price`) VALUES (%s, %s, %s, %s);"
+    def add_data_to_noncitsingle(self, data):
+        for row in data:
             company = row.get("company")
             age = row.get("age")
             events = row.get("events")
             price = row.get("price")
-            values = (company,age,events,price)
-            self.execute_query_post(query,values)
 
-    def add_data_to_citsingle(self,data):
-        # Prepare the INSERT statement
-        
+            # Check if the record already exists
+            query = "SELECT * FROM noncitizen_single WHERE company = %s AND age = %s AND events = %s AND price = %s"
+            self.cursor.execute(query, (company, age, events, price))
+            existing_record = self.cursor.fetchone()
 
-        for row in data: 
-            query = "INSERT INTO citizen_single (`company`, `year`,`age`, `events`, `price`) VALUES (%s, %s, %s, %s,%s);"
+            if existing_record:
+                # Record already exists, decide whether to update or ignore
+                # For example, you can update the existing record here
+                # Update query: 
+                # update_query = "UPDATE noncitizen_single SET ... WHERE <condition>"
+                # self.cursor.execute(update_query, (new_values))
+                # self.conn.commit()
+                pass
+            else:
+                # Record does not exist, insert new record
+                insert_query = "INSERT INTO noncitizen_single (`company`, `age`, `events`, `price`) VALUES (%s, %s, %s, %s);"
+                values = (company, age, events, price)
+                self.execute_query_post(insert_query, values)
+
+    def add_data_to_citsingle(self, data):
+        for row in data:
             company = row.get("company")
             year = row.get("year")
             age = row.get("age")
             events = row.get("events")
             price = row.get("price")
-            values = (company,year,age,events,price)
-            self.execute_query_post(query,values)
+
+            # Check if the record already exists
+            query = "SELECT * FROM citizen_single WHERE company = %s AND year = %s AND age = %s AND events = %s AND price = %s"
+            self.cursor.execute(query, (company, year, age, events, price))
+            existing_record = self.cursor.fetchone()
+
+            if existing_record:
+                # Record already exists, decide whether to update or ignore
+                # For example, you can update the existing record here
+                # Update query: 
+                # update_query = "UPDATE citizen_single SET ... WHERE <condition>"
+                # self.cursor.execute(update_query, (new_values))
+                # self.conn.commit()
+                pass
+            else:
+                # Record does not exist, insert new record
+                insert_query = "INSERT INTO citizen_single (`company`, `year`, `age`, `events`, `price`) VALUES (%s, %s, %s, %s, %s);"
+                values = (company, year, age, events, price)
+                self.execute_query_post(insert_query, values)
     
-    def add_data_to_allisbundle(self,data):
-    # Prepare the INSERT statement
-        for row in data: 
-            query = "INSERT INTO all_isbundle (`company`,`age`,`is_citizen`, `events`, `price`,`singleA`,`singleB`,`singleC`, `singleD`,`singleE`) VALUES (%s, %s, %s, %s,%s,%s, %s, %s, %s,%s);"
+    def add_data_to_allisbundle(self, data):
+        for row in data:
             company = row.get("company")
             age = row.get("age")
             is_citizen = row.get("is_citizen")
@@ -241,13 +265,28 @@ class Database:
             singleC = row.get("singleC")
             singleD = row.get("singleD")
             singleE = row.get("singleE")
-            values = (company,age,is_citizen,events,price,singleA,singleB,singleC,singleD,singleE)
-            self.execute_query_post(query,values)
 
-    def add_data_to_overseas(self,data):
-        # Prepare the INSERT statement
-        for row in data: 
-            query = "INSERT INTO overseas (`company`,`country`,`city`,`duration`,`distance`,`snow`,`tourist_volume_of_cable_car`,`cable_car_price`,`age_range`,`is_nature`,`type_of_trip`,`is_citizen`) VALUES (%s, %s , %s, %s, %s, %s,%s,%s, %s, %s, %s,%s);"
+            # Check if the record already exists
+            query = "SELECT * FROM all_isbundle WHERE company = %s AND age = %s AND is_citizen = %s AND events = %s AND price = %s AND singleA = %s AND singleB = %s AND singleC = %s AND singleD = %s AND singleE = %s"
+            self.cursor.execute(query, (company, age, is_citizen, events, price, singleA, singleB, singleC, singleD, singleE))
+            existing_record = self.cursor.fetchone()
+
+            if existing_record:
+                # Record already exists, decide whether to update or ignore
+                # For example, you can update the existing record here
+                # Update query: 
+                # update_query = "UPDATE all_isbundle SET ... WHERE <condition>"
+                # self.cursor.execute(update_query, (new_values))
+                # self.conn.commit()
+                pass
+            else:
+                # Record does not exist, insert new record
+                insert_query = "INSERT INTO all_isbundle (`company`, `age`, `is_citizen`, `events`, `price`, `singleA`, `singleB`, `singleC`, `singleD`, `singleE`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
+                values = (company, age, is_citizen, events, price, singleA, singleB, singleC, singleD, singleE)
+                self.execute_query_post(insert_query, values)
+
+    def add_data_to_overseas(self, data):
+        for row in data:
             company = row.get("company")
             country = row.get("country")
             city = row.get("city")
@@ -261,21 +300,51 @@ class Database:
             type_of_trip = row.get("type_of_trip")
             is_citizen = row.get("is_citizen")
 
-            values = (company,country,city,duration,distance,snow,tourist_volume_of_cable_car,cable_car_price,age_range,is_nature,type_of_trip,is_citizen)
-            self.execute_query_post(query,values)
+            # Check if the record already exists
+            query = "SELECT * FROM overseas WHERE company = %s AND country = %s AND city = %s AND duration = %s AND distance = %s AND snow = %s AND tourist_volume_of_cable_car = %s AND cable_car_price = %s AND age_range = %s AND is_nature = %s AND type_of_trip = %s AND is_citizen = %s"
+            self.cursor.execute(query, (company, country, city, duration, distance, snow, tourist_volume_of_cable_car, cable_car_price, age_range, is_nature, type_of_trip, is_citizen))
+            existing_record = self.cursor.fetchone()
+
+            if existing_record:
+                # Record already exists, decide whether to update or ignore
+                # For example, you can update the existing record here
+                # Update query: 
+                # update_query = "UPDATE overseas SET ... WHERE <condition>"
+                # self.cursor.execute(update_query, (new_values))
+                # self.conn.commit()
+                pass
+            else:
+                # Record does not exist, insert new record
+                insert_query = "INSERT INTO overseas (`company`, `country`, `city`, `duration`, `distance`, `snow`, `tourist_volume_of_cable_car`, `cable_car_price`, `age_range`, `is_nature`, `type_of_trip`, `is_citizen`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"
+                values = (company, country, city, duration, distance, snow, tourist_volume_of_cable_car, cable_car_price, age_range, is_nature, type_of_trip, is_citizen)
+                self.execute_query_post(insert_query, values)
 
     # Inserting Data into PED 
-    def add_data_to_ped(self,data):
-        # Prepare the INSERT statement
-        for row in data: 
-            query = "INSERT INTO ped_data (`is_citizen`,`is_adult`,`price`,`quantity`) VALUES (%s, %s, %s,%s);"
+    def add_data_to_ped(self, data):
+        for row in data:
             is_citizen = row.get("is_citizen")
             is_adult = row.get("is_adult")
             price = row.get("price")
             quantity = row.get("quantity")
 
-            values = (is_citizen,is_adult,price,quantity)
-            self.execute_query_post(query,values)
+            # Check if the record already exists
+            query = "SELECT * FROM ped_data WHERE is_citizen = %s AND is_adult = %s AND price = %s AND quantity = %s"
+            self.cursor.execute(query, (is_citizen, is_adult, price, quantity))
+            existing_record = self.cursor.fetchone()
+
+            if existing_record:
+                # Record already exists, decide whether to update or ignore
+                # For example, you can update the existing record here
+                # Update query: 
+                # update_query = "UPDATE ped_data SET ... WHERE <condition>"
+                # self.cursor.execute(update_query, (new_values))
+                # self.conn.commit()
+                pass
+            else:
+                # Record does not exist, insert new record
+                insert_query = "INSERT INTO ped_data (`is_citizen`, `is_adult`, `price`, `quantity`) VALUES (%s, %s, %s, %s);"
+                values = (is_citizen, is_adult, price, quantity)
+                self.execute_query_post(insert_query, values)
 
     def delete_data_from_noncitsingle(self, data):
         for _, row in data.items():

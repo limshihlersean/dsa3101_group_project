@@ -15,7 +15,7 @@ COPY .env .
 COPY wait-for-it.sh .
 
 RUN pip install -r requirements.txt --timeout=1000
-#RUN chmod +x wait-for-it.sh
+RUN chmod +x wait-for-it.sh
 
 EXPOSE 8080
 
