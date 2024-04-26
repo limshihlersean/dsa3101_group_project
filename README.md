@@ -166,7 +166,3 @@ git push origin feature/your-feature-name
 ```
 7. Submit a pull request (PR) to the main repository's main branch. Provide a clear description of your changes and why they are needed.
 
-## License
-[Specify the project's license, such as MIT, Apache 2.0, or another open-source license. Include any additional terms or conditions as necessary.]
-
-
