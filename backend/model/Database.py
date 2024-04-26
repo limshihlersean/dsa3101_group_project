@@ -9,11 +9,10 @@ mysql_password = os.environ.get("MYSQL_PASSWORD")
 class Database:
     def __init__(self):
         self.conn = mysql.connector.connect(
-            host="host.docker.internal",
+            host="db",
             user="root",
             password=mysql_password,
-            database="priceopt",
-            port=1272
+            database="priceopt"
         )
         self.cursor = self.conn.cursor()
 
