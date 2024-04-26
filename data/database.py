@@ -25,8 +25,7 @@ while True:
             host="db", #"localhost", #change to localhost if run locally if not db when docker-compose up
             user="root",
             password=mysql_password,
-            database="priceopt",
-            port=3306
+            database="priceopt"
         )
         print("Connected to MySQL server successfully!!!")
         break  
