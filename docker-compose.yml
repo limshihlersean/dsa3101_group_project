@@ -4,6 +4,7 @@ services:
 
   db:
     image: mysql:latest
+    platform: linux/amd64
     container_name: mysql-container
     restart: always
     ports: 
@@ -23,6 +24,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     restart: always
+    platform: linux/amd64
     networks:
       - docker-net
     volumes:
@@ -40,6 +42,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     restart: always
+    platform: linux/amd64
     networks:
       - docker-net
     volumes:
@@ -55,6 +58,7 @@ services:
     build:
       context: ./data
       dockerfile: Dockerfile
+    platform: linux/amd64
     networks:
       - docker-net
     depends_on:
