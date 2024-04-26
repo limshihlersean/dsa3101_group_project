@@ -128,7 +128,8 @@ docker-compose up
 ```
 **Step 4:** Wait for Docker Containers
 Wait for Docker to create the necessary containers for the application.
-![data_flows drawio](https://github.com/limshihlersean/dsa3101_group_project/assets/98541932/3959907a-f743-4245-ba4c-9c08aa53decd)
+
+<img width="1205" alt="Screenshot 2024-04-26 at 10 20 21 AM" src="https://github.com/limshihlersean/dsa3101_group_project/assets/98541932/b9244ef5-2f70-444c-b9e4-0f5d160fb208">
 
 Once it says “Connected to MySQL server successfully!!!!”,  go to step 5.
 
